@@ -1,0 +1,1696 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Google Workspace 技術百科｜樂雲智能</title>
+<meta name="description" content="樂雲技術單位用 Google Workspace 百科：方案、應用功用、Enterprise 資安、Vault、NotebookLM 匯出。">
+<style>
+:root{
+  --bg:#ffffff;--panel:#f7f9fc;--panel2:#eef2f7;--line:#d5deea;
+  --text:#1c2430;--muted:#4d5d70;--dim:#6a7a8c;
+  --blue:#1558d6;--green:#0d7a4d;--amber:#9a6700;--red:#b42318;
+  --sidebar:#f4f7fb;--sidebar-w:248px;
+  --radius:10px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font:15px/1.65 "Segoe UI","Noto Sans TC","Microsoft JhengHei",sans-serif;background:#fff;color:var(--text)}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+code,kbd{font-family:ui-monospace,Consolas,monospace;font-size:.9em;background:#eef3f9;padding:.12em .38em;border-radius:4px;border:1px solid var(--line);color:#16324d}
+
+.nav-open{display:none;position:fixed;top:12px;left:12px;z-index:60;background:#1558d6;color:#fff;border:0;border-radius:8px;padding:8px 14px;font-weight:700;cursor:pointer;box-shadow:0 2px 8px rgba(16,32,51,.15)}
+body.nav-closed .nav-open{display:block}
+body.nav-closed nav.sidebar{transform:translateX(-110%);transition:transform .2s ease}
+body.nav-closed .content{margin-left:0}
+body.nav-closed .dim{display:none}
+.nav-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:12px}
+.nav-head .brandwrap{min-width:0}
+.nav-close{flex:none;background:#fff;border:1px solid var(--line);color:#334155;border-radius:8px;padding:6px 10px;font-size:13px;font-weight:700;cursor:pointer}
+.nav-close:hover{background:#e7eef8}
+nav.sidebar{transition:transform .2s ease}
+
+.dim{display:none;position:fixed;inset:0;background:rgba(16,24,40,.35);z-index:40}
+nav.sidebar{position:fixed;left:0;top:0;width:var(--sidebar-w);height:100vh;overflow:auto;background:var(--sidebar);border-right:1px solid var(--line);padding:18px 14px 48px;z-index:50}
+.content{margin-left:var(--sidebar-w);min-width:0;background:#fff}
+nav .brand{font-weight:750;margin:0 0 2px;color:#102033}
+nav .sub{color:var(--muted);font-size:12px;margin:0 0 14px}
+nav input{width:100%;background:#fff;border:1px solid var(--line);color:var(--text);border-radius:8px;padding:8px 10px;margin-bottom:12px}
+nav a.toc{display:block;color:#334155;padding:6px 8px;border-radius:6px;font-size:13px;text-decoration:none}
+nav a.toc:hover,nav a.toc.active{background:#e7eef8;color:#102033;text-decoration:none}
+nav .g{color:#7b8b9c;font-size:11px;letter-spacing:.06em;margin:14px 8px 6px;font-weight:700}
+header.top{padding:28px 36px 16px;border-bottom:1px solid var(--line);background:#fff}
+header.top h1{margin:0 0 8px;font-size:26px;color:#102033}
+header.top p{margin:0;color:var(--muted);max-width:88ch}
+main{padding:8px 36px 80px;max-width:1100px}
+section{padding:28px 0;border-bottom:1px solid var(--line)}
+section h2{margin:0 0 8px;font-size:22px;color:#102033}
+section h3{margin:22px 0 8px;font-size:17px;color:#1b2b40}
+section h4{margin:16px 0 6px;font-size:15px;color:#243447}
+.lead{color:var(--muted);margin:0 0 16px}
+.callout{border:1px solid var(--line);background:var(--panel);border-radius:var(--radius);padding:14px 16px;margin:12px 0}
+.callout.warn{border-color:#efcc80;background:#fff8e8}
+.callout.ok{border-color:#9ad4b5;background:#f1fbf5}
+.callout.bad{border-color:#f0b4b4;background:#fff4f3}
+.callout b.tag{display:inline-block;font-size:11px;letter-spacing:.04em;margin-bottom:6px;color:var(--amber)}
+.grid{display:grid;gap:12px}
+.grid.e4{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.grid.e2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px}
+.card h3{margin:0 0 8px}
+.price{font-size:22px;font-weight:700}
+.price small{font-size:12px;color:var(--muted);font-weight:500}
+ul.tight,ol.tight{margin:8px 0;padding-left:1.2em}
+ul.tight li,ol.tight li{margin:3px 0}
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin:10px 0 16px;background:#fff}
+th,td{border:1px solid var(--line);padding:8px 10px;vertical-align:top;text-align:left}
+th{background:#eef3f9;color:#1b2b40}
+td.y{color:var(--green);font-weight:650}
+td.n{color:var(--dim)}
+td.p{color:var(--amber)}
+.badge{display:inline-block;border-radius:999px;padding:1px 8px;font-size:11px;font-weight:700}
+.b-st{background:#e8f0fe;color:#174ea6}
+.b-sd{background:#e6f4ea;color:#0d7a4d}
+.b-pl{background:#fef7e0;color:#8a5a00}
+.b-en{background:#fce8e6;color:#a50e0e}
+.b-all{background:#e6f4ea;color:#0d7a4d}
+.app{border-left:3px solid var(--blue);padding-left:12px;margin:18px 0 28px}
+.app h3{margin-top:0}
+.kicker{font-size:12px;color:var(--dim);margin:0 0 4px}
+.src{font-size:12px;color:var(--dim)}
+footer{color:var(--dim);font-size:12px;padding:24px 36px 40px;background:#fff}
+.hidden{display:none !important}
+.tree{display:grid;gap:8px}
+.tree .step{background:var(--panel);border-radius:8px;padding:10px 12px;border:1px solid var(--line)}
+pre{background:#f4f7fb;border:1px solid var(--line);border-radius:8px;padding:12px 14px;overflow:auto;font-size:12.5px;line-height:1.5;color:#16324d}
+.faq-index{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 18px}
+.faq-chip{display:inline-block;background:#fff;border:1px solid var(--line);border-radius:999px;padding:3px 10px;font-size:12px;color:var(--muted);text-decoration:none}
+.faq-chip:hover{color:var(--text);text-decoration:none;border-color:var(--blue)}
+hr{border:0;border-top:1px solid var(--line);margin:20px 0}
+@media print{
+  nav,.nav-open,.nav-close,.dim,.no-print{display:none !important}
+  .content{margin-left:0 !important}
+}
+@media (max-width:720px){
+  body:not(.nav-closed) .dim{display:block}
+  main,header.top,footer{padding-left:16px;padding-right:16px}
+  body.nav-closed header.top{padding-top:56px}
+}
+
+</style>
+</head>
+<body>
+<button class="nav-open no-print" id="navOpen" type="button">打開選單</button>
+<div class="dim" id="dim"></div>
+<nav class="sidebar no-print" id="toc">
+  <div class="nav-head">
+    <div class="brandwrap">
+      <p class="brand">GWS 技術百科</p>
+      <p class="sub">樂雲智能 · 技術單位</p>
+    </div>
+    <button class="nav-close" id="navClose" type="button">關閉</button>
+  </div>
+  <input id="q" type="search" placeholder="搜尋開通、MX、常見問題…">
+  <div class="g">概覽</div>
+  <a class="toc" href="#use">分工與接單</a>
+  <a class="toc" href="#glossary">名詞對照</a>
+  <a class="toc" href="#plans">方案與功能</a>
+  <a class="toc" href="#apps">應用說明</a>
+  <a class="toc" href="#gmail">　Gmail（電子郵件）</a>
+  <a class="toc" href="#calendar">　日曆 Calendar</a>
+  <a class="toc" href="#drive">　雲端硬碟 Drive</a>
+  <a class="toc" href="#editors">　文件／試算表／簡報</a>
+  <a class="toc" href="#meet">　Meet（視訊會議）</a>
+  <a class="toc" href="#chat">　Chat／群組</a>
+  <a class="toc" href="#other-apps">　其他服務</a>
+  <a class="toc" href="#gemini">Gemini 與筆記本</a>
+  <a class="toc" href="#notebook-export">　筆記本匯出</a>
+  <a class="toc" href="#security">企業資安</a>
+  <a class="toc" href="#vault">保管箱 Vault</a>
+  <a class="toc" href="#export">資料怎麼匯出</a>
+  <a class="toc" href="#admin">管理控制台</a>
+  <a class="toc" href="#storage">儲存空間</a>
+  <a class="toc" href="#mail-auth">網域與郵件認證</a>
+  <a class="toc" href="#endpoint">裝置管理</a>
+  <a class="toc" href="#missell">常見錯配</a>
+  <a class="toc" href="#support">支援升級</a>
+  <div class="g">操作步驟</div>
+  <a class="toc" href="#sop-03">開通</a>
+  <a class="toc" href="#sop-05">使用者與組織</a>
+  <a class="toc" href="#sop-06">移轉（換商／搬家）</a>
+  <a class="toc" href="#sop-07">日常維運</a>
+  <a class="toc" href="#sop-10">常見問題 100</a>
+  <a class="toc" href="#sources">官方來源</a>
+</nav>
+<div class="content">
+<header class="top">
+  <h1>Google Workspace 技術手冊</h1>
+  <p>樂雲技術單位用。功能與數字以 Google 說明中心為準；本頁美金為官方牌價，不是樂雲報價。訂閱與請款走上游；登入、收信、帳號、雲端硬碟由樂雲協助。</p>
+</header>
+<main id="main">
+
+<section id="use">
+  <h2>分工與接單</h2>
+  <p class="lead">樂雲是客戶的技術窗口，不是下單窗口。進客戶環境需超級管理員加委派，或共屏。</p>
+  <div class="grid e2">
+    <div class="card">
+      <h3>樂雲處理</h3>
+      <ul class="tight">
+        <li>登入、密碼、兩步驟驗證、帳號／群組／授權（授權滿了則開上游加購）</li>
+        <li>網域驗證、郵件交換紀錄 MX、SPF／DKIM／DMARC、收發信</li>
+        <li>雲端硬碟分享、儲存、日曆、Meet、裝置基礎設定</li>
+        <li>從 Microsoft 365 搬家（郵件／日曆／檔案）的技術設定</li>
+        <li>說明方案、保管箱、Gemini、筆記本的能力邊界</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>開給上游</h3>
+      <ul class="tight">
+        <li>下單、開通租戶、完成訂閱轉移 Complete transfer</li>
+        <li>加授權、改年約／彈性方案、更換產品代碼 SKU</li>
+        <li>帳單、發票、折扣、請款</li>
+        <li>公開識別碼 Public Identifier、合作夥伴銷售控制台 Partner Sales Console（樂雲目前沒有）</li>
+      </ul>
+    </div>
+  </div>
+  <p>對客戶可說：訂閱與請款走原廠通路；登入、收信、帳號、雲端硬碟這些技術問題可以直接幫。</p>
+  <h3>接到故障單先問</h3>
+  <ol class="tight">
+    <li>誰受影響：一人、一個組織單位、全公司，或外部寄不進。</li>
+    <li>從什麼時候開始：是否剛改 DNS、剛轉經銷商、剛強制兩步驟驗證。</li>
+    <li>進的是使用者 Gmail 還是管理控制台（不要進銷售控制台）。</li>
+    <li>用 <a href="https://toolbox.googleapps.com/apps/dig/" target="_blank" rel="noopener">Admin Toolbox Dig</a> 查 MX，不要只聽口述。</li>
+    <li>授權是否用盡、使用者是否暫停。</li>
+    <li>若要改生產 MX、完成轉移、刪使用者：先找第二人確認。</li>
+  </ol>
+  <h3>不要一個人做</h3>
+  <ul class="tight">
+    <li>改生產 MX、刪除舊 MX</li>
+    <li>完成訂閱轉移（不可逆）</li>
+    <li>刪除超級管理員、刪除主要網域</li>
+    <li>關閉保管箱保留規則、解除訴訟保留 Hold</li>
+  </ul>
+  <p>美金牌價見方案章；報價問商務與上游。台灣定價頁常有新客促銷，不以該頁對客戶報價。</p>
+</section>
+
+<section id="glossary">
+  <h2>名詞對照</h2>
+  <p class="lead">中文與官方英文並陳，對客戶時兩邊都可以講。</p>
+  <table>
+    <thead><tr><th>中文</th><th>英文（官方）</th><th>一句話</th></tr></thead>
+    <tbody>
+      <tr><td>Google Workspace／工作區</td><td>Google Workspace（GWS）</td><td>公司信箱＋協作雲端，不是 Google Cloud 雲端平台 GCP</td></tr>
+      <tr><td>商業入門／標準／Plus 版</td><td>Business Starter／Standard／Plus</td><td>最多 300 人</td></tr>
+      <tr><td>企業標準／Plus 版</td><td>Enterprise Standard／Plus</td><td>不限人數；Plus 才有部分進階加密</td></tr>
+      <tr><td>管理控制台</td><td>Admin console</td><td>admin.google.com</td></tr>
+      <tr><td>合作夥伴銷售控制台</td><td>Partner Sales Console（PSC）</td><td>下單／轉移；樂雲目前沒有</td></tr>
+      <tr><td>超級管理員</td><td>Super admin</td><td>唯一能做訂閱轉移授權的角色</td></tr>
+      <tr><td>委派管理員</td><td>Delegated admin</td><td>依角色管使用者／群組／服務</td></tr>
+      <tr><td>組織單位</td><td>Organizational unit（OU）</td><td>掛政策的樹，不是 HR 組織圖</td></tr>
+      <tr><td>庫存單位／產品代碼</td><td>SKU</td><td>訂閱品項代碼</td></tr>
+      <tr><td>彈性方案／年約（定期）方案</td><td>Flexible Plan／Annual／Fixed-Term Plan</td><td>Help 牌價與可否增減授權不同</td></tr>
+      <tr><td>集區儲存空間</td><td>Pooled storage</td><td>全公司共用，不是每人硬切</td></tr>
+      <tr><td>郵件交換紀錄</td><td>MX</td><td>別人寄到你網域送到哪</td></tr>
+      <tr><td>寄件者政策架構</td><td>SPF</td><td>誰可以用你的網域寄信</td></tr>
+      <tr><td>網域金鑰識別郵件</td><td>DKIM</td><td>外寄簽章</td></tr>
+      <tr><td>網域為基礎的郵件認證、報告與一致性</td><td>DMARC</td><td>失敗信要隔離還是拒絕</td></tr>
+      <tr><td>雙重傳遞／分割傳遞</td><td>Dual delivery／Split delivery</td><td>遷移期同一封雙送 vs 依收件人分流</td></tr>
+      <tr><td>兩步驟驗證</td><td>2-Step Verification（2SV）</td><td>密碼以外再驗證</td></tr>
+      <tr><td>單一登入</td><td>Single Sign-On（SSO）</td><td>改走身分提供者 IdP</td></tr>
+      <tr><td>身分提供者</td><td>Identity provider（IdP）</td><td>例如 Microsoft Entra、Okta</td></tr>
+      <tr><td>保管箱</td><td>Google Vault</td><td>保留、訴訟保留、搜尋、匯出；<strong>不是備份</strong></td></tr>
+      <tr><td>電子蒐證</td><td>eDiscovery</td><td>為法律／合規把資料找出來</td></tr>
+      <tr><td>訴訟保留</td><td>Hold</td><td>壓過刪除與保留到期</td></tr>
+      <tr><td>案件</td><td>Matter</td><td>保管箱裡的案件資料夾</td></tr>
+      <tr><td>資料遺失防護</td><td>Data Loss Prevention（DLP）</td><td>外寄／分享敏感資料規則</td></tr>
+      <tr><td>情境感知存取</td><td>Context-Aware Access（CAA）</td><td>依裝置／IP／使用者決定能否開服務</td></tr>
+      <tr><td>S/MIME 郵件加密</td><td>S/MIME</td><td>企業 Plus 版；憑證加密／簽章</td></tr>
+      <tr><td>用戶端加密</td><td>Client-side encryption（CSE）</td><td>金鑰在客戶端；企業 Plus 版</td></tr>
+      <tr><td>資料匯出工具</td><td>Data Export</td><td>管理員整包匯出（含 Gemini 筆記本）</td></tr>
+      <tr><td>Gemini 筆記本（舊稱 NotebookLM）</td><td>Gemini Notebook</td><td>工作帳筆記本＋來源；不是保管箱服務</td></tr>
+      <tr><td>音訊總覽</td><td>Audio overview</td><td>筆記本生成的語音摘要</td></tr>
+      <tr><td>服務等級目標</td><td>Service Level Objective（SLO）</td><td>支援首次回應目標，不是賠償條款</td></tr>
+      <tr><td>技術客戶經理</td><td>Technical Account Manager（TAM）</td><td>Premium 支援才有指定顧問</td></tr>
+      <tr><td>安全 LDAP</td><td>Secure LDAP</td><td>Plus／企業版把舊系統接到 Google 身分</td></tr>
+      <tr><td>公開識別碼</td><td>Public Identifier</td><td>訂閱轉移必填；樂雲無 PSC 時向上游要</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="plans">
+  <h2>方案與功能</h2><p class="src">功能與牌價以 <a href="https://knowledge.workspace.google.com/admin/getting-started/editions/business-editions">商業版 Help</a>、<a href="https://knowledge.workspace.google.com/admin/getting-started/editions/compare-enterprise-editions">企業版對照</a> 為準；台灣 <a href="https://workspace.google.com/pricing?hl=zh-tw">定價頁</a> 僅供對行銷賣點。</p>
+  <p class="lead">商業線四張臉：Starter／Standard／Plus（最多 300 人）與 Enterprise（不限人數，實務再拆 Standard／Plus）。儲存是<strong>全組織集區</strong>，不是每人硬切不能借。</p>
+
+  <div class="grid e4">
+    <article class="card">
+      <span class="badge b-st">Business Starter</span>
+      <h3>入門郵件＋協作</h3>
+      <p class="price">年約牌價 $7 <small>USD／人／月</small></p>
+      <p class="kicker">Help 年約牌價 $7、彈性 $8.40（<a href="https://knowledge.workspace.google.com/admin/getting-started/editions/business-editions">Business editions</a>）。定價頁促銷會變，不當樂雲售價。</p>
+      <ul class="tight">
+        <li>集區儲存 <strong>30 GB × 人數</strong></li>
+        <li>自訂網域 Gmail、無廣告</li>
+        <li>Gmail 內建 Gemini；Gemini 應用程式可對話</li>
+        <li>Meet <strong>100 人</strong>、最長 24 小時</li>
+        <li>Vids、Chat、日曆、文件編輯器</li>
+        <li><strong>沒有</strong> Meet 錄製、沒有 Vault、Workspace 內建 Gemini 多數 App 受限</li>
+      </ul>
+      <p>適合：只要公司信箱與基礎協作、人數少、先不要電子蒐證。</p>
+    </article>
+    <article class="card">
+      <span class="badge b-sd">Business Standard</span>
+      <h3>最常見主力</h3>
+      <p class="price">年約牌價 $14 <small>USD／人／月</small></p>
+      <p class="kicker">Help 年約 $14、彈性 $16.80。定價頁促銷會變。</p>
+      <ul class="tight">
+        <li>集區儲存 <strong>2 TB × 人數</strong></li>
+        <li>Gemini 進 Gmail、文件、Meet 等</li>
+        <li>Gemini Notebook <strong>高階用量</strong>（見第 4 章）</li>
+        <li>Meet <strong>150 人</strong>＋錄製＋降噪</li>
+        <li>預約頁、文件／PDF 電子簽名</li>
+        <li>Google Workspace Migrate</li>
+        <li>郵件合併、Gmail 自訂版面</li>
+        <li><strong>仍沒有 Vault</strong></li>
+      </ul>
+      <p>適合：要錄影、要較大雲端、要進階 Gemini，但還沒有法務保留需求。</p>
+    </article>
+    <article class="card">
+      <span class="badge b-pl">Business Plus</span>
+      <h3>開始有保管箱</h3>
+      <p class="price">年約牌價 $22 <small>USD／人／月</small></p>
+      <p class="kicker">Help 年約 $22、彈性 $26.40。定價頁促銷會變。</p>
+      <ul class="tight">
+        <li>集區儲存 <strong>5 TB × 人數</strong></li>
+        <li>Meet <strong>500 人</strong>＋出席追蹤</li>
+        <li><strong>Vault</strong>：保留、封存、搜尋、匯出</li>
+        <li>電子蒐證（eDiscovery）</li>
+        <li>安全 LDAP、進階端點管理</li>
+        <li>仍上限 300 人</li>
+      </ul>
+      <p>適合：要訴訟保留／稽核匯出，但組織還在 300 人內。</p>
+    </article>
+    <article class="card">
+      <span class="badge b-en">Enterprise</span>
+      <h3>不限人數＋企業資安</h3>
+      <p class="price">聯絡銷售 <small>拆 Standard／Plus</small></p>
+      <p class="kicker">行銷頁常把兩張合成「Enterprise」；接單時要確認是 Standard 還是 Plus</p>
+      <ul class="tight">
+        <li>集區儲存 <strong>5 TB × 人數</strong>；5 人以上可向 Google 申請更多</li>
+        <li>Meet：行銷頁寫 1000 人＋網域內直播（Help 見下表拆分）</li>
+        <li>DLP、情境感知存取</li>
+        <li>企業資料地區、Cloud Identity 進階版</li>
+        <li>企業端點、Drive AI 分類</li>
+        <li>Enhanced 支援（可再升 Premium）</li>
+        <li>S/MIME、用戶端加密多在 <strong>Plus</strong></li>
+      </ul>
+      <p>適合：超過 300 人、要 DLP／情境感知／資料地區、要跟法務對電子蒐證。</p>
+    </article>
+  </div>
+
+  <h3>企業標準版 vs 企業 Plus 版（說明中心，不是行銷一頁）</h3>
+  <table>
+    <thead><tr><th>項目</th><th>Enterprise Standard</th><th>Enterprise Plus</th></tr></thead>
+    <tbody>
+      <tr><td>人數</td><td>不限</td><td>不限</td></tr>
+      <tr><td>儲存</td><td>5 TB 集區／人</td><td>同左；同樣可申請加量</td></tr>
+      <tr><td>Vault</td><td class="y">有</td><td class="y">有</td></tr>
+      <tr><td>DLP／情境感知／Cloud Identity Premium</td><td class="y">有</td><td class="y">有</td></tr>
+      <tr><td>Meet 人數</td><td>500（超過後另 500 位僅檢視）</td><td>1,000（同樣 500 後可能僅檢視）</td></tr>
+      <tr><td>網域內／信任網域直播觀眾</td><td>1 萬</td><td>10 萬</td></tr>
+      <tr><td>S/MIME 郵件加密</td><td class="n">無</td><td class="y">有</td></tr>
+      <tr><td>用戶端加密（CSE）</td><td class="n">無</td><td class="y">有</td></tr>
+      <tr><td>進階資料匯出</td><td class="n">基本匯出</td><td class="y">進階匯出</td></tr>
+      <tr><td>企業資料地區（依 OU／群組）</td><td>基礎：全組織單一地區</td><td>可依 OU／群組＋處理地區政策</td></tr>
+      <tr><td>Assured Controls</td><td class="n">無</td><td class="p">加購</td></tr>
+      <tr><td>Cloud Search 第三方</td><td>僅 Google 服務</td><td>可第三方（條件：授權數與認證夥伴）</td></tr>
+      <tr><td>Gmail／Chat 內容審核、部分資安報表</td><td>較少</td><td>較完整（含 Access Transparency 等）</td></tr>
+      <tr><td>Meet 用戶端加密（音訊／視訊）</td><td class="n">無</td><td class="y">有</td></tr>
+      <tr><td>內建支援</td><td>Enhanced</td><td>Enhanced（可談 Premium）</td></tr>
+    </tbody>
+  </table>
+  <div class="callout">
+    台灣行銷頁把 Enterprise 寫成「1000 人會議＋S/MIME＋DLP」。那是<strong>系列賣點</strong>。客戶若買的是 Enterprise Standard，Meet 上限與 S/MIME 以 Help 與 Admin 實際訂閱為準，不要用行銷頁一次承諾 Plus 才有的控制項。
+  </div>
+
+  <h3>其他產品代碼 SKU</h3>
+  <table>
+    <thead><tr><th>SKU</th><th>技術重點</th><th>別承諾</th></tr></thead>
+    <tbody>
+      <tr><td>Essentials／Enterprise Essentials</td><td>Drive／Meet／協作，<strong>沒有 Gmail</strong></td><td>公司信箱</td></tr>
+      <tr><td>Frontline</td><td>現場人員功能裁切</td><td>完整 Vault／Gemini 用量與一般商業線相同</td></tr>
+      <tr><td>Education</td><td>學校資格審查</td><td>一般商業客「改買教育版比較便宜」</td></tr>
+      <tr><td>G Suite Basic／Business</td><td>舊 SKU，轉移時會被換成 Workspace</td><td>可以永遠留在 G Suite</td></tr>
+      <tr><td>Cloud Identity Free／Premium</td><td>只要身分與裝置</td><td>等於有 Gmail</td></tr>
+    </tbody>
+  </table>
+
+  <h3>付款方案</h3>
+  <table>
+    <thead><tr><th>方案</th><th>含義</th><th>轉移時</th></tr></thead>
+    <tbody>
+      <tr><td>彈性 Flexible</td><td>可月繳、增減授權規則較鬆</td><td>可轉彈性或年約</td></tr>
+      <tr><td>年約 Annual／定期</td><td>承諾數量；年中減少通常不行</td><td>預設只能新年約；續約前 30 天才可改彈性／減量</td></tr>
+      <tr><td>試用</td><td>台灣定價頁寫 <strong>14 天</strong></td><td>未驗證網域可能被刪；已試用規則以上游與註冊畫面為準</td></tr>
+    </tbody>
+  </table>
+  <p>年繳已預付：官方不退費、也不把餘額轉到新訂閱。應排在服務年底再轉經銷商。</p>
+</section>
+
+<section id="matrix">
+  <h3>功能對照</h3>
+  <p class="src">來源：<a href="https://knowledge.workspace.google.com/admin/getting-started/editions/business-editions">商業版</a>、<a href="https://knowledge.workspace.google.com/admin/getting-started/editions/compare-enterprise-editions">企業版</a>。入門版「受限」出自台灣定價頁。</p>
+  <table>
+    <thead>
+      <tr><th>能力</th><th>Starter</th><th>Standard</th><th>Plus</th><th>Ent Std</th><th>Ent Plus</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>人數上限</td><td>300</td><td>300</td><td>300</td><td>不限</td><td>不限</td></tr>
+      <tr><td>集區儲存／人</td><td>30 GB</td><td>2 TB</td><td>5 TB</td><td>5 TB</td><td>5 TB＋可申請</td></tr>
+      <tr><td>自訂網域 Gmail</td><td class="y">有</td><td class="y">有</td><td class="y">有</td><td class="y">有</td><td class="y">有</td></tr>
+      <tr><td>釣魚／垃圾郵件防護</td><td class="y">有</td><td class="y">有</td><td class="y">有</td><td class="y">進階</td><td class="y">進階</td></tr>
+      <tr><td>Gmail 內建 Gemini</td><td class="y">有</td><td class="y">有</td><td class="y">有</td><td class="y">有</td><td class="y">有</td></tr>
+      <tr><td>文件／試算表／簡報／Drive／Meet／Chat Gemini</td><td class="p">受限</td><td class="y">有</td><td class="y">有</td><td class="y">有</td><td class="y">有</td></tr>
+      <tr><td>Gemini Notebook 用量層</td><td>核心・標準＋企業資安</td><td>核心・高階</td><td>核心・高階</td><td>核心・高階</td><td>核心・高階</td></tr>
+      <tr><td>Meet 人數</td><td>100</td><td>150</td><td>500</td><td>500</td><td>1000</td></tr>
+      <tr><td>Meet 錄製到 Drive</td><td class="n">無</td><td class="y">有</td><td class="y">有</td><td class="y">有</td><td class="y">有</td></tr>
+      <tr><td>Meet 出席追蹤</td><td class="n">無</td><td class="n">無</td><td class="y">有</td><td class="y">有</td><td class="y">有</td></tr>
+      <tr><td>網域內直播</td><td class="n">無</td><td class="n">無</td><td class="n">無</td><td>1 萬觀眾</td><td>10 萬觀眾</td></tr>
+      <tr><td>預約頁／電子簽名</td><td class="n">無</td><td class="y">有</td><td class="y">有</td><td class="y">有</td><td class="y">有</td></tr>
+      <tr><td>Workspace Migrate</td><td class="n">無</td><td class="y">有</td><td class="y">有</td><td class="y">有</td><td class="y">有</td></tr>
+      <tr><td>Vault</td><td class="n">無</td><td class="n">無</td><td class="y">內建</td><td class="y">內建</td><td class="y">內建</td></tr>
+      <tr><td>安全 LDAP</td><td class="n">無</td><td class="n">無</td><td class="y">有</td><td class="y">有</td><td class="y">有</td></tr>
+      <tr><td>進階端點</td><td class="n">基礎</td><td class="n">基礎</td><td class="y">進階</td><td class="y">企業</td><td class="y">企業</td></tr>
+      <tr><td>DLP</td><td class="n">無</td><td class="n">無</td><td class="n">無</td><td class="y">有</td><td class="y">有</td></tr>
+      <tr><td>情境感知存取</td><td class="n">無</td><td class="n">無</td><td class="n">無</td><td class="y">有</td><td class="y">有</td></tr>
+      <tr><td>S/MIME</td><td class="n">無</td><td class="n">無</td><td class="n">無</td><td class="n">無</td><td class="y">有</td></tr>
+      <tr><td>用戶端加密 CSE</td><td class="n">無</td><td class="n">無</td><td class="n">無</td><td class="n">無</td><td class="y">有</td></tr>
+      <tr><td>2SV／安全金鑰／群組政策</td><td class="y">有</td><td class="y">有</td><td class="y">有</td><td class="y">有</td><td class="y">有</td></tr>
+    </tbody>
+  </table>
+  <p>授權怎麼數：一個要登入的使用者 ≈ 一顆 Workspace。別名、群組、共用雲端硬碟不另算。授權用盡通常不能新開帳，舊人仍可登入。</p>
+</section>
+
+<section id="apps">
+  <h2>應用說明</h2>
+  <p class="lead">每個服務：能做什麼、管理員控什麼、資料在哪、保管箱管不管。</p>
+
+  <article class="app" id="gmail">
+    <p class="kicker">核心服務 · 所有有 Gmail 的 SKU</p>
+    <h3>Gmail — 公司網域電子郵件</h3>
+    <p><strong>能做什麼：</strong>用 <code>名字@公司網域</code> 收發信，而不是 @gmail.com。網頁、手機 App、IMAP／POP（若管理員允許）、Outlook 外掛都可。標籤（不是資料夾樹）、篩選器、委派（秘書代收）、別名、密件副本、假期自動回覆、機密模式（連結取代內文）、離線、會議時段。</p>
+    <ul class="tight">
+      <li><strong>反垃圾／釣魚：</strong>台灣定價頁行銷句寫可擋 99.9% 以上攻擊——<strong>不是 SLA</strong>。實務仍要設定寄件者政策架構 SPF、網域金鑰 DKIM、DMARC。進階網路釣魚防護視版本在管理控制台打開。</li>
+      <li><strong>無廣告：</strong>Workspace Gmail 不是消費版那種廣告匣。</li>
+      <li><strong>Gemini：</strong>各版都有「幫我寫／摘要執行緒」。Starter 起就有；文件／試算表那側 Gemini 才從 Standard 變完整。</li>
+      <li><strong>郵件合併、自訂版面：</strong>Standard 起（行銷頁）。</li>
+      <li><strong>S/MIME：</strong>Enterprise Plus。憑證佈到使用者後才能端對端郵件加密。</li>
+      <li><strong>DLP：</strong>Enterprise。可擋外寄個資、信用卡號等（規則要法務定，不是 L1 亂加）。</li>
+      <li><strong>配額（Enterprise Help 常見值）：</strong>每封 To+Cc+Bcc 合計 2,000（外域 500）；每日不重複收件人約 3,000（外域 2,000；試用更嚴）。大量行銷信不要走一般使用者 Gmail。</li>
+    </ul>
+    <h4>管理員常調</h4>
+    <ul class="tight">
+      <li>MX 現值官方為 <code>smtp.google.com</code>（舊 ASPMX 仍可能存活，以 Help 為準）</li>
+      <li>雙重傳遞／分割傳遞、路由、隔離區、綜合郵件儲存（Calendar／Drive 分享信要進 Vault 必開）</li>
+      <li>停用低安全性應用程式、管控 IMAP／POP、自動轉寄</li>
+    </ul>
+    <h4>資料與匯出</h4>
+    <p>使用者刪信清空垃圾桶後，若沒有 Vault 規則／Hold，就救不回。Vault 搜 Gmail 可匯出 mbox 或 PST；<strong>不是</strong>跟 Drive 混成一個 zip。可另開「匯出連結的 Drive 檔案」→ 另外一個 Drive 包＋<code>drive-links.csv</code> 對照（見第 6、7 章）。</p>
+  </article>
+
+  <article class="app" id="calendar">
+    <p class="kicker">核心服務</p>
+    <h3>Google 日曆 — 行程與資源</h3>
+    <p><strong>能做什麼：</strong>個人／團隊行事曆、邀請內部外部、看忙碌／空閒、會議室與資源（投影機、車位）、預約時段、附加 Meet 連結、重複事件、時區、委派。</p>
+    <ul class="tight">
+      <li><strong>預約頁：</strong>Standard 起。給外部人選時段，適合業務／顧問。</li>
+      <li><strong>資源日曆：</strong>Admin 建建築物／資源，使用者才能「瀏覽會議室」。</li>
+      <li><strong>Vault：</strong>可保留／Hold／搜尋／匯出事件（ICS 或 PST）。事件裡的 Drive 超連結<strong>只帶連結、不帶檔案本體</strong>。</li>
+    </ul>
+  </article>
+
+  <article class="app" id="drive">
+    <p class="kicker">核心服務 · 儲存池主角</p>
+    <h3>Google 雲端硬碟 — 檔案與共用雲端硬碟</h3>
+    <p><strong>能做什麼：</strong>存放 Google 檔與上傳的 PDF／Office／圖片／影片；共用連結；共用雲端硬碟（團隊擁有、人不在檔還在）；電腦版 Drive 串流／鏡像；離線；標籤（進階版）；核准流程。</p>
+    <ul class="tight">
+      <li><strong>集區：</strong>Starter 30GB／Standard 2TB／Plus 與 Enterprise 5TB × 授權數（含封存使用者算法見儲存 Help）。一人把 1.8TB 影片丟進去，全公司都可能爆。</li>
+      <li><strong>Gemini：</strong>Standard 起可在 Drive 側邊欄問檔、摘要 PDF。Starter 行銷頁為無。</li>
+      <li><strong>AI 分類：</strong>Enterprise 行銷賣點；可幫敏感檔自動貼標，常跟 DLP 一起講。</li>
+      <li><strong>外部分享：</strong>Admin 可設「僅限網域／允許外部／公開連結」。預設建議受限。</li>
+      <li><strong>轉移擁有權：</strong>離職時把 My Drive 轉給主管；共用雲端硬碟不跟私人雲走。</li>
+    </ul>
+    <h4>Vault／匯出時 Google 檔會轉成什麼</h4>
+    <table>
+      <thead><tr><th>來源</th><th>匯出格式</th></tr></thead>
+      <tbody>
+        <tr><td>Google 文件 Docs</td><td>DOCX</td></tr>
+        <tr><td>試算表 Sheets</td><td>XLSX</td></tr>
+        <tr><td>簡報 Slides</td><td>PPTX</td></tr>
+        <tr><td>表單 Forms</td><td>ZIP（HTML＋CSV）</td></tr>
+        <tr><td>繪圖 Drawings</td><td>PDF</td></tr>
+        <tr><td>新版 Sites 每一頁</td><td>PDF（檔名含站台／頁面 ID）</td></tr>
+        <tr><td>Vids</td><td>MP4</td></tr>
+        <tr><td>Pics</td><td>PNG</td></tr>
+        <tr><td>使用者上傳的非 Google 檔</td><td>原格式</td></tr>
+        <tr><td>用戶端加密檔</td><td>仍加密，副檔名 <code>.gcse</code></td></tr>
+      </tbody>
+    </table>
+    <p>單一 zip 上限約 <strong>10 GB</strong>，超過就切多個。檔名＝原名＋底線＋Drive 檔案 ID。</p>
+  </article>
+
+  <article class="app" id="editors">
+    <p class="kicker">核心服務</p>
+    <h3>文件、試算表、簡報、表單、Sites、Keep、Tasks</h3>
+    <h4>Google 文件 Docs</h4>
+    <p>線上 Word 類：即時協作、建議模式、註解、範本、目錄、離線。Gemini（Standard+）可從零寫、潤飾、生成圖片。電子簽名在文件與 PDF：Standard 起。</p>
+    <h4>Google 試算表 Sheets</h4>
+    <p>線上 Excel 類：公式、樞紐、智慧填入、圖表、與 Forms 連動。Gemini 可做圖、分析。Office 檔可直接在 Drive 開（相容模式）。</p>
+    <h4>Google 簡報 Slides</h4>
+    <p>線上 PPT：簡報者檢視、問答、投影片錄製（視版本）。Gemini 可生圖、去背、產簡報。</p>
+    <h4>Google 表單 Forms</h4>
+    <p>問卷／報名／測驗；答案進試算表。Vault 把 Forms 當 Drive 物件匯出成 ZIP，不是「表單服務」獨立搜尋頁。</p>
+    <h4>Google 協作平台 Sites</h4>
+    <p>部門入口、專案站。新版 Sites 的 Vault 走 Drive 搜尋／匯出，每頁一份 PDF。</p>
+    <h4>Keep／Tasks／聯絡人</h4>
+    <p>Keep＝便利貼；Tasks＝待辦；聯絡人＝全域通訊錄＋個人。Keep／Tasks <strong>不是</strong> Vault 原生服務。分享 Keep 時發出的郵件，要靠綜合郵件儲存才進 Gmail Vault。</p>
+  </article>
+
+  <article class="app" id="meet">
+    <p class="kicker">核心服務</p>
+    <h3>Google Meet — 視訊會議</h3>
+    <p><strong>能做什麼：</strong>瀏覽器或 App 開會、螢幕分享、即時字幕、舉手、分組討論室（進階版）、等候室、投票／Q&amp;A、降噪、錄製、直播、電話撥入（常搭 Voice）。</p>
+    <table>
+      <thead><tr><th></th><th>Starter</th><th>Standard</th><th>Plus</th><th>Ent Std</th><th>Ent Plus</th></tr></thead>
+      <tbody>
+        <tr><td>人數</td><td>100</td><td>150</td><td>500</td><td>500</td><td>1000</td></tr>
+        <tr><td>時長</td><td>24h</td><td>24h</td><td>24h</td><td>24h</td><td>24h</td></tr>
+        <tr><td>錄製→Drive</td><td class="n">無</td><td class="y">有</td><td class="y">有</td><td class="y">有</td><td class="y">有</td></tr>
+        <tr><td>降噪</td><td class="n">無</td><td class="y">有</td><td class="y">有</td><td class="y">有</td><td class="y">有</td></tr>
+        <tr><td>出席追蹤</td><td class="n">無</td><td class="n">無</td><td class="y">有</td><td class="y">有</td><td class="y">有</td></tr>
+        <tr><td>直播觀眾</td><td class="n">無</td><td class="n">無</td><td class="n">無</td><td>1 萬</td><td>10 萬</td></tr>
+        <tr><td>會議加密（CSE）</td><td class="n">無</td><td class="n">無</td><td class="n">無</td><td class="n">無</td><td class="y">有</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Vault：</strong>錄製檔、Gemini 會議筆記、會中聊天／Q&amp;A／投票紀錄預設吃 <strong>Drive 規則</strong>；可另開 Meet 專用保留規則（開了以後 Drive 規則就不再套用在錄製檔）。搜尋匯出走 Drive，沒有獨立「Meet 服務」匯出鈕。</p>
+  </article>
+
+  <article class="app" id="chat">
+    <p class="kicker">核心服務</p>
+    <h3>Google Chat 與 Groups</h3>
+    <h4>Chat</h4>
+    <p>1:1、群組、聊天室 Spaces、檔案、表情、App／機器人。歷史紀錄可被管理員強制開或關——<strong>歷史關閉的訊息 Vault 常抓不到</strong>。Enterprise 有 Chat DLP、外部聊天室開關、訊息自動刪除。</p>
+    <p>Vault：保留／Hold／搜尋／匯出；匯出按對話／聊天室分組，mbox 或 PST。</p>
+    <h4>Groups for Business</h4>
+    <p>郵件清單、誰可以發、審核、協同收件匣。群組不當使用者授權。Vault 可搜群組信件並帶成員 CSV。</p>
+    <h4>舊 Hangouts</h4>
+    <p>保留／Hold 跟 Chat 規則；搜尋匯出走 Gmail。</p>
+  </article>
+
+  <article class="app" id="other-apps">
+    <p class="kicker">核心或附加</p>
+    <h3>Vids、Voice、AppSheet、Workspace Studio、Chrome、Colab</h3>
+    <ul class="tight">
+      <li><strong>Google Vids：</strong>AI 影片製作。各商業方案行銷頁都有；Gemini 進階生成視層級。檔案在 Drive，Vault 走 Drive。</li>
+      <li><strong>Google Voice：</strong>加購商務電話。簡訊、語音留言 MP3、通話紀錄可進 Vault（要有 Voice 訂閱）。</li>
+      <li><strong>AppSheet Core：</strong>無程式碼 App。網域驗證後可用；進階整合／政策看方案。</li>
+      <li><strong>Workspace Studio：</strong>AI 代理人自動化辦公。Starter 行銷頁有列；進階動作看 AI Expanded。</li>
+      <li><strong>Chrome 瀏覽器／ChromeOS：</strong>企業政策、擴充功能、裝置。進階報表常要 Chrome Enterprise Core／Premium。</li>
+      <li><strong>Colab：</strong>Enterprise 可當 extra 服務開；Pro／Pro+ 加購。</li>
+    </ul>
+  </article>
+</section>
+
+<section id="gemini">
+  <h2>Gemini 與筆記本 Gemini Notebook</h2>
+  <p class="lead">客戶口中的「NotebookLM」在 Workspace 文件已改稱 <strong>Gemini Notebook</strong>。它跟「Gmail 側邊欄 Gemini」跟「gemini.google.com 對話」是三條產品，Vault 範圍不一樣。</p>
+
+  <h3>三條 AI 不要混</h3>
+  <table>
+    <thead><tr><th>產品</th><th>使用者在做什麼</th><th>Vault？</th><th>整包匯出？</th></tr></thead>
+    <tbody>
+      <tr><td>Workspace 內建 Gemini（Gmail／文件／Meet…）</td><td>在該 App 側邊欄寫信、摘要、筆記</td><td>官方寫 Vault Gemini 規則<strong>不涵蓋</strong>「Google Workspace with Gemini」這類側邊欄資料（以 <a href="https://support.google.com/vault/answer/6127699">Vault 支援服務</a> 為準）</td><td>不走 Vault Gemini 包</td></tr>
+      <tr><td>Gemini 應用程式（gemini.google.com）</td><td>獨立聊天、Gems、上傳檔、生圖／影</td><td><strong>有</strong>：prompt＋回覆。附件媒體／Gems／模型生出的媒體 <strong>不</strong>保留不匯出</td><td>Vault：XML 對話；沒有把上傳 mp4 當獨立檔</td></tr>
+      <tr><td>Gemini Notebook（NotebookLM）</td><td>筆記本＋來源檔＋問答＋音訊總覽</td><td><strong>不是</strong> Vault 支援服務表上的產品</td><td>用 <strong>Data Export</strong>：聊天＋音訊＋<strong>上傳內容</strong>＋生成筆記</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Notebook 用量（工作／學校帳，官方 16337734）</h3>
+  <p>徽章：開 notebooklm.google.com（或 Gemini Notebook）看大頭貼旁是否有 Pro／Plus／Expanded／Ultra。</p>
+  <table>
+    <thead>
+      <tr><th>層級</th><th>誰大概在這層</th><th>筆記本／人</th><th>來源／本</th><th>對話／日</th><th>音訊總覽／日</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>標準（附加服務）</td><td>Essentials Starter、Cloud Identity、Individual、部分舊 G Suite</td><td>100</td><td>50</td><td>50</td><td>3</td></tr>
+      <tr><td>標準＋企業資安（核心）</td><td><strong>Business Starter</strong>、Frontline、Education Fundamentals／Standard、Enterprise Essentials</td><td>200</td><td>100</td><td>200</td><td>6</td></tr>
+      <tr><td>進階</td><td>Education Plus、Teaching and Learning 加購</td><td>500</td><td>300</td><td>500</td><td>20</td></tr>
+      <tr><td>高階</td><td><strong>Business Standard／Plus、Enterprise Standard／Plus</strong></td><td>500</td><td>300</td><td>500</td><td>20</td></tr>
+      <tr><td>擴充</td><td>AI Expanded Access 加購</td><td>500</td><td>400</td><td>1,000</td><td>官方用量表此欄未寫死數字，以當日畫面為準</td></tr>
+      <tr><td>最高</td><td>AI Ultra Access 加購</td><td>500</td><td>600</td><td>5,000</td><td>官方用量表此欄未寫死數字，以當日畫面為準</td></tr>
+    </tbody>
+  </table>
+  <p>台灣定價頁寫 Standard 起「筆記本與來源數量變 5 倍」：對的是從消費／附加層 100 本、50 來源跳到高階層 500 本、300 來源，不是 Starter 再乘五。Starter 是核心服務但用量停在「標準＋企業資安」。</p>
+  <div class="callout ok">
+    <b class="tag">企業資料處理</b>
+    <strong>Business Starter 是核心服務</strong>，官方列在「標準功能＋企業級安全隱私」：上傳檔、聊天、模型輸出不用來訓練、也不給人工審（除非使用者主動回饋）。<strong>不要</strong>把 Starter 講成附加服務層。附加服務層是 Essentials Starter、Cloud Identity、舊 G Suite 等，走一般 Google 服務條款。來源：<a href="https://support.google.com/notebooklm/answer/16337734">16337734</a>。
+  </div>
+</section>
+
+<section id="notebook-export">
+  <h2>筆記本能否匯出、檔案會不會一起走</h2>
+  <div class="callout warn">
+    <b class="tag">一句話</b>
+    <strong>可以一起匯出上傳檔</strong>——但路徑是管理員 <strong>Data Export（資料匯出工具）</strong>，不是 Vault。Vault 沒有 NotebookLM 這個服務選項。已刪除的聊天不會進 Data Export。
+  </div>
+  <h3>官方 Data Export 包什麼（Help 16054396，2026-09-10）</h3>
+  <ol class="tight">
+    <li>聊天紀錄（<strong>不含已刪除</strong>的聊天）</li>
+    <li>生成的音訊總覽（Audio overviews）</li>
+    <li><strong>上傳的內容</strong>（來源 PDF、文件等）</li>
+    <li>生成的筆記</li>
+  </ol>
+  <p>所以客戶問「筆記本裡丟的檔會不會跟對話一起出來？」→ <strong>會，走 Data Export 時這四類在同一次匯出規格裡。</strong> 不是保證「一個 zip 裡目錄長怎樣永遠不變」，Google 可能改包裝；但官方明確把 uploaded content 列進去。</p>
+
+  <h3>三條匯出路徑比較</h3>
+  <table>
+    <thead><tr><th>路徑</th><th>誰按</th><th>NotebookLM</th><th>檔案一起？</th><th>適合</th></tr></thead>
+    <tbody>
+      <tr><td>使用者在 UI 分享／複製／下載單則</td><td>使用者</td><td>單本、單則筆記或音訊</td><td>視畫面；不是整租戶</td><td>自己要一份音訊 mp3／筆記</td></tr>
+      <tr><td>Admin <strong>資料匯出</strong> Data Export</td><td>超管</td><td>官方列四類</td><td><strong>是（上傳內容在清單內）</strong></td><td>離職交接、租戶搬家、退租帶走</td></tr>
+      <tr><td>Google Vault</td><td>Vault 管理員</td><td><strong>不支援此服務</strong></td><td>不適用</td><td>電子蒐證請改 Gmail／Drive／Gemini app</td></tr>
+      <tr><td>使用者 Takeout（若管理員允許）</td><td>使用者</td><td>可能含部分 Google 資料；Notebook 以 Data Export 說明為準</td><td>不要假設與 Vault 相同</td><td>個人帶走；企業合規仍以 Admin 政策為準</td></tr>
+    </tbody>
+  </table>
+  <h3>對客戶的標準說法</h3>
+  <ul class="tight">
+    <li>法務要「像 Vault 一樣保留 Notebook 五年」→ <strong>現在沒有原生 Vault 語料庫</strong>，不要承諾。改建議：來源檔放 Drive＋Drive Vault；對話不要當唯一正本。</li>
+    <li>要一次帶走筆記本＋來源檔＋音訊＋筆記 → 超管跑 <a href="https://support.google.com/a/answer/16054396">Export Gemini Notebook data</a>／Data Export 工具。</li>
+    <li>已刪聊天 → Data Export 不含。</li>
+    <li>Gemini app 對話裡即時上傳、沒進 Drive 的圖／音 → Vault <strong>不</strong>當獨立媒體匯出（見 Vault Gemini 節）。</li>
+  </ul>
+</section>
+
+<section id="security">
+  <h2>企業資安</h2>
+  <p class="lead">「Enterprise 比較安全」不是口號，是一組 Admin 能打開、Starter 根本沒有的控制項。責任仍在客戶超管與法務；樂雲可代設定，不書面保證不外洩。</p>
+
+  <h3>所有方案都該做的基線（即使 Starter）</h3>
+  <ol class="tight">
+    <li>至少兩名超管；超管強制 2SV／安全金鑰</li>
+    <li>全體 2SV（給寬限期）</li>
+    <li>Drive 預設分享＝僅限網域</li>
+    <li>關舊「低安全性應用程式」密碼</li>
+    <li>SPF＋DKIM＋DMARC（建議 p=quarantine 再 p=reject）</li>
+    <li>看稽核：Admin → 報表 → 稽核日誌</li>
+  </ol>
+
+  <h3>Enterprise 才開始完整的政策（Std 與 Plus 都有，除非註明 Plus）</h3>
+  <div class="grid e2">
+    <div class="card">
+      <h3>資料外洩防護 DLP</h3>
+      <p>掃描 Gmail／Drive／Chat 外送或分享內容，偵測身分證、卡號、關鍵字、偵測器。可警告、封鎖、稽核。沒規則＝沒防護。Plus 與 Std 都有 DLP；調查工具「看敏感內容本體」等能力偏 Plus。</p>
+    </div>
+    <div class="card">
+      <h3>情境感知存取 Context-Aware Access</h3>
+      <p>依使用者、裝置是否加密、IP、地區、是否公司裝置，決定能不能開 Gmail／Drive。典型：個人電腦不准下載 Drive、只准公司 Chrome。</p>
+    </div>
+    <div class="card">
+      <h3>資料地區 Data regions</h3>
+      <p>Std：全公司一個「靜態資料」地區。Plus：可依 OU／群組切，還有處理中資料地區與進階報表。不是「資料絕對不離開台灣」的法律保證，是 Google 承諾的存放／處理控制。</p>
+    </div>
+    <div class="card">
+      <h3>Cloud Identity Premium</h3>
+      <p>Enterprise 內建、不必另買。裝置庫存、密碼政策、自動佈建、更高的身分安全。Frontline／只要身分的客戶才單買 CIP。</p>
+    </div>
+    <div class="card">
+      <h3>端點管理</h3>
+      <p>從基本密碼、遠端登出，到 Android 工作資料夾、iOS 資料保護、憑證、Windows 管理、零接觸註冊。Plus 行銷頁的「企業端點」對應這層。</p>
+    </div>
+    <div class="card">
+      <h3>安全調查工具</h3>
+      <p>把登入、Drive、Gmail、裝置日誌交叉查。可依搜尋結果採取行動、活動規則自動回應。Plus 多：惡意郵件調查、看敏感內容、Access Transparency、Gmail 訊息本體日誌等。</p>
+    </div>
+  </div>
+
+  <h3>幾乎只有 Enterprise Plus 的</h3>
+  <table>
+    <thead><tr><th>控制項</th><th>用途</th><th>注意</th></tr></thead>
+    <tbody>
+      <tr><td>S/MIME</td><td>郵件憑證加密／簽章</td><td>要 PKI；對方也要支援，否則退回或明文</td></tr>
+      <tr><td>用戶端加密 CSE</td><td>金鑰在客戶 KMS，Google 看不到明文</td><td>Vault 匯出仍是 <code>.gcse</code>，要另用解密工具</td></tr>
+      <tr><td>進階資料匯出</td><td>比基本 Takeout／Data Export 更完整的管理匯出</td><td>Std 只有基本匯出</td></tr>
+      <tr><td>Assured Controls</td><td>高度合規（資料區、Access Transparency 加購包）</td><td>加購，不要算在標準 Enterprise 報價裡</td></tr>
+      <tr><td>Meet／部分服務 CSE</td><td>會議媒體用戶端加密</td><td>功能會少（錄製／部分 AI）</td></tr>
+      <tr><td>Gmail 安全健康檢查細項</td><td>轉寄、MX、MTA-STS、白名單 IP 等監控</td><td>Std 安全健康頁較窄</td></tr>
+    </tbody>
+  </table>
+
+  <h3>稽核四類（會議最常問錯）</h3>
+  <table>
+    <thead><tr><th>要查</th><th>去哪</th><th>不是</th></tr></thead>
+    <tbody>
+      <tr><td>登入 IP／裝置</td><td>Admin 稽核／調查工具</td><td>不是 Vault Gemini</td></tr>
+      <tr><td>誰改了分享權限</td><td>Admin Drive／管理員稽核</td><td>不是保管箱搜尋</td></tr>
+      <tr><td>Gemini 對話文字</td><td>Vault Gemini 規則</td><td>不含附件媒體</td></tr>
+      <tr><td>檔案本體</td><td>Drive Vault 或 Data Export</td><td>不要說「Vault 什麼都有」</td></tr>
+    </tbody>
+  </table>
+  <p>多方核准 MPA：敏感動作（含 Vault 匯出）要第二人點頭。Enterprise 有此能力。</p>
+</section>
+
+<section id="vault">
+  <h2>保管箱 Google Vault</h2><p class="src">來源：<a href="https://support.google.com/vault/answer/2462365">Vault 簡介</a>、<a href="https://support.google.com/vault/answer/6127699">支援服務</a>、<a href="https://support.google.com/vault/answer/6099459">匯出內容</a>。</p>
+  <div class="callout bad">
+    <b class="tag">不是備份</b>
+    Vault 是資訊治理＋電子蒐證：保留、訴訟保留 Hold、搜尋、匯出。沒有規則就沒有「垃圾桶外的天堂」。規則到期且沒 Hold，資料走 Google 標準刪除，之後救不回。不要賣成「無限備份／一鍵還原信箱」。
+  </div>
+  <p>入口：<a href="https://vault.google.com">vault.google.com</a>。誰能進：要 Vault 授權＋管理員角色裡的 Vault 權限。超管<strong>看不到全部匯出包</strong>，只能看自己的與被分享的 matter。</p>
+
+  <h3>哪些版本有 Vault</h3>
+  <p>內建：Business Plus、Enterprise Standard／Plus、Frontline Standard／Plus、所有 Education、網域驗證的 Enterprise Essentials／Plus、舊 G Suite Business。Starter／Standard <strong>沒有</strong>。加購是否可買，須上游確認產品代碼 SKU。</p>
+
+  <h3>支援服務（官方 6127699）</h3>
+  <table>
+    <thead><tr><th>服務</th><th>保留</th><th>Hold</th><th>搜尋與匯出</th><th>備註</th></tr></thead>
+    <tbody>
+      <tr><td>Gmail</td><td class="y">✔</td><td class="y">✔</td><td class="y">✔</td><td>直附檔會進；Drive 超連結預設不隨保留，匯出可另選</td></tr>
+      <tr><td>Drive</td><td class="y">✔</td><td class="y">✔</td><td class="y">✔</td><td>含共用雲端硬碟、上傳檔、CSE 檔</td></tr>
+      <tr><td>Groups</td><td class="y">✔</td><td class="y">✔</td><td class="y">✔</td><td>另帶成員 CSV</td></tr>
+      <tr><td>Chat</td><td class="y">✔</td><td class="y">✔</td><td class="y">✔</td><td>歷史要開</td></tr>
+      <tr><td>經典 Hangouts</td><td>Chat 規則</td><td>Chat Hold</td><td>走 Gmail</td><td></td></tr>
+      <tr><td>Meet</td><td>預設 Drive；可改 Meet 規則</td><td>Drive Hold</td><td>走 Drive</td><td>錄製＋會中紀錄＋Gemini 筆記</td></tr>
+      <tr><td>Voice</td><td class="y">✔</td><td class="y">✔</td><td class="y">✔</td><td>要 Voice 訂閱</td></tr>
+      <tr><td>Sites</td><td>Sites 規則</td><td>Drive Hold</td><td>走 Drive</td><td></td></tr>
+      <tr><td>Calendar</td><td class="y">✔</td><td class="y">✔</td><td class="y">✔</td><td>連結檔不隨事件匯出</td></tr>
+      <tr><td>Vids／Pics</td><td>Drive</td><td>Drive</td><td>Drive</td><td>MP4／PNG</td></tr>
+      <tr><td>Gemini app</td><td class="y">✔</td><td class="y">✔</td><td class="y">✔</td><td>僅 prompt／回覆</td></tr>
+      <tr><td>NotebookLM</td><td class="n">未列</td><td class="n">未列</td><td class="n">未列</td><td>改 Data Export</td></tr>
+      <tr><td>Keep／Tasks</td><td class="n">未列</td><td class="n">未列</td><td class="n">未列</td><td>不要承諾</td></tr>
+    </tbody>
+  </table>
+
+  <h3>四件事：保留、Hold、搜尋、匯出</h3>
+  <ol class="tight">
+    <li><strong>預設／自訂保留規則：</strong>到期後，使用者已刪的資料會被清除。無限期可以，但要法務書面。</li>
+    <li><strong>Hold：</strong>壓過保留與使用者刪除，直到撤 Hold。亂刪 Hold＝作證風險。</li>
+    <li><strong>Matter：</strong>一個案件資料夾，可分享給外部律師帳號（仍要權限模型）。</li>
+    <li><strong>搜尋一次選一個服務。</strong>沒有「全 Workspace 一個混和 zip」。</li>
+    <li>匯出完成後約 <strong>15 天</strong>內下載。MPA 開啟時要先核准。</li>
+  </ol>
+
+  <h3>Gmail 匯出長什麼樣</h3>
+  <ul class="tight">
+    <li><code>export-N.zip</code>：每人 mbox 或 PST（mbox 單檔約 10GB 切；PST 約 1GB 切）</li>
+    <li><code>metadata.csv</code>／<code>.xml</code>：Rfc822MessageId、帳號、主旨、標籤、時間</li>
+    <li><code>result-counts.csv</code></li>
+    <li><code>errors.xml</code>（即使沒錯誤也常在）</li>
+    <li>MD5 checksums</li>
+    <li>可選：<code>drive-links.csv</code>＋另一組 Drive zip（「Export linked Drive files」）</li>
+  </ul>
+  <div class="callout">
+    <b class="tag">檔案能不能跟郵件一起？</b>
+    <p><strong>直附檔：</strong>是，在同一封信的 mbox／PST 裡。</p>
+    <p><strong>信裡貼的 Drive 連結：</strong>保留／Hold／搜尋 Gmail 時<strong>不</strong>自動涵蓋該檔。匯出時勾選才另外產 Drive 包。關聯靠 CSV（郵件 ID ↔ 文件 ID），<strong>不是</strong>把 PDF 嵌回原信當傳統附件。公開 Sites、可填的 Forms 連結、部分舊連結格式無法匯出。子 OU 管理員只能下載自己建的超連結匯出。</p>
+    <p>索引約每封 1MB 文字；沒被索引的內容仍可能整封被匯出。</p>
+  </div>
+
+  <h3>Drive 匯出長什麼樣</h3>
+  <p>見第 3 章轉換表。另有 <code>metadata.xml</code>、<code>custodian-docid.csv</code>。若這次是「Gmail 連帶 Drive」，可能沒有 custodian-docid，改看 drive-links.csv。</p>
+
+  <h3>Gemini app 匯出長什麼樣</h3>
+  <ul class="tight">
+    <li>一個 zip 裡每個對話擁有者一份 XML：prompt、回覆、模型版本、時間、ConversationId</li>
+    <li>為了上下文，會帶符合條件前後各 12 小時同一對話</li>
+    <li><strong>沒有</strong>傳統 metadata 檔</li>
+    <li><strong>不包含</strong>使用者附上的媒體、Gems、模型生成的媒體</li>
+  </ul>
+
+  <h3>Calendar／Voice／Chat</h3>
+  <ul class="tight">
+    <li>日曆：每人 ICS 或 PST；系列事件要整組；Drive 連結不帶檔</li>
+    <li>Voice：簡訊、來電紀錄、語音留言 MP3 等，每人 zip；沒有 count 檔</li>
+    <li>Chat：依對話／聊天室；含編輯／刪除痕跡（官方匯出說明）</li>
+  </ul>
+
+  <h3>綜合郵件儲存</h3>
+  <p>日曆邀請、Drive 分享通知、Docs「用郵件當附件寄出」、Forms、Keep 分享信，預設<strong>不進</strong>已傳送。不開綜合儲存，Vault 就沒這些信。這是合規建置必問項。</p>
+
+  <h3>機密模式、動態信（AMP）</h3>
+  <ul class="tight">
+    <li>自家寄出的機密模式（2018-11-30 後）：Vault 可留／搜／匯；可選擇匯出時去掉機密內文。</li>
+    <li>外部寄來的機密模式：通常只有主旨／標頭，沒有內文與附件。</li>
+    <li>動態信：保留 HTML／純文字／AMP 標記；無法凍結使用者當下看到的即時內容。</li>
+  </ul>
+</section>
+
+<section id="export">
+  <h2>資料怎麼匯出</h2>
+  <div class="tree">
+    <div class="step"><strong>A. 使用者自己要一份檔</strong> → Drive 下載／「建立副本」／Meet 錄製本來就在 Drive。Google 檔下載會轉 Office／PDF。</div>
+    <div class="step"><strong>B. 整個人離職帶走</strong> → 轉 Drive 擁有權＋Data Export／Takeout（看 Admin 是否允許）＋寄信轉寄關閉。</div>
+    <div class="step"><strong>C. 法務／訴訟要可作證包</strong> → Vault（需 Plus 或 Enterprise）。一次一個服務。</div>
+    <div class="step"><strong>D. 信裡點的 Drive 也要</strong> → Vault Gmail 匯出勾選 linked Drive files；得到第二個 Drive 包＋CSV，不是單一混檔。</div>
+    <div class="step"><strong>E. NotebookLM 整本含來源檔</strong> → Data Export（uploaded content 在官方清單）。不是 Vault。</div>
+    <div class="step"><strong>F. Gemini 聊天裡丟的圖／音，沒進 Drive</strong> → Vault 不給獨立媒體。先要求落地 Drive 再套 Drive 規則。</div>
+    <div class="step"><strong>G. 整個公司要搬雲或退租</strong> → 超管 Data Export（Plus 才有「進階資料匯出」更完整）。這不是 eDiscovery。</div>
+  </div>
+  <table>
+    <thead><tr><th>問題</th><th>答案</th></tr></thead>
+    <tbody>
+      <tr><td>能不能一個 zip 包含 Gmail＋Drive＋Chat＋Notebook？</td><td>官方沒有這種 Vault 按鈕。Data Export 是「使用者／服務資料包」，結構與 Vault 不同，也不要承諾單一 zip。</td></tr>
+      <tr><td>Vault 匯出能不能當備份還原進新租戶？</td><td>極不適合。還原應走遷移工具／GWMME／Migrate，不是把 mbox 當備份映像。</td></tr>
+      <tr><td>經銷商轉移會不會把 Vault 規則帶走？</td><td>同一租戶轉經銷商：資料還在原租戶。不是兩個網域合併。規則在租戶內，不會「複製到另一間公司的新網域」。</td></tr>
+      <tr><td>CSE 檔匯出後能直接開嗎？</td><td>不能。要用 Google 用戶端解密工具；Sheets 還可能要再轉 xlsx。</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="admin">
+  <h2>管理控制台</h2>
+  <p>三層不要混：<strong>使用者 App</strong>（mail.google.com）／<strong>Admin console</strong>（admin.google.com）／<strong>Partner Sales Console</strong>（樂雲現在沒有）。Vault 是第四個站 vault.google.com。</p>
+  <ul class="tight">
+    <li>使用者、群組、OU、授權</li>
+    <li>網域、SSO（Google 當 IdP 或第三方 IdP）、SAML 目錄</li>
+    <li>應用程式開關（含 extra 服務：YouTube、Blogger…）</li>
+    <li>安全性：2SV、警示中心、調查工具、DLP、CAA</li>
+    <li>裝置：端點驗證、遠端抹除、Windows／Apple／Android</li>
+    <li>報表、BigQuery 匯出（Enterprise）、Security Operations 匯出</li>
+    <li>帳單：客戶超管看得到訂閱；樂雲沒 PSC 就請超管截圖或上游查</li>
+  </ul>
+  
+  <h3>三個入口</h3>
+  <table>
+    <thead><tr><th>入口</th><th>網址</th><th>用途</th></tr></thead>
+    <tbody>
+      <tr><td>合作夥伴銷售控制台 Partner Sales Console</td><td>經銷商入口</td><td>建客戶、下單、轉移、帳單。樂雲目前進不去，開給上游。</td></tr>
+      <tr><td>管理控制台 Admin console</td><td><a href="https://admin.google.com" target="_blank" rel="noopener">admin.google.com</a></td><td>網域、使用者、Gmail、安全、保管箱設定權限</td></tr>
+      <tr><td>經銷商管理</td><td><a href="https://admin.google.com/ac/resellermanagement" target="_blank" rel="noopener">經銷商管理頁</a></td><td>僅超級管理員能產生轉移授權</td></tr>
+    </tbody>
+  </table>
+  <h3>沒有銷售控制台時，怎麼進客戶管理控制台</h3>
+  <ol class="tight">
+    <li>請客戶超級管理員加樂雲為委派管理員（使用者、群組、服務設定；不要給刪網域）。</li>
+    <li>與超級管理員共屏，口述步驟。</li>
+    <li>請上游用經銷商存取進入（客戶可關閉此權限，不要假設永遠進得去）。</li>
+  </ol>
+<p>委派給樂雲：使用者、群組、服務設定即可。保管箱權限單獨做角色，保留規則與匯出不要集中在同一人。</p>
+</section>
+
+<section id="storage">
+  <h2>儲存空間</h2>
+  <p class="lead">官方：儲存是「每位使用者額度 × 授權數」的<strong>全組織共用池</strong>，含多數情況下的封存使用者。Gmail、Drive、Meet 錄製、Photos（若當核心／附加開著）都從同一池扣。</p>
+  <table>
+    <thead><tr><th>例子</th><th>算法</th><th>結果</th></tr></thead>
+    <tbody>
+      <tr><td>Starter 10 人</td><td>30 GB × 10</td><td>全公司 300 GB</td></tr>
+      <tr><td>Standard 25 人</td><td>2 TB × 25</td><td>50 TB 池</td></tr>
+      <tr><td>Plus 8 人</td><td>5 TB × 8</td><td>40 TB 池</td></tr>
+      <tr><td>一人丟 200 GB 影片（Starter 10 人）</td><td>從 300 GB 扣</td><td>其他人只剩 100 GB 可搶</td></tr>
+      <tr><td>Enterprise 5 人以上覺得不夠</td><td>向 Google 申請加量（裁量）</td><td>不是自動無限。也可買 Additional Storage</td></tr>
+    </tbody>
+  </table>
+  <ul class="tight">
+    <li>新訂閱可能先給部分額度，付滿約 30 USD 後 72 小時內加到滿額（Help 172541）。</li>
+    <li>爆倉症狀：Gmail 不能寄、Drive 不能上傳、Meet 不能錄。先看 Admin 儲存報表，不要先怪單一使用者電腦。</li>
+    <li>共用雲端硬碟吃的是組織池，不是「另給一桶」。</li>
+    <li>Google 檔（Docs）佔的是雲端格式空間，下載成 DOCX 後大小會變，Vault 匯出 zip 也會變大。</li>
+  </ul>
+</section>
+
+<section id="mail-auth">
+  <h2>網域與郵件認證</h2>
+  <h3>DNS 四件套</h3>
+  <table>
+    <thead><tr><th>紀錄</th><th>功用</th><th>沒設會怎樣</th></tr></thead>
+    <tbody>
+      <tr><td>網域驗證 TXT／CNAME</td><td>證明你擁有網域，才能開 Workspace</td><td>開不了或試用被刪</td></tr>
+      <tr><td>MX → <code>smtp.google.com</code></td><td>全世界把信送到 Google</td><td>新信還在舊主機或進黑洞</td></tr>
+      <tr><td>SPF TXT</td><td>宣告誰可以冒你的網域寄信</td><td>進垃圾、被拒</td></tr>
+      <tr><td>DKIM</td><td>Google 幫你簽章</td><td>DMARC 過不了</td></tr>
+      <tr><td>DMARC</td><td>收件方依政策隔離／拒絕未通過的信</td><td>容易被仿冒；政策太猛又會誤殺</td></tr>
+    </tbody>
+  </table>
+  <h3>雙重傳遞 vs 分割傳遞</h3>
+  <ul class="tight">
+    <li><strong>雙重 Dual delivery：</strong>同一封進 Gmail 也進舊伺服器。遷移期常用。要小心迴圈與兩套垃圾郵件政策不一致。</li>
+    <li><strong>分割 Split delivery：</strong>依收件人決定進 Gmail 或舊系統。適合「只有部分人先搬」。</li>
+    <li>路由、內容合規、隔離區、附件安全、詐騙防護：Enterprise 健康檢查頁會盯這些開關。</li>
+  </ul>
+  <h3>Gmail 還能幹的進階事（管理員）</h3>
+  <ul class="tight">
+    <li>合規封存、法律保留（有 Vault 才完整）</li>
+    <li>限制外寄網域、停用自動轉寄、強制 TLS</li>
+    <li>綜合郵件儲存（Calendar／Drive 通知才進 Vault）</li>
+    <li>機密模式全公司開或關</li>
+    <li>S/MIME（僅企業 Plus 版）</li>
+  </ul>
+
+  <h3>建議紀錄值</h3>
+  <p>進信看 MX，出信看 SPF／DKIM／DMARC。新開通 MX 只留一筆：主機 <code>@</code>、優先順序 1、值 <code>smtp.google.com</code>（部分廠商要結尾點）。舊租戶若 ASPMX 已在收信，不要無故改。來源：<a href="https://support.google.com/a/answer/140034">MX</a>。</p>
+  <p>純 Google 寄信的 SPF 一筆即可：<code>v=spf1 include:_spf.google.com ~all</code>。兩筆 SPF 會失效。第三方寄信要把 <code>include:</code> 併進同一筆。DKIM 在管理控制台 Gmail「驗證電子郵件」產生。DMARC 建議先 <code>p=none</code> 觀察再考慮隔離／拒絕。</p>
+</section>
+
+<section id="endpoint">
+  <h2>裝置管理</h2>
+  <table>
+    <thead><tr><th>層</th><th>大約誰有</th><th>能做</th></tr></thead>
+    <tbody>
+      <tr><td>基礎 Fundamental</td><td>Starter／Standard</td><td>基本密碼、遠端登出、電腦端點驗證、Drive 電腦版、封鎖裝置</td></tr>
+      <tr><td>進階 Advanced</td><td>Plus</td><td>強密碼、Android 工作資料夾、遠端抹機、iOS App、Windows 管理、零接觸</td></tr>
+      <tr><td>企業 Enterprise</td><td>Enterprise</td><td>公司裝置庫存（Android／iOS）、裝置憑證、CAA、BeyondCorp 夥伴、裝置規則</td></tr>
+    </tbody>
+  </table>
+  <p>客戶說「遠端把手機資料清掉」：要確認已開啟進階行動管理，且裝置曾經註冊。沒註冊＝做不到，不是 Workspace「壞了」。</p>
+</section>
+
+<section id="missell">
+  <h2>常見錯配</h2>
+  <table>
+    <thead><tr><th>客戶原話</th><th>不要回</th><th>要回</th></tr></thead>
+    <tbody>
+      <tr><td>我們 320 人繼續買 Standard 比較便宜</td><td>可以先買再說</td><td>Business 系列官方上限 300，要改 Enterprise 或拆租戶（實務幾乎都升級）</td></tr>
+      <tr><td>Starter 也有 Vault 吧</td><td>Gemini 就等於保管箱</td><td>Vault 從 Plus／Enterprise 內建。Starter／Standard 沒有</td></tr>
+      <tr><td>Enterprise 一定有 S/MIME</td><td>行銷頁有寫就有</td><td>S/MIME 與 CSE 在 <strong>Plus</strong>。先查訂閱是 Std 還是 Plus</td></tr>
+      <tr><td>Vault 幫我們每天備份，壞了還原</td><td>可以當 Veeam 用</td><td>eDiscovery。還原靠遷移工具或使用者垃圾桶（有限天數）</td></tr>
+      <tr><td>Notebook 對話 Vault 都能搜</td><td>AI 都在保管箱</td><td>Notebook 走 Data Export。Vault 管 Gemini <strong>應用程式</strong>的文字，不管 Notebook 服務</td></tr>
+      <tr><td>信裡貼的 Drive 跟附件一樣會進 Vault 搜尋</td><td>連結等於附檔</td><td>搜尋／保留不含連結檔；匯出可另選，且是第二個包＋CSV</td></tr>
+      <tr><td>GWS 掛掉找 GCP 技術支援</td><td>同一張雲合約</td><td>兩條產品、兩套支援。狀態看 appsstatus dashboard</td></tr>
+      <tr><td>樂雲直接幫我們下單開租戶</td><td>我們有 PSC</td><td>2026-09 起開通／轉移走上游。樂雲做 DNS／帳號／遷移技術段</td></tr>
+      <tr><td>無限儲存</td><td>Enterprise 就是無限</td><td>5TB×人數的池，5 人以上可申請，不是契約無限</td></tr>
+      <tr><td>Meet 1000 人直播 10 萬</td><td>買 Enterprise 就有</td><td>1000 人與 10 萬觀眾是 <strong>Plus</strong> 檔；Std 是 500 人／1 萬觀眾</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="support">
+  <h2>支援升級</h2><p class="src">來源：<a href="https://knowledge.workspace.google.com/admin/support/google-workspace-support-offerings?hl=zh-tw">Google Workspace 支援服務</a>（2026-09-14）。P1 首次回應目標：Standard 4 小時、Enhanced 1 小時、Premium 15 分鐘。Enhanced／Premium 全年無休日語僅營業時間；勿保證中文 24/7。</p>
+  <table>
+    <thead><tr><th>層級</th><th>誰有</th><th>技術含義</th></tr></thead>
+    <tbody>
+      <tr><td>Standard Support</td><td>多數 Business</td><td>辦公時間、較慢；先自助＋社群</td></tr>
+      <tr><td>Enhanced Support</td><td>Enterprise 內建；Business 可加購升級</td><td>重大事件較快；行銷頁強調這點</td></tr>
+      <tr><td>Premium Support</td><td>從 Enhanced 再升，多在大企業</td><td>技術客戶經理、更高 SLO</td></tr>
+    </tbody>
+  </table>
+  <p>GCP 的 Basic／Standard／Enhanced／Premium 是另一條合約，不可套用到 Gmail 中斷的服務水準協議 SLA。</p>
+  <p>升級順序：官方狀態儀表板 → 客戶管理控制台開 Google 支援（視合約）→ 上游。樂雲不是 Google 原廠支援窗口。</p>
+</section>
+
+<section id="sop-03">
+  <h2>開通</h2>
+
+<div class='callout'><p>官方：<a href="https://support.google.com/channelservices/answer/9548627" target="_blank" rel="noopener">Add a customer</a>、<a href="https://support.google.com/a/answer/60216" target="_blank" rel="noopener">Verify domain</a>、<a href="https://support.google.com/a/answer/140034" target="_blank" rel="noopener">Set up MX</a>。<strong>下單／建客由上游處理。</strong> 階段 A 開給上游；租戶存在後，樂雲做驗證、開帳、切 MX。<strong>已有 Workspace、只是換經銷商</strong> → 請改走 <a href="#sop-06">移轉</a>。</p></div>
+<h3>開通前向客戶要的東西</h3>
+<ul class='tight'><li>公司正式名稱、主要網域（例 <code>example.com</code>）</li><li>誰當<strong>第一位超管</strong>（姓名）</li><li><strong>備用電子郵件</strong>（<strong>不能</strong>是即將開通的主要網域，例如個人 Gmail 或另一家公司信）</li><li>聯絡電話、帳單地址</li><li>版本與授權數、彈性或年約（商務已談定）</li><li>網域在哪裡管 DNS（Cloudflare／網域商／機房）</li><li>現在信箱在哪（M365／自建／沒有信箱）→ 決定要不要當日切 MX</li></ul>
+<p>沒有備用信箱不要請上游建客：驗證信、復原、Google 通知都靠它。</p>
+<h3>給上游的建客資料包（階段 A 開單用）</h3>
+<p>樂雲技術不登入合作夥伴銷售控制台。把下表交給上游，並註明「請建立 Domain customer、下單、回覆超管登入方式與訂閱狀態」。</p>
+<pre><code>公司正式名稱:
+主要網域:
+教育機構: 否（商業客勿勾）
+第一超管姓名:
+備用電子郵件（非主網域）:
+聯絡電話／帳單地址:
+SKU / 版本:
+授權數:
+付款方案: 彈性 / 年約
+CRM 或內部案號:
+DNS 由誰管:
+現有信箱: 無 / M365 / 自建（影響是否當日切 MX）
+請回覆: 超管初始登入、訂閱是否有效、客戶是否已接 ToS</code></pre>
+<h3>階段 A — 上游在 Partner Sales Console 建客</h3>
+<p>以下步驟由<strong>上游</strong>操作。官方流程不變：</p>
+<ol class='tight'><li><strong>上游</strong>用經銷商帳號登入 Partner Sales Console。</li><li><strong>客戶 → 建立客戶</strong>。</li><li>主要產品系列選 <strong>Google Workspace</strong>。</li><li>組織資訊：</li></ol>
+<p>- 一般公司（網域驗證）→ <strong>Domain customer</strong></p>
+<p>- Enterprise Essentials 用信箱驗證、沒有網域 → <strong>Team customer</strong></p>
+<p>- 學校 → 勾 Educational Institution</p>
+<ol class='tight'><li>若系統要求，填入經銷商 <strong>Public Identifier</strong>。</li><li>填組織名稱、網域。</li><li>管理員姓名、地址。</li><li>Domain 客戶：主管理員郵件稍後會變成 <code>admin@客戶網域</code>；<strong>備用信必須是其他網域</strong>。</li><li>選填 CRM ID、電話。</li><li>按 <strong>建立</strong>。</li><li>可立刻 <strong>購買</strong>，或先關閉、稍後下單。未下單前訂閱狀態是空的。</li></ol>
+<p>下單時：選 SKU、付款方案、授權數、（若有多個）<strong>Workspace 帳單帳戶</strong>。同一客戶所有 Workspace 訂閱要同一帳單帳戶；同一客戶訂單同一幣別。</p>
+<p>下單後：<strong>追客戶超管接受 Google 服務條款</strong>。沒接受，服務會卡。</p>
+<h3>階段 B — 第一次進入 Admin</h3>
+<p>沒有合作夥伴銷售控制台快捷連結時，依序試：</p>
+<ol class='tight'><li>上游建完後，請客戶用超管登入 https://admin.google.com （或上游把臨時密碼交給<strong>客戶</strong>，不要長期放在樂雲）。</li><li>請超管把樂雲技術加為<strong>委派管理員</strong>（見 <a href="#admin">管理控制台</a>）。</li><li>若加不到：與客戶共屏，或請上游用經銷商存取進去。</li><li>若出現設定精靈，跟著走；核心只有三件事：<strong>驗證網域、建使用者、決定何時切 MX</strong>。</li><li>確認至少兩位超管（或一位超管＋文件化的緊急復原流程）。</li><li>超管密碼改成客戶自己保管；樂雲不要當唯一知道密碼的人。</li></ol>
+<h3>階段 C — 驗證網域（還沒改 MX）</h3>
+<p>官方：DNS TXT 是正途；HTML／meta 較容易被濫用。</p>
+<ol class='tight'><li>用超管打開 Workspace 設定工具，複製 <strong>驗證碼</strong>。</li><li>到 DNS 新增 TXT（主機 <code>@</code> 或空白；值貼 Google 給的字串）。</li><li>回到 Admin 按驗證。通常數分鐘到 1 小時，DNS 慢才會更久。</li><li><strong>Admin → 帳戶 → 網域 → 管理網域</strong>，狀態應為已驗證。</li></ol>
+<p>官方時限：</p>
+<ul class='tight'><li>試用開始後約 <strong>9 天內</strong>要驗證。</li><li>未驗證且沒有有效付費訂閱，帳戶可能在註冊後約 <strong>21 天</strong>被刪。</li><li><strong>經銷商代管的新客，官方寫網域可能已驗證</strong>——仍要在「管理網域」看狀態，不要假設。</li></ul>
+<p>驗證 ≠ 收信。沒改 MX 之前，信還在舊系統。</p>
+<h3>階段 D — 建使用者（切 MX 前做完）</h3>
+<p>見 <a href="#sop-05">使用者與組織</a>。最低限度：</p>
+<ul class='tight'><li>每位要收信的人都有帳號</li><li>授權已指派</li><li>別名（<code>info@</code>、<code>sales@</code>）已掛好</li><li>群組（部門信箱）已建</li></ul>
+<p>切 MX 之後才開帳，等於那段時間的信會進 Gmail 黑洞或彈回。</p>
+<h3>階段 E — 啟用 Gmail（改 MX）</h3>
+<p><strong>不要跟驗證同一分鐘做</strong>，除非客戶接受「現在開始信進 Google」。</p>
+<p>檢查清單（全勾才改 MX）：</p>
+<ul class='tight'><li>[ ] 網域已驗證</li><li>[ ] 使用者與別名已建</li><li>[ ] SPF／DKIM 記錄已準備（可先加 SPF、DKIM；DMARC 先 <code>p=none</code>）見 <a href="#mail-auth">網域與郵件認證</a></li><li>[ ] DNS TTL 已在 24–48 小時前降低（若做得到）</li><li>[ ] 客戶知道 Outlook／手機要改連 Gmail</li><li>[ ] 若還要從舊信箱搬信 → 搬遷第一輪建議在切 MX <strong>前</strong>做完，切後再跑增量（<a href="#sop-06">移轉</a>）</li><li>[ ] 已約定回切條件（保留舊 MX 截圖）</li></ul>
+<p>操作：</p>
+<ol class='tight'><li>DNS：<strong>刪光舊 MX</strong>，只留 Google。新帳戶用：</li></ol>
+<table><thead><tr><th>類型</th><th>主機</th><th>優先順序</th><th>值</th></tr></thead><tbody><tr><td>MX</td><td><code>@</code></td><td>1</td><td><code>smtp.google.com</code></td></tr></tbody></table>
+<p>有些廠商要寫成 <code>smtp.google.com.</code>（結尾點）。</p>
+<p><strong>2023 年前</strong>的舊租戶可能仍是 ASPMX.L.GOOGLE.COM 那組；<strong>能收信就不要為了美觀去改</strong>。新開通一律用 <code>smtp.google.com</code>。</p>
+<ol class='tight'><li>Admin → 帳戶 → 網域 → 管理網域 → 該網域 <strong>啟用 Gmail</strong>，依畫面完成。</li><li>用 <a href="https://toolbox.googleapps.com/apps/dig/" target="_blank" rel="noopener">Admin Toolbox Dig</a> 查 MX。</li><li>從外部 Gmail／Hotmail 寄一封到超管與一般使用者，確認進 inbox 而非隔離。</li><li>外寄一封，看是否進對方垃圾信；失敗先查 SPF／DKIM（<a href="#mail-auth">網域與郵件認證</a>）。</li></ol>
+<p>官方：MX 全球生效最多約 <strong>72 小時</strong>。TTL 已降低時通常更快。</p>
+<h3>階段 F — 開通當日收工檢查</h3>
+<ul class='tight'><li>超管能進 Admin、一般使用者能登 Gmail／Drive</li><li>授權用量與訂單一致（管理控制台帳單；對不上就開給上游查）</li><li>備用信收得到 Google 通知</li><li>樂雲已有委派管理員（或已約定共屏窗口）</li><li>通知上游：銷售控制台聯絡資料要對得上真實超管（樂雲無法代改）</li><li>若有搬家：排增量同步與雙週檢查退信</li></ul>
+<h3>失敗常見原因（開通）</h3>
+<table><thead><tr><th>現象</th><th>先查</th></tr></thead><tbody><tr><td>驗證一直失敗</td><td>TXT 貼錯、貼在子網域、有兩家 DNS、Cloudflare 代理搞錯記錄類型</td></tr><tr><td>建立客戶失敗</td><td>網域已被其他 Workspace 租戶占用</td></tr><tr><td>下單後沒服務</td><td>客戶沒接 ToS、訂閱暫停、選錯 Team／Domain</td></tr><tr><td>啟用 Gmail 按鈕灰的</td><td>網域未驗證、缺少網域設定管理員權限</td></tr><tr><td>部分人有信部分沒有</td><td>使用者沒建、被暫停、MX 殘留舊紀錄、分割傳遞設錯</td></tr></tbody></table>
+<p>對照 <a href="#sop-10">常見問題 100</a> Q16–Q35（進信／網域）。</p>
+</section>
+<section id="sop-05">
+  <h2>使用者與組織</h2>
+
+<div class='callout'><p>官方入口：Admin → 目錄 → 使用者。新增使用者說明見 Help 搜尋「Add users」。</p></div>
+<h3>先講授權</h3>
+<ul class='tight'><li>新增使用者前看 <strong>帳單 → 使用者授權</strong>（或請上游查授權用量）。額滿先加購再新增。</li><li>暫停使用者：<strong>釋放授權</strong>（預設行為依設定；確認「自動釋放」有沒有開）。</li><li>刪除使用者：資料進入短暫復原窗（官方通常約 20 天量級，刪前先轉 Drive／Gmail 所有權）。</li><li>別名、群組、日曆資源：<strong>不消耗</strong> Workspace 授權。</li></ul>
+<h3>開一個使用者（手動）</h3>
+<ol class='tight'><li>Admin → 目錄 → 使用者 → <strong>新增使用者</strong>。</li><li>名、姓、主要電子郵件（必須是已驗證網域）。</li><li>自動產生或自訂密碼；勾「首次登入須改密」。</li><li>把使用者放進正確 <strong>OU</strong>（政策跟 OU 走，不是跟部門名稱想像走）。</li><li>儲存後檢查授權圖示為已指派。</li><li>通知本人用備用通道（電話／Line），不要寄到還沒切過來的公司信。</li></ol>
+<h3>CSV 批次（開通日標準作業）</h3>
+<ol class='tight'><li>Admin → 使用者 → 批次上傳 → 下載範本。</li><li>必填：First Name, Last Name, Email Address, Password。</li><li>選填：Org Unit Path（例 <code>/業務/北區</code>）、Recovery Email、Change Password at Next Sign-In。</li><li>編碼用 UTF-8，Excel 開中文容易變亂碼——用 Google 試算表匯出 CSV。</li><li>上傳後看工作結果：失敗列通常是重複帳號、網域未驗證、授權不足、OU 路徑不存在。</li></ol>
+<p><strong>先建 OU 再建人。</strong> 路徑打錯會整批進根 OU，安全政策全錯。</p>
+<h3>組織單位（OU）</h3>
+<p>用來掛政策，不是 HR 組織圖複製品。建議最小切法：</p>
+<table><thead><tr><th>OU</th><th>典型政策</th></tr></thead><tbody><tr><td><code>/超管</code></td><td>2SV 強制、較少封鎖</td></tr><tr><td><code>/員工</code></td><td>標準 2SV、Drive 外部分享限制</td></tr><tr><td><code>/約聘或外部</code></td><td>更嚴分享、關閉部分服務</td></tr><tr><td><code>/例外-舊手機</code></td><td>暫時不強制 2SV（有到期日）</td></tr></tbody></table>
+<p>政策在 Admin → 安全性／應用程式，選 OU 後覆寫。子 OU 繼承父 OU，除非明確覆寫。</p>
+<h3>群組</h3>
+<table><thead><tr><th>類型</th><th>用途</th></tr></thead><tbody><tr><td>通訊群組</td><td><code>sales@</code> 多人收信</td></tr><tr><td>協作收件匣</td><td>需輪派時再用進階功能</td></tr><tr><td>安全／動態群組</td><td>進階版本才有完整能力</td></tr><tr><td>擁有者／管理員／成員</td><td>誰能加人或誰能發信到群組</td></tr></tbody></table>
+<p>群組當「權限群」時：Drive／日曆請加群組不要加一長串個人。人離職只退群組。</p>
+<p>建立：Admin → 目錄 → 群組。注意「誰可以發信」：<code>info@</code> 若設成僅成員，客戶會以為信箱壞了。</p>
+<h3>別名</h3>
+<p>使用者 → 該人 → 帳戶 → 電子郵件別名。</p>
+<p><code>oldname@</code> 留給改名；對外公開信箱用群組通常比別名更乾淨。</p>
+<h3>暫停 vs 刪除 vs 轉檔</h3>
+<table><thead><tr><th>動作</th><th>登入</th><th>資料</th><th>授權</th><th>何時</th></tr></thead><tbody><tr><td>暫停</td><td>否</td><td>保留</td><td>通常釋放</td><td>留職停薪、資安事件</td></tr><tr><td>刪除</td><td>否</td><td>復原窗後沒</td><td>釋放</td><td>確定離職且已交接</td></tr><tr><td>轉移 Drive／Gmail</td><td>—</td><td>給接手人</td><td>—</td><td>刪除前必做</td></tr><tr><td>將資料備份 Vault</td><td>—</td><td>依規則</td><td>—</td><td>有合規需求</td></tr></tbody></table>
+<p>刪超管前：先指定另一位超管，再降權或刪。不要刪到最後一個超管。</p>
+<h3>與 AD／Entra ID 同步（GCDS）</h3>
+<p><a href="https://support.google.com/a/answer/106368" target="_blank" rel="noopener">Google Cloud Directory Sync</a> 把 AD／LDAP 使用者、群組、OU 同步進 Workspace。</p>
+<p>操作注意：</p>
+<ul class='tight'><li>GCDS 是<strong>單向</strong>（目錄 → Google），不要在 Admin 手動改會被覆寫的欄位。</li><li>同步帳號刪除規則設錯會<strong>大量刪 Google 使用者</strong>——改設定要雙人。</li><li>密碼預設不同步（除非另外做密碼同步／SSO）。</li><li>已上 SSO（SAML）時，登入問題先查 IdP，不是先重設 Google 密碼。</li></ul>
+<p>少於 50 人通常用 CSV 即可，不必先上 GCDS。</p>
+<h3>授權不夠時的標準回覆</h3>
+<ol class='tight'><li>管理控制台帳單（或請上游）確認已用／購買數。</li><li>清暫停帳、別名誤建成完整使用者、測試帳。</li><li>仍不足 → 走加購（年約可能依剩餘合約天數計價，細節問上游）。</li><li>一顆授權不能給兩人同時使用。</li></ol>
+</section>
+<section id="sop-06">
+  <h2>移轉（換商／搬家）</h2>
+
+<p>先問客戶一句話：<strong>「帳號已經在用 Google，只是要換廠商；還是現在還在用 Microsoft／自建信箱？」</strong></p>
+<table><thead><tr><th>客戶意思</th><th>真正作業</th><th>資料會動嗎</th></tr></thead><tbody><tr><td>換代理商／改由樂雲出帳</td><td><strong>訂閱轉移 Transfer</strong></td><td>否。服務不中斷</td></tr><tr><td>Outlook／M365 要改 Gmail</td><td><strong>資料搬遷 Migration</strong></td><td>是。另要切 MX</td></tr><tr><td>兩個都要</td><td>先轉移或先開通，再搬資料；專案計畫分開寫</td><td></td></tr></tbody></table>
+<p>請分開立單，不要把換商與搬家寫在同一張工單。</p>
+<div class='callout'><p><strong>訂閱轉移（換商、改出帳）現在不是樂雲按的。</strong> 樂雲寫工單給上游，並在轉移後做技術檢查。 <strong>資料搬家（M365→Gmail）是技術問題，樂雲可以做</strong>，不需要 PSC。</p></div>
+<hr>
+<h3>A. 訂閱轉移（經銷商換手）</h3>
+<p>官方客戶側：<a href="https://support.google.com/a/answer/7643791" target="_blank" rel="noopener">Transfer subscriptions between Google and resellers</a></p>
+<p>官方經銷商側：<a href="https://support.google.com/channelservices/answer/9547629" target="_blank" rel="noopener">Transfer a customer&#x27;s subscriptions to your reseller account</a></p>
+<h4>轉移規則</h4>
+<ul class='tight'><li><strong>不可逆。</strong></li><li>同一<strong>產品組</strong>必須整組轉，不能只轉一半 Workspace。</li><li>可只轉 Workspace、把 Voice 等其他產品組留在原處。</li><li>日曆年內轉給經銷商 <strong>最多 2 次</strong>。</li><li>多個 Workspace／G Suite 版本並存 → 要 Google Sales／支援，PSC 自己轉不了。</li><li>Nonprofit、舊免費版 → 先升級付費再轉。</li><li>轉移<strong>不會</strong>自動把關聯的 GCP Cloud Billing 帳戶一起轉走。</li><li>新經銷商預設能進客戶 Admin，除非客戶拿掉存取。</li><li>新訂閱授權數 ≥ 原承諾；僅年約且續約前 30 天可減少。</li><li>年繳已預付：<strong>不退、不結轉</strong>。應排在服務年度結束。</li><li>彈性方案：可轉彈性或年約。年約：原則新年約；續約前 30 天才可改彈性。</li><li>試用中：可轉成新試用或新訂閱。試用已結束：只能轉付費經銷商訂閱。</li><li>G Suite Basic／Business 在轉移當下會換成 Workspace SKU；要進 Business 系列則授權須 ≤300。</li></ul>
+<h4>開給上游的轉移工單</h4>
+<p>向上游要 <strong>公開識別碼 Public Identifier</strong>（客戶超管產生授權時必填）。樂雲目前沒有合作夥伴銷售控制台，無法自行複製。</p>
+<pre><code>請協助 Complete transfer
+客戶網域:
+目前經銷商 / 直購 Google:
+要轉的產品組: Workspace（是否含 Vault／Voice 等另列）
+授權數（不得低於承諾）:
+希望付款方案: 彈性 / 年約（附續約日）
+客戶超管已產生轉移授權: 是／否（時間）
+請回覆: 訂閱狀態、授權上限、樂雲是否需請客戶開經銷商存取</code></pre>
+<h4>上游在合作夥伴銷售控制台的步驟（核對用）</h4>
+<ol class='tight'><li>PSC → 設定 → 複製 <strong>Public Identifier（帳戶 ID）</strong>。</li><li>把 Public ID＋客戶說明（下一節）給對方<strong>超級管理員</strong>。</li><li>等客戶產生轉移授權（權杖有時效；失敗就請對方重做一次）。</li><li>PSC → 客戶 → <strong>建立客戶</strong> → <strong>Transfer customer</strong>。</li><li>多數選 <strong>Transfer with domain</strong>，輸入主要網域。  </li></ol>
+<p>Essentials 信箱驗證戶選 <strong>Transfer with Cloud Identity ID</strong>。</p>
+<ol class='tight'><li>成功匯入 → <strong>Transfer services</strong>。</li><li>舊 G Suite → <strong>Select replacement SKU</strong>。</li><li>選帳單帳戶（同一客戶 Workspace 同一帳戶、同一幣別）。</li><li>選付款方案、授權數／上限、選填 PO。</li><li><strong>Complete transfer</strong>。必要時接受該產品協議。</li></ol>
+<p>失敗：請客戶超管重走經銷商管理頁，勿重複送出轉移。</p>
+<h4>客戶超管步驟（可直接轉貼）</h4>
+<p>你必須是超級管理員。</p>
+<ol class='tight'><li>開啟 https://admin.google.com/ac/resellermanagement  </li></ol>
+<p>（路徑：選單 → 帳戶 → 經銷商管理）</p>
+<ol class='tight'><li>在「來自經銷商的訂閱」或「來自 Google 的訂閱」找到要轉的項目 → <strong>轉移</strong>。</li><li>輸入樂雲提供的 <strong>Public Identifier</strong> → 繼續。</li><li>每個產品組選擇「轉移給〔樂雲〕」或保留給 Google／原經銷商。</li><li>同意條款 → <strong>產生轉移授權</strong>。</li><li>通知<strong>上游</strong>可以在 Partner Sales Console 完成轉移（把時間與網域寫進工單）。  </li></ol>
+<p>通知上游在合作夥伴銷售控制台完成轉移。</p>
+<h4>商務副作用（技術也要會講）</h4>
+<ul class='tight'><li>從 Google 直購轉出：轉移日前 Google 按比例收；轉移日起經銷商收。月中轉可能<strong>同一個月份兩張帳單</strong>。</li><li>從 A 經銷商轉 B：預付年費不退；月繳年約通常沒有 closeout 重罰（官方：月繳年約客戶不收收尾費，轉移日前按比例）。以官方頁＋上游合約為準。</li></ul>
+<h4>轉移當天技術檢查</h4>
+<p>資料與 MX <strong>不該變</strong>。若轉移後突然不能收信，不是「轉移弄壞郵件」，是碰巧有人改 DNS 或授權／暫停。仍要：</p>
+<ul class='tight'><li>使用者能登入</li><li>授權數 ≥ 使用中人數</li><li>樂雲進得了 Admin（委派或共屏）</li><li>請上游確認 PSC 訂閱狀態為有效</li></ul>
+<hr>
+<h3>B. 資料搬遷（M365／Exchange／IMAP → Workspace）</h3>
+<p>官方工具地圖：</p>
+<table><thead><tr><th>工具</th><th>適合</th><th>搬什麼</th></tr></thead><tbody><tr><td>Admin <strong>資料匯入</strong>（Data import）連 Exchange Online</td><td>雲對雲、管理員操作</td><td>郵件、日曆、聯絡人</td></tr><tr><td><strong>GWMME</strong>（Google Workspace Migration for Microsoft Exchange）</td><td>地端 Exchange、或 IMAP</td><td>郵件／日曆／聯絡人（視來源）</td></tr><tr><td><strong>Google Workspace Migrate</strong></td><td>大企業、複雜</td><td>擴大範圍（Drive 等），要另案評估</td></tr><tr><td>Drive 遷移工具／第三方</td><td>檔案</td><td>權限模型與 M365 不同，要驗</td></tr></tbody></table>
+<p>官方：Data import 是<strong>複製</strong>不是搬空來源；不刪 Exchange 資料。有 API 配額。不是所有 Exchange 功能都對應得過來（會議房間、部分權限、委派）。</p>
+<h4>建議時序（中小企業最常用）</h4>
+<ol class='tight'><li>Workspace 開通並<strong>驗證網域</strong>，<strong>先不要切 MX</strong>。</li><li>建好全部使用者，主信箱與舊信箱對應表（CSV）。</li><li>開 2SV 政策但給遷移視窗例外。</li><li>接上資料匯入：Admin → 資料 → 資料匯入與匯出 → 資料匯入 → Exchange Online → 用 <strong>M365 Global Admin</strong> 授權。</li><li>上傳對應 CSV，跑第一輪。</li><li>準備 DNS：SPF 含 Google、產生 DKIM、DMARC <code>p=none</code>、降低 MX TTL。</li><li>切 MX 到 <code>smtp.google.com</code>，Admin 啟用 Gmail。</li><li><strong>增量（delta）匯入</strong>抓切換窗期間的新信。</li><li>Outlook／手機改官方 Gmail 連線；不要再用 POP 雙拉。</li><li>觀察一週退信與垃圾信後，再關 M365 信箱授權（商務自行決定重疊期）。</li></ol>
+<h4>共存（做不到一次切）</h4>
+<ul class='tight'><li><strong>分割傳遞</strong>：已遷移使用者進 Gmail，其餘留 M365（<a href="#mail-auth">網域與郵件認證</a>）。</li><li>內部互寄容易進錯邊：要訂「目標位址規則」並測 <code>user@舊</code> vs <code>user@新</code>。</li><li>日曆免費／忙碌跨系統是獨立專案，不要承諾「跟 Outlook 一模一樣」。</li></ul>
+<h4>檔案（Drive）</h4>
+<p>郵件搬完 ≠ Drive 就好。SharePoint／OneDrive 權限、共用連結、外部訪客要另做盤點。小客戶用 Drive 桌面上傳＋共用雲端硬碟即可；超過部門檔案伺服器要另開遷移專案。</p>
+<h4>搬家不要承諾的事</h4>
+<ul class='tight'><li>規則、分類帳、Outlook 類別、委派、共用信箱權限 100% 過來</li><li>即時雙方即時雙寫不漏信（只能做到增量＋共存設計）</li><li>Vault 保留規則從別的 Workspace 租戶自動複製（租戶對租戶轉移是另一套 Domain Transfer 產品，見官方 pretransfer 文件；<strong>不是</strong>經銷商轉移）</li></ul>
+<hr>
+<h3>轉移 vs 搬家 一頁檢查</h3>
+<table><thead><tr><th>問項</th><th>轉移</th><th>搬家</th></tr></thead><tbody><tr><td>要 Public ID？</td><td>要</td><td>不要</td></tr><tr><td>要改 MX？</td><td>不要</td><td>要（最後才改）</td></tr><tr><td>服務會停嗎？</td><td>官方：使用不受影響</td><td>切 MX 有傳播窗</td></tr><tr><td>誰按最後一下？</td><td><strong>上游</strong> PSC Complete transfer（樂雲無 PSC）</td><td>客戶 DNS＋Admin 啟用 Gmail</td></tr><tr><td>雙人覆核？</td><td>必須</td><td>必須</td></tr></tbody></table>
+</section>
+<section id="sop-07">
+  <h2>日常維運</h2>
+  <p class="lead">管理控制台操作位置。步驟細節見 <a href="#sop-10">常見問題 100</a>。</p>
+  <table>
+    <thead><tr><th>情境</th><th>管理控制台位置</th><th>對照</th></tr></thead>
+    <tbody>
+      <tr><td>無法登入、重設密碼、兩步驟驗證</td><td>目錄 → 使用者 → 重設密碼／安全性</td><td>Q1–Q15</td></tr>
+      <tr><td>收不到信、MX、驗證</td><td>帳戶 → 網域；Gmail 記錄搜尋</td><td><a href="#mail-auth">網域與郵件認證</a>、Q16–Q35</td></tr>
+      <tr><td>垃圾信、SPF／DKIM／DMARC</td><td>應用程式 → Gmail → 驗證電子郵件</td><td>Q36–Q48</td></tr>
+      <tr><td>開帳、離職、群組、授權</td><td>目錄 → 使用者／群組；帳單 → 授權</td><td><a href="#sop-05">使用者與組織</a>、Q49–Q62</td></tr>
+      <tr><td>Drive 分享、離職轉檔</td><td>應用程式 → Drive → 共用設定；刪帳前轉移 Drive</td><td>Q73–Q84</td></tr>
+      <tr><td>儲存空間不足</td><td>報表 → 儲存空間（匯總池，見 <a href="#storage">儲存空間</a>）</td><td>Q76–Q77</td></tr>
+      <tr><td>日曆會議室</td><td>目錄 → 建築物與資源（不是一般使用者帳號）</td><td>Q85–Q86</td></tr>
+      <tr><td>Meet 錄影／外部加入</td><td>應用程式 → Google Meet</td><td><a href="#meet">Meet</a>、Q87–Q89</td></tr>
+      <tr><td>裝置遺失</td><td>裝置：先撤銷連線與 2SV，再考慮遠端抹除</td><td><a href="#endpoint">裝置管理</a>、Q96</td></tr>
+      <tr><td>服務突然沒有</td><td>應用程式 → Google Workspace → 該服務是否對組織單位關閉；同時看 <a href="https://www.google.com/appsstatus/dashboard/" target="_blank" rel="noopener">狀態儀表板</a></td><td>Q35、Q61、Q98</td></tr>
+      <tr><td>帳號被盜</td><td>暫停或重設＋撤 2SV；報表 → 稽核</td><td>Q93</td></tr>
+    </tbody>
+  </table>
+  <p>平時維持至少兩位超級管理員。合規客戶的 Chat 歷史／Spaces 保留與保管箱版本有關，不要隨口開關。</p>
+</section>
+<section id="sop-10">
+  <h2>常見問題 100</h2>
+<div class="faq-index"><a class="faq-chip" href="#faq-q1">Q1. 使用者說密碼錯誤、登不進去</a><a class="faq-chip" href="#faq-q2">Q2. 重設密碼後還是進不去</a><a class="faq-chip" href="#faq-q3">Q3. 強制 2SV 後一批人進不去</a><a class="faq-chip" href="#faq-q4">Q4. 手機丟了</a><a class="faq-chip" href="#faq-q5">Q5. 超級管理員自己被鎖</a><a class="faq-chip" href="#faq-q6">Q6. 開了 SSO，重設 Google 密碼沒用</a><a class="faq-chip" href="#faq-q7">Q7. 使用者被暫停，信箱停了</a><a class="faq-chip" href="#faq-q8">Q8. 全公司突然都不能登，像被停權</a><a class="faq-chip" href="#faq-q9">Q9. 使用者搞混個人 Gmail 跟公司帳號</a><a class="faq-chip" href="#faq-q10">Q10. 新筆電一直要驗證、收不到驗證碼</a><a class="faq-chip" href="#faq-q11">Q11. 備份碼用完了</a><a class="faq-chip" href="#faq-q12">Q12. 委派管理員看不到「網域／Gmail 設定」</a><a class="faq-chip" href="#faq-q13">Q13. 樂雲要進客戶 Admin，沒有 PSC</a><a class="faq-chip" href="#faq-q14">Q14. 登入顯示帳號不存在，但目錄裡看得到</a><a class="faq-chip" href="#faq-q15">Q15. 使用者被要求改密後，一次性密碼失效</a><a class="faq-chip" href="#faq-q16">Q16. 網域驗證跟能收信是同一件事嗎？</a><a class="faq-chip" href="#faq-q17">Q17. 驗證 TXT 一直失敗</a><a class="faq-chip" href="#faq-q18">Q18. 「啟用 Gmail」是灰的</a><a class="faq-chip" href="#faq-q19">Q19. 現在 MX 應該填什麼？</a><a class="faq-chip" href="#faq-q20">Q20. 舊的 ASPMX.L.GOOGLE.COM 要改掉嗎？</a><a class="faq-chip" href="#faq-q21">Q21. MX 改了，信還進舊信箱</a><a class="faq-chip" href="#faq-q22">Q22. 全公司都收不到</a><a class="faq-chip" href="#faq-q23">Q23. 只有一個人收不到</a><a class="faq-chip" href="#faq-q24">Q24. 外部寄來的信進隔離／垃圾</a><a class="faq-chip" href="#faq-q25">Q25. 寄到群組 `sales@` 沒人收到</a><a class="faq-chip" href="#faq-q26">Q26. 客戶說 DNS 面板已改，要怎麼證明？</a><a class="faq-chip" href="#faq-q27">Q27. Cloudflare 要開橘雲（Proxy）嗎？</a><a class="faq-chip" href="#faq-q28">Q28. 還沒改 MX，Gmail 轉送規則有用嗎？</a><a class="faq-chip" href="#faq-q29">Q29. 雙重傳遞出現重複信或迴圈</a><a class="faq-chip" href="#faq-q30">Q30. 分割傳遞：有人有信、未遷移的人沒信</a><a class="faq-chip" href="#faq-q31">Q31. 次要網域跟網域別名差在哪？</a><a class="faq-chip" href="#faq-q32">Q32. 要用 `mail.example.com` 當信箱網域</a><a class="faq-chip" href="#faq-q33">Q33. 客戶要改主要網域</a><a class="faq-chip" href="#faq-q34">Q34. 要查「那封信到底去哪了」</a><a class="faq-chip" href="#faq-q35">Q35. 某部門突然沒有 Gmail</a><a class="faq-chip" href="#faq-q36">Q36. 寄出去進對方垃圾匣</a><a class="faq-chip" href="#faq-q37">Q37. SPF 要寫什麼？</a><a class="faq-chip" href="#faq-q38">Q38. 查到兩筆 SPF，或 include 太多</a><a class="faq-chip" href="#faq-q39">Q39. DKIM 怎麼開？</a><a class="faq-chip" href="#faq-q40">Q40. DNS 已加 DKIM 但還是 fail</a><a class="faq-chip" href="#faq-q41">Q41. DMARC 一開始就要 `p=reject` 嗎？</a><a class="faq-chip" href="#faq-q42">Q42. 一次寄給很多人被拒或進垃圾</a><a class="faq-chip" href="#faq-q43">Q43. 大附件寄不出</a><a class="faq-chip" href="#faq-q44">Q44. 提示達到郵件傳送上限</a><a class="faq-chip" href="#faq-q45">Q45. 助理「以誰的身分傳送」失敗</a><a class="faq-chip" href="#faq-q46">Q46. 加了公司簽名檔／保密聲明後，對方說 DKIM 失敗</a><a class="faq-chip" href="#faq-q47">Q47. 內部互寄正常，外部收不到我們的信</a><a class="faq-chip" href="#faq-q48">Q48. 行銷系統（EDM）用公司網域寄信變垃圾</a><a class="faq-chip" href="#faq-q49">Q49. 新增使用者失敗</a><a class="faq-chip" href="#faq-q50">Q50. CSV 批次中文亂碼、整批失敗</a><a class="faq-chip" href="#faq-q51">Q51. 授權買 50 個卻開不了第 51 人</a><a class="faq-chip" href="#faq-q52">Q52. 別名要不要多買一顆授權？</a><a class="faq-chip" href="#faq-q53">Q53. `info@` 該用別名還是群組？</a><a class="faq-chip" href="#faq-q54">Q54. 人在錯誤部門，2SV／分享政策不對</a><a class="faq-chip" href="#faq-q55">Q55. 離職要刪帳還是暫停？</a><a class="faq-chip" href="#faq-q56">Q56. 刪了使用者還能救嗎？</a><a class="faq-chip" href="#faq-q57">Q57. 離職者雲端硬碟主管看不到</a><a class="faq-chip" href="#faq-q58">Q58. GCDS 同步後人消失</a><a class="faq-chip" href="#faq-q59">Q59. 建了群組，外部寄信被拒</a><a class="faq-chip" href="#faq-q60">Q60. 使用者被自動暫停（濫用）</a><a class="faq-chip" href="#faq-q61">Q61. 人建了但沒有 Gmail／Drive 圖示</a><a class="faq-chip" href="#faq-q62">Q62. 想做「共用信箱」多人同時收</a><a class="faq-chip" href="#faq-q63">Q63. 從 Microsoft 365 搬家，技術第一步？</a><a class="faq-chip" href="#faq-q64">Q64. 資料匯入會把 Outlook 的信刪掉嗎？</a><a class="faq-chip" href="#faq-q65">Q65. 什麼時候跑增量（delta）？</a><a class="faq-chip" href="#faq-q66">Q66. Exchange 共用信箱怎麼遷？</a><a class="faq-chip" href="#faq-q67">Q67. SharePoint／OneDrive 會自動進 Drive 嗎？</a><a class="faq-chip" href="#faq-q68">Q68. 搬家期間要兩邊都看得到信</a><a class="faq-chip" href="#faq-q69">Q69. 哪一天改 MX 最安全？</a><a class="faq-chip" href="#faq-q70">Q70. 資料匯入卡住或部分失敗</a><a class="faq-chip" href="#faq-q71">Q71. 日曆會議室遷完還是亂</a><a class="faq-chip" href="#faq-q72">Q72. 搬家後 Outlook 還在連舊伺服器</a><a class="faq-chip" href="#faq-q73">Q73. 外部說連結打不開</a><a class="faq-chip" href="#faq-q74">Q74. 員工要外部分享但按鈕沒有</a><a class="faq-chip" href="#faq-q75">Q75. 部門檔案該放個人雲端硬碟還是共用雲端硬碟？</a><a class="faq-chip" href="#faq-q76">Q76. 提示儲存空間不足</a><a class="faq-chip" href="#faq-q77">Q77. Google 相片把空間吃光</a><a class="faq-chip" href="#faq-q78">Q78. Drive 電腦版同步衝突、複製一堆檔</a><a class="faq-chip" href="#faq-q79">Q79. 檔案在誰那裡找不到</a><a class="faq-chip" href="#faq-q80">Q80. 共用雲端硬碟權限太亂</a><a class="faq-chip" href="#faq-q81">Q81. 離職帳號刪了，主管要檔</a><a class="faq-chip" href="#faq-q82">Q82. 連結設成「知道連結的人都能編輯」，怕外流</a><a class="faq-chip" href="#faq-q83">Q83. 電腦版顯示未同步</a><a class="faq-chip" href="#faq-q84">Q84. 外部訪客一直被要求登入 Google</a><a class="faq-chip" href="#faq-q85">Q85. 會議室怎麼建？不能開一個 `room@` 當人嗎？</a><a class="faq-chip" href="#faq-q86">Q86. 看不到同事行事曆</a><a class="faq-chip" href="#faq-q87">Q87. Meet 不能錄影</a><a class="faq-chip" href="#faq-q88">Q88. 外部／客戶進不了 Meet</a><a class="faq-chip" href="#faq-q89">Q89. 會議人數太多進不去</a><a class="faq-chip" href="#faq-q90">Q90. 客戶要保留 Chat／Spaces 紀錄</a><a class="faq-chip" href="#faq-q91">Q91. 會議邀請進對方垃圾</a><a class="faq-chip" href="#faq-q92">Q92. 會議室被亂訂、要審批</a><a class="faq-chip" href="#faq-q93">Q93. 懷疑帳號被盜（亂寄信、轉帳詐騙）</a><a class="faq-chip" href="#faq-q94">Q94. Vault 是不是備份還原系統？</a><a class="faq-chip" href="#faq-q95">Q95. Vault 保不保 Gemini 對話裡上傳的檔？</a><a class="faq-chip" href="#faq-q96">Q96. 筆電丟了，要遠端抹除嗎？</a><a class="faq-chip" href="#faq-q97">Q97. 要查誰改過檔案權限、誰登入過</a><a class="faq-chip" href="#faq-q98">Q98. 多客戶同時掛、或全公司無預警</a><a class="faq-chip" href="#faq-q99">Q99. 技術解不了，要怎麼開 Google 支援？</a><a class="faq-chip" href="#faq-q100">Q100. 這張單到底是技術還是要開上游？</a></div>
+<div class='callout'><p>本節供技術單位排查。下單、開通租戶、訂閱轉移見 <a href="#use">分工與接單</a>、<a href="#sop-03">開通</a>、<a href="#sop-06">移轉</a>。每題：<strong>結論</strong> → <strong>路徑</strong> → <strong>官方</strong>（畫面不符以連結為準）→ <strong>升級</strong>。</p></div>
+<p>用法：Ctrl+F 關鍵字。沒有管理控制台權限時，先請超管加委派或共屏（<a href="#admin">管理控制台</a>）。</p>
+<hr>
+<h3>A. 登入與身分（Q1–Q15）</h3>
+<h4 id="faq-q1">Q1. 使用者說密碼錯誤、登不進去</h4>
+<p><strong>結論：</strong> 先分「帳號不存在／暫停／密碼／2SV／SSO」，不要一連串重設。</p>
+<p><strong>路徑：</strong></p>
+<ol class='tight'><li>Admin → 目錄 → 使用者，搜尋該信箱：有沒有人、是否暫停、有沒有授權。</li><li>沒有人 → 建帳（Q49）。暫停 → 查原因後恢復（Q7）。</li><li>有人且啟用：重設密碼，用電話把暫時密碼給本人，勾首次登入須改密。</li><li>仍進不去 → Q2（2SV）或 Q6（SSO）。</li></ol>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/33386" target="_blank" rel="noopener">重設使用者密碼</a></p>
+<p><strong>升級：</strong> 超管也進不去 → Q5。</p>
+<h4 id="faq-q2">Q2. 重設密碼後還是進不去</h4>
+<p><strong>結論：</strong> 多半是 2 步驟驗證卡住，不是密碼。</p>
+<p><strong>路徑：</strong></p>
+<ol class='tight'><li>使用者 → 安全性 → 看 2 步驟驗證是否開啟。</li><li>請管理員產生<strong>備份碼</strong>給本人，或撤銷舊裝置後再登。</li><li>緊急：暫時把人移到未強制 2SV 的例外 OU，登入完成再移回。</li></ol>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/175197" target="_blank" rel="noopener">為機構部署 2 步驟驗證</a></p>
+<p><strong>升級：</strong> 無。</p>
+<h4 id="faq-q3">Q3. 強制 2SV 後一批人進不去</h4>
+<p><strong>結論：</strong> 寬限天數已過，裝置沒登記。</p>
+<p><strong>路徑：</strong></p>
+<ol class='tight'><li>安全性 → 2 步驟驗證：看強制範圍與寬限。</li><li>對還沒登錄的人發備份碼，或暫緩該 OU 強制。</li><li>不要把例外 OU 變成永久後門。</li></ol>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/9176657" target="_blank" rel="noopener">強制使用 2 步驟驗證</a></p>
+<p><strong>升級：</strong> 無。</p>
+<h4 id="faq-q4">Q4. 手機丟了</h4>
+<p><strong>結論：</strong> 只改密碼不夠，要撤 2SV 裝置。</p>
+<p><strong>路徑：</strong></p>
+<ol class='tight'><li>重設密碼。</li><li>使用者 → 安全性 → 2 步驟驗證：撤銷手機／提示。</li><li>發新備份碼；必要時遠端登出工作階段。</li></ol>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/6355290" target="_blank" rel="noopener">管理員協助使用者使用 2SV</a></p>
+<p><strong>升級：</strong> 無。</p>
+<h4 id="faq-q5">Q5. 超級管理員自己被鎖</h4>
+<p><strong>結論：</strong> 用第二位超管救。只留一位超管是事故。</p>
+<p><strong>路徑：</strong></p>
+<ol class='tight'><li>另一位超管重設密碼＋處理 2SV。</li><li>沒有第二超管：走 Google 帳戶復原，備公司網域與身分證明。</li><li>救回來立刻加第二位超管。</li></ol>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/185196" target="_blank" rel="noopener">無法登入管理員帳戶</a></p>
+<p><strong>升級：</strong> 復原失敗 → <a href="https://support.google.com/a/answer/1047213" target="_blank" rel="noopener">與支援團隊聯絡</a>。</p>
+<h4 id="faq-q6">Q6. 開了 SSO，重設 Google 密碼沒用</h4>
+<p><strong>結論：</strong> 正常。登入改走 IdP（Entra／Okta）。</p>
+<p><strong>路徑：</strong></p>
+<ol class='tight'><li>Admin → 安全性 → 驗證 → SSO 設定，確認已開啟。</li><li>到 IdP 解鎖／重設。排除 SSO 的緊急超管帳戶用來救援。</li></ol>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/60224" target="_blank" rel="noopener">設定 SSO</a></p>
+<p><strong>升級：</strong> IdP 方。</p>
+<h4 id="faq-q7">Q7. 使用者被暫停，信箱停了</h4>
+<p><strong>結論：</strong> 暫停＝不能登入；資料通常還在。</p>
+<p><strong>路徑：</strong></p>
+<ol class='tight'><li>使用者列上看「已暫停」與原因（管理員、濫用、帳單）。</li><li>管理員暫停 → 選使用者 → 恢復。</li><li>濫用／停權 → 不要自己亂恢復，走 Q60／原廠。</li></ol>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/33314" target="_blank" rel="noopener">暫停使用者</a></p>
+<p><strong>升級：</strong> 濫用申訴 → Google 支援。</p>
+<h4 id="faq-q8">Q8. 全公司突然都不能登，像被停權</h4>
+<p><strong>結論：</strong> 先看訂閱是否因帳單暫停；再看狀態儀表板。</p>
+<p><strong>路徑：</strong></p>
+<ol class='tight'><li><a href="https://www.google.com/appsstatus/dashboard/" target="_blank" rel="noopener">Workspace 狀態</a>。</li><li>Admin → 帳單：訂閱是否暫停。</li><li>帳單暫停 → 商務／上游；服務中斷 → Q98。</li></ol>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/topic/25838" target="_blank" rel="noopener">解決帳單問題</a>（帳單主題）；狀態儀表板見上。</p>
+<p><strong>升級：</strong> 停權申訴、請款 → 上游。</p>
+<h4 id="faq-q9">Q9. 使用者搞混個人 Gmail 跟公司帳號</h4>
+<p><strong>結論：</strong> 公司帳號是 <code>名字@客戶網域</code>，不是 <code>@gmail.com</code>。</p>
+<p><strong>路徑：</strong></p>
+<ol class='tight'><li>請對方用完整公司信箱登入 admin／mail。</li><li>Chrome 用不同設定檔，避免自動帶入個人 Gmail。</li></ol>
+<p><strong>官方：</strong> <a href="https://support.google.com/accounts/answer/172705" target="_blank" rel="noopener">登入 Google 帳戶</a></p>
+<p><strong>升級：</strong> 無。</p>
+<h4 id="faq-q10">Q10. 新筆電一直要驗證、收不到驗證碼</h4>
+<p><strong>結論：</strong> 復原電話／信過期，或驗證碼寄到舊手機。</p>
+<p><strong>路徑：</strong></p>
+<ol class='tight'><li>超管更新使用者的復原信箱／電話。</li><li>用備份碼或管理員重設 2SV。</li></ol>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/33386" target="_blank" rel="noopener">新增復原選項（管理員）</a>（重設密碼流程一併處理復原）</p>
+<p><strong>升級：</strong> 無。</p>
+<h4 id="faq-q11">Q11. 備份碼用完了</h4>
+<p><strong>結論：</strong> 超管可請使用者重新產生，或管理員協助重設 2SV。</p>
+<p><strong>路徑：</strong> 使用者自行：帳戶 → 安全性 → 2SV → 備份碼。進不去就走 Q2。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/accounts/answer/1187538" target="_blank" rel="noopener">2 步驟驗證備份碼</a></p>
+<p><strong>升級：</strong> 無。</p>
+<h4 id="faq-q12">Q12. 委派管理員看不到「網域／Gmail 設定」</h4>
+<p><strong>結論：</strong> 角色沒有「網域設定」或「Gmail 設定」權限。</p>
+<p><strong>路徑：</strong></p>
+<ol class='tight'><li>帳號 → 管理員角色：看該人被派什麼。</li><li>需要啟用 Gmail／改 MX 相關設定 → 用超管，或加權限。</li></ol>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/121201" target="_blank" rel="noopener">管理員角色權限</a></p>
+<p><strong>升級：</strong> 無。</p>
+<h4 id="faq-q13">Q13. 樂雲要進客戶 Admin，沒有 PSC</h4>
+<p><strong>結論：</strong> 請超管加委派；或共屏；或請上游用經銷商存取。</p>
+<p><strong>路徑：</strong></p>
+<ol class='tight'><li>超管 → 目錄 → 使用者 → 把樂雲帳號加成管理員（建議不要給刪網域）。</li><li>客戶拒絕 → 共屏口述。</li></ol>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/172190" target="_blank" rel="noopener">指派管理員角色</a></p>
+<p><strong>升級：</strong> 客戶不給權限 → 只能諮詢，不要開上游當技術單。</p>
+<h4 id="faq-q14">Q14. 登入顯示帳號不存在，但目錄裡看得到</h4>
+<p><strong>結論：</strong> 網域沒驗證、打錯網域、或還沒傳播。</p>
+<p><strong>路徑：</strong></p>
+<ol class='tight'><li>對一下完整信箱拼寫與網域。</li><li>管理網域：主要網域是否已驗證。</li><li>剛建帳等幾分鐘再試。</li></ol>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/60216" target="_blank" rel="noopener">驗證網域</a></p>
+<p><strong>升級：</strong> 無。</p>
+<h4 id="faq-q15">Q15. 使用者被要求改密後，一次性密碼失效</h4>
+<p><strong>結論：</strong> 官方：MX／Gmail 啟用後，一次性密碼會失效，要先設正式密碼。</p>
+<p><strong>路徑：</strong> 啟用 Gmail 前，請超管到 accounts.google.com 設好密碼。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/60216" target="_blank" rel="noopener">驗證網域說明中的「避免被鎖在帳戶外」</a></p>
+<p><strong>升級：</strong> 無。</p>
+<hr>
+<h3>B. 進信與網域（Q16–Q35）</h3>
+<h4 id="faq-q16">Q16. 網域驗證跟能收信是同一件事嗎？</h4>
+<p><strong>結論：</strong> 不是。驗證＝所有權；MX＝進信。</p>
+<p><strong>路徑：</strong> 先 TXT 驗證，帳號建齊，<strong>最後</strong>才改 MX。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/60216" target="_blank" rel="noopener">驗證網域</a> · <a href="https://support.google.com/a/answer/140034" target="_blank" rel="noopener">設定 MX</a></p>
+<p><strong>升級：</strong> 無。</p>
+<h4 id="faq-q17">Q17. 驗證 TXT 一直失敗</h4>
+<p><strong>結論：</strong> 貼錯層級、雙 DNS、或還沒生效。</p>
+<p><strong>路徑：</strong></p>
+<ol class='tight'><li>設定精靈複製完整字串，加在 <strong>@</strong>（不是 www）。</li><li><a href="https://toolbox.googleapps.com/apps/dig/" target="_blank" rel="noopener">Admin Toolbox Dig</a> 查 TXT，網路上看不看到。</li><li>等 DNS；Cloudflare 用 DNS only。</li></ol>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/60216" target="_blank" rel="noopener">驗證網域</a> · <a href="https://toolbox.googleapps.com/apps/dig/" target="_blank" rel="noopener">Dig</a></p>
+<p><strong>升級：</strong> 超過數小時 Dig 仍沒紀錄 → 網域商。</p>
+<h4 id="faq-q18">Q18. 「啟用 Gmail」是灰的</h4>
+<p><strong>結論：</strong> 網域未驗證，或操作者沒有網域設定權限。</p>
+<p><strong>路徑：</strong></p>
+<ol class='tight'><li>帳戶 → 網域 → 管理網域：狀態是否已驗證。</li><li>換成超管再試。</li></ol>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/140034" target="_blank" rel="noopener">設定 MX／啟用 Gmail</a></p>
+<p><strong>升級：</strong> 已驗證仍灰 → 開 Google 支援，附截圖。</p>
+<h4 id="faq-q19">Q19. 現在 MX 應該填什麼？</h4>
+<p><strong>結論：</strong> 新開通用一筆：<code>smtp.google.com</code>，優先順序 1，<strong>刪光其他 MX</strong>。</p>
+<p><strong>路徑：</strong></p>
+<ol class='tight'><li>DNS 刪舊 MX（含 Microsoft／舊主機）。</li><li>新增 MX → <code>smtp.google.com</code>（有些廠商要結尾點 <code>smtp.google.com.</code>）。</li><li>Admin 啟用 Gmail；Dig 確認。</li></ol>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/140034" target="_blank" rel="noopener">設定 Google Workspace 的 MX 記錄</a></p>
+<p><strong>升級：</strong> 網域商介面加不了 → 網域商客服。</p>
+<h4 id="faq-q20">Q20. 舊的 ASPMX.L.GOOGLE.COM 要改掉嗎？</h4>
+<p><strong>結論：</strong> 能收信就不要動。新開通才用 <code>smtp.google.com</code>。</p>
+<p><strong>路徑：</strong> Dig 看現況；不要為了美觀改生產 MX。</p>
+<p><strong>官方：</strong> 同上頁「舊版 MX 記錄值」說明。</p>
+<p><strong>升級：</strong> 無。</p>
+<h4 id="faq-q21">Q21. MX 改了，信還進舊信箱</h4>
+<p><strong>結論：</strong> 舊 MX 沒刪光，或 TTL／快取未過。</p>
+<p><strong>路徑：</strong></p>
+<ol class='tight'><li>Dig MX：只能剩 Google。</li><li>刪殘留；等 TTL（官方最多約 72 小時）。</li><li>從外部 Gmail 再寄測試。</li></ol>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/140034" target="_blank" rel="noopener">MX 疑難排解</a>（頁內 Troubleshooting）</p>
+<p><strong>升級：</strong> 72 小時後 Dig 已對仍錯 → Q30 分割傳遞。</p>
+<h4 id="faq-q22">Q22. 全公司都收不到</h4>
+<p><strong>結論：</strong> MX、Google 中斷、或 Gmail 服務被關。</p>
+<p><strong>路徑：</strong></p>
+<ol class='tight'><li><a href="https://www.google.com/appsstatus/dashboard/" target="_blank" rel="noopener">狀態儀表板</a>。</li><li>Dig MX。</li><li>應用程式 → Gmail：是否對根 OU 關閉。</li><li>電子郵件記錄搜尋一封測試信。</li></ol>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/182449" target="_blank" rel="noopener">開啟或關閉 Gmail</a> · <a href="https://support.google.com/a/answer/2613641" target="_blank" rel="noopener">電子郵件記錄搜尋</a></p>
+<p><strong>升級：</strong> 儀表板紅燈 → 原廠 P1。</p>
+<h4 id="faq-q23">Q23. 只有一個人收不到</h4>
+<p><strong>結論：</strong> 不是 MX。</p>
+<p><strong>路徑：</strong></p>
+<ol class='tight'><li>使用者：暫停？沒授權？信箱拼寫？</li><li>該人 Gmail 篩選器／轉寄／委派。</li><li>隔離區、垃圾郵件。</li><li>記錄搜尋：該訊息是投遞、延遲還是拒收。</li></ol>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/2613641" target="_blank" rel="noopener">電子郵件記錄搜尋</a> · <a href="https://support.google.com/a/answer/4340942" target="_blank" rel="noopener">管理隔離區</a></p>
+<p><strong>升級：</strong> 無。</p>
+<h4 id="faq-q24">Q24. 外部寄來的信進隔離／垃圾</h4>
+<p><strong>結論：</strong> 進階內容過濾或使用者垃圾分類，不是 MX 壞了。</p>
+<p><strong>路徑：</strong></p>
+<ol class='tight'><li>安全性／Gmail → 隔離區：放行並看規則。</li><li>使用者垃圾郵件匣。</li><li>必要時調整合規規則；不要關閉防毒／垃圾郵件防護。</li></ol>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/4340942" target="_blank" rel="noopener">管理隔離區</a></p>
+<p><strong>升級：</strong> 規則複雜 → L2。</p>
+<h4 id="faq-q25">Q25. 寄到群組 <code>sales@</code> 沒人收到</h4>
+<p><strong>結論：</strong> 「誰可以傳送郵件給群組」太嚴，或成員關閉群組郵件。</p>
+<p><strong>路徑：</strong></p>
+<ol class='tight'><li>目錄 → 群組 → 存取設定：允許外部？</li><li>成員是否開啟「從群組接收郵件」。</li><li>從外部寄一封測試。</li></ol>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/167430" target="_blank" rel="noopener">建立群組</a> · <a href="https://support.google.com/a/answer/167430" target="_blank" rel="noopener">群組存取設定</a></p>
+<p><strong>升級：</strong> 無。</p>
+<h4 id="faq-q26">Q26. 客戶說 DNS 面板已改，要怎麼證明？</h4>
+<p><strong>結論：</strong> 用 Dig 看<strong>網路上</strong>的值，不要只看面板。</p>
+<p><strong>路徑：</strong> <a href="https://toolbox.googleapps.com/apps/dig/" target="_blank" rel="noopener">Admin Toolbox Dig</a> 查 MX／TXT，主機填網域不含 www。</p>
+<p><strong>官方：</strong> <a href="https://toolbox.googleapps.com/apps/dig/" target="_blank" rel="noopener">Dig</a></p>
+<p><strong>升級：</strong> 無。</p>
+<h4 id="faq-q27">Q27. Cloudflare 要開橘雲（Proxy）嗎？</h4>
+<p><strong>結論：</strong> MX、TXT 不要代理，用 DNS only。</p>
+<p><strong>路徑：</strong> 檢查 MX／驗證 TXT／DKIM 的雲朵圖示為灰。</p>
+<p><strong>官方：</strong> MX 通用步驟見 <a href="https://support.google.com/a/answer/140034" target="_blank" rel="noopener">設定 MX</a>；Proxy 依 Cloudflare 文件。</p>
+<p><strong>升級：</strong> 無。</p>
+<h4 id="faq-q28">Q28. 還沒改 MX，Gmail 轉送規則有用嗎？</h4>
+<p><strong>結論：</strong> 沒有。進信先看 MX。</p>
+<p><strong>路徑：</strong> 要 Google 當入口，先切 MX；或維持舊商直到切換窗。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/140034" target="_blank" rel="noopener">設定 MX</a></p>
+<p><strong>升級：</strong> 無。</p>
+<h4 id="faq-q29">Q29. 雙重傳遞出現重複信或迴圈</h4>
+<p><strong>結論：</strong> 同一封進 Gmail 又轉回舊伺服器。短時間用，不要當長期架構。</p>
+<p><strong>路徑：</strong></p>
+<ol class='tight'><li>確認先「新增路由」再設轉送。</li><li>迴圈 → 關掉雙重，改分割或直接切 MX。</li></ol>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/2685650" target="_blank" rel="noopener">設定雙重傳遞</a> · <a href="https://support.google.com/a/answer/2614757" target="_blank" rel="noopener">新增郵件路線</a></p>
+<p><strong>升級：</strong> L2。</p>
+<h4 id="faq-q30">Q30. 分割傳遞：有人有信、未遷移的人沒信</h4>
+<p><strong>結論：</strong> MX 已指 Google，未遷移使用者要靠「不存在則改送舊伺服器」的規則。</p>
+<p><strong>路徑：</strong></p>
+<ol class='tight'><li>MX 必須已是 Google。</li><li>依官方設分割：不在目錄的收件人改送舊主機。</li><li>測已建帳 vs 未建帳各一封。</li></ol>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/12971016" target="_blank" rel="noopener">使用分割傳遞</a></p>
+<p><strong>升級：</strong> 內部互寄失敗 → L2。</p>
+<h4 id="faq-q31">Q31. 次要網域跟網域別名差在哪？</h4>
+<p><strong>結論：</strong> 次要＝可有獨立 <code>user@b.com</code>；別名＝同一批人自動多一個 @。</p>
+<p><strong>路徑：</strong> 帳戶 → 網域 → 新增時看類型。別名不耗授權。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/7502379" target="_blank" rel="noopener">新增網域或網域別名</a></p>
+<p><strong>升級：</strong> 無。</p>
+<h4 id="faq-q32">Q32. 要用 <code>mail.example.com</code> 當信箱網域</h4>
+<p><strong>結論：</strong> 子網域要自己驗證、自己的 MX。</p>
+<p><strong>路徑：</strong> MX 名稱填子網域，不是 <code>@</code>。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/140034" target="_blank" rel="noopener">設定 MX</a>（子網域欄位說明）</p>
+<p><strong>升級：</strong> 無。</p>
+<h4 id="faq-q33">Q33. 客戶要改主要網域</h4>
+<p><strong>結論：</strong> 高風險專案，技術單位不接。</p>
+<p><strong>路徑：</strong> 另開變更單、雙人、維護窗；依官方「變更主要網域」當下步驟。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/7009002" target="_blank" rel="noopener">變更主要網域</a></p>
+<p><strong>升級：</strong> 一律 L2。</p>
+<h4 id="faq-q34">Q34. 要查「那封信到底去哪了」</h4>
+<p><strong>結論：</strong> 用電子郵件記錄搜尋，。</p>
+<p><strong>路徑：</strong></p>
+<ol class='tight'><li>Admin → 報表 → 電子郵件記錄搜尋（權限視版本）。</li><li>用訊息 ID、寄件者、時間窗。</li><li>看投遞／拒收／延遲原因。</li></ol>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/2613641" target="_blank" rel="noopener">電子郵件記錄搜尋</a></p>
+<p><strong>升級：</strong> 沒有此功能 → 版本限制，改從使用者垃圾匣／隔離查。</p>
+<h4 id="faq-q35">Q35. 某部門突然沒有 Gmail</h4>
+<p><strong>結論：</strong> 該 OU 被關掉 Gmail 服務。</p>
+<p><strong>路徑：</strong> 應用程式 → Google Workspace → Gmail → 看組織單位覆寫。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/182449" target="_blank" rel="noopener">開啟或關閉 Google Workspace 服務</a></p>
+<p><strong>升級：</strong> 無。</p>
+<hr>
+<h3>C. 出信與認證（Q36–Q48）</h3>
+<h4 id="faq-q36">Q36. 寄出去進對方垃圾匣</h4>
+<p><strong>結論：</strong> 先認證（SPF／DKIM／DMARC），再看內容與信譽。</p>
+<p><strong>路徑：</strong></p>
+<ol class='tight'><li>外寄一封到個人 Gmail，看信頭 <code>spf=</code> <code>dkim=</code> <code>dmarc=</code>。</li><li>失敗 → Q37–Q41。通過仍進垃圾 → 內容／大量寄信指南。</li></ol>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/81126" target="_blank" rel="noopener">電子郵件寄件者指南</a></p>
+<p><strong>升級：</strong> 已 pass 仍大量進垃圾 → L2。</p>
+<h4 id="faq-q37">Q37. SPF 要寫什麼？</h4>
+<p><strong>結論：</strong> 純 Google：<code>v=spf1 include:_spf.google.com ~all</code>。<strong>每個網域只能一筆 SPF。</strong></p>
+<p><strong>路徑：</strong> DNS 加／合併成一筆 TXT。有 EDM／票務把對方 <code>include:</code> 併進來。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/33786" target="_blank" rel="noopener">設定 SPF</a></p>
+<p><strong>升級：</strong> permerror → Q38。</p>
+<h4 id="faq-q38">Q38. 查到兩筆 SPF，或 include 太多</h4>
+<p><strong>結論：</strong> 兩筆 SPF＝失效；<code>include</code> DNS 查詢過多會 permerror。</p>
+<p><strong>路徑：</strong> 刪到只剩一筆；精簡 include（官方約 10 次查詢上限）。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/33786" target="_blank" rel="noopener">SPF 記錄</a> · <a href="https://support.google.com/a/answer/33785" target="_blank" rel="noopener">排解 SPF 問題</a></p>
+<p><strong>升級：</strong> L2 幫精簡。</p>
+<h4 id="faq-q39">Q39. DKIM 怎麼開？</h4>
+<p><strong>結論：</strong> Admin 產生金鑰 → DNS TXT → 開始驗證。</p>
+<p><strong>路徑：</strong></p>
+<ol class='tight'><li>應用程式 → Gmail → 驗證電子郵件 → 產生新記錄。</li><li>把 TXT（多為 <code>google._domainkey</code>）加到 DNS。</li><li>Dig 看得到後，按開始驗證。</li><li>外寄看信頭 <code>dkim=pass</code>。</li></ol>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/174124" target="_blank" rel="noopener">設定 DKIM</a></p>
+<p><strong>升級：</strong> 無。</p>
+<h4 id="faq-q40">Q40. DNS 已加 DKIM 但還是 fail</h4>
+<p><strong>結論：</strong> 還沒按「開始驗證」、選取器不一致、或出站閘道改寫信件。</p>
+<p><strong>路徑：</strong></p>
+<ol class='tight'><li>確認 Admin 已啟用驗證。</li><li>TXT 主機名稱與精靈完全一致。</li><li>有簽名檔閘道 → 測關掉改寫或改 DKIM 時機。</li></ol>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/174124" target="_blank" rel="noopener">排解 DKIM 問題</a>（頁內疑難排解）</p>
+<p><strong>升級：</strong> L2。</p>
+<h4 id="faq-q41">Q41. DMARC 一開始就要 <code>p=reject</code> 嗎？</h4>
+<p><strong>結論：</strong> 不要。先 <code>p=none</code> 看報表。</p>
+<p><strong>路徑：</strong> 加 TXT：<code>v=DMARC1; p=none; rua=mailto:dmarc-report@客戶網域</code>。數週再考慮隔離／拒絕。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/2466580" target="_blank" rel="noopener">設定 DMARC</a></p>
+<p><strong>升級：</strong> 無。</p>
+<h4 id="faq-q42">Q42. 一次寄給很多人被拒或進垃圾</h4>
+<p><strong>結論：</strong> 受 Gmail 寄件者指南與 Workspace 傳送上限約束。</p>
+<p><strong>路徑：</strong> 確認 SPF＋DKIM＋DMARC；分批；看是否走 Gmail 還是第三方。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/81126" target="_blank" rel="noopener">電子郵件寄件者指南</a> · <a href="https://support.google.com/a/answer/166852" target="_blank" rel="noopener">Gmail 傳送限制</a></p>
+<p><strong>升級：</strong> 被當濫用 → 原廠。</p>
+<h4 id="faq-q43">Q43. 大附件寄不出</h4>
+<p><strong>結論：</strong> Gmail 附件上限（一般 25MB）；更大應改 Drive 連結。</p>
+<p><strong>路徑：</strong> 改共用 Drive 連結；查政策是否擋外寄附件類型。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/mail/answer/6584" target="_blank" rel="noopener">附件大小上限</a></p>
+<p><strong>升級：</strong> 無。</p>
+<h4 id="faq-q44">Q44. 提示達到郵件傳送上限</h4>
+<p><strong>結論：</strong> 帳號或網域當日配額用完，或被限制。</p>
+<p><strong>路徑：</strong></p>
+<ol class='tight'><li>看是否大量通知信／異常外寄（被盜 Q93）。</li><li>等重置或拆帳號；異常則暫停該使用者。</li></ol>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/166852" target="_blank" rel="noopener">Gmail 傳送限制</a></p>
+<p><strong>升級：</strong> 濫用 → 原廠。</p>
+<h4 id="faq-q45">Q45. 助理「以誰的身分傳送」失敗</h4>
+<p><strong>結論：</strong> Gmail 委派沒設好，或政策禁止。</p>
+<p><strong>路徑：</strong> 使用者 Gmail 設定 → 帳戶 → 授予存取權；Admin 是否允許委派。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/11966655" target="_blank" rel="noopener">授權 Gmail 委派存取權</a></p>
+<p><strong>升級：</strong> 無。</p>
+<h4 id="faq-q46">Q46. 加了公司簽名檔／保密聲明後，對方說 DKIM 失敗</h4>
+<p><strong>結論：</strong> 出站閘道改了信件本體。</p>
+<p><strong>路徑：</strong> 測不經閘道是否 pass；閘道需改為不破壞簽章，或 DKIM 在閘道後簽。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/174124" target="_blank" rel="noopener">設定 DKIM</a>（出站閘道注意事項）</p>
+<p><strong>升級：</strong> L2。</p>
+<h4 id="faq-q47">Q47. 內部互寄正常，外部收不到我們的信</h4>
+<p><strong>結論：</strong> 出站認證或對方拒收，不是 MX（MX 管進信）。</p>
+<p><strong>路徑：</strong> 信頭認證；記錄搜尋外寄狀態；對方垃圾匣。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/2613641" target="_blank" rel="noopener">電子郵件記錄搜尋</a> · <a href="https://support.google.com/a/answer/81126" target="_blank" rel="noopener">寄件者指南</a></p>
+<p><strong>升級：</strong> 無。</p>
+<h4 id="faq-q48">Q48. 行銷系統（EDM）用公司網域寄信變垃圾</h4>
+<p><strong>結論：</strong> SPF 沒把該廠商 include 進去，或沒對齊 DMARC。</p>
+<p><strong>路徑：</strong> 把廠商指定的 include／DKIM 併入<strong>同一筆</strong> SPF；不要另開第二筆 SPF。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/33786" target="_blank" rel="noopener">設定 SPF</a></p>
+<p><strong>升級：</strong> 無。</p>
+<hr>
+<h3>D. 使用者、OU、群組（Q49–Q62）</h3>
+<h4 id="faq-q49">Q49. 新增使用者失敗</h4>
+<p><strong>結論：</strong> 授權滿、帳號已存在、網域未驗證、OU 路徑不存在。</p>
+<p><strong>路徑：</strong></p>
+<ol class='tight'><li>帳單看授權用量。</li><li>搜尋是否已有該信箱／別名。</li><li>網域已驗證？OU 先建再建人。</li></ol>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/33310" target="_blank" rel="noopener">新增使用者</a> · <a href="https://support.google.com/a/answer/172716" target="_blank" rel="noopener">指派授權</a></p>
+<p><strong>升級：</strong> 授權滿 → 診斷後開上游加購。</p>
+<h4 id="faq-q50">Q50. CSV 批次中文亂碼、整批失敗</h4>
+<p><strong>結論：</strong> Excel 編碼問題。</p>
+<p><strong>路徑：</strong> 用 Google 試算表匯出 UTF-8 CSV；先建 OU；看上傳結果失敗列。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/40057" target="_blank" rel="noopener">大量新增使用者</a></p>
+<p><strong>升級：</strong> 無。</p>
+<h4 id="faq-q51">Q51. 授權買 50 個卻開不了第 51 人</h4>
+<p><strong>結論：</strong> 授權用盡。別名／群組不占授權；暫停帳可能可釋放。</p>
+<p><strong>路徑：</strong> 帳單對用量；清測試帳；仍不足 → 上游加購（樂雲不下單）。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/172716" target="_blank" rel="noopener">指派授權</a></p>
+<p><strong>升級：</strong> 加購 → 上游／商務。</p>
+<h4 id="faq-q52">Q52. 別名要不要多買一顆授權？</h4>
+<p><strong>結論：</strong> 不要。群組、日曆資源也不要。</p>
+<p><strong>路徑：</strong> 使用者 → 帳戶 → 電子郵件別名。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/33327" target="_blank" rel="noopener">電子郵件別名</a></p>
+<p><strong>升級：</strong> 無。</p>
+<h4 id="faq-q53">Q53. <code>info@</code> 該用別名還是群組？</h4>
+<p><strong>結論：</strong> 多人值守用群組。</p>
+<p><strong>路徑：</strong> 建群組、開放外部寄入、成員開接收。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/167430" target="_blank" rel="noopener">建立群組</a></p>
+<p><strong>升級：</strong> 無。</p>
+<h4 id="faq-q54">Q54. 人在錯誤部門，2SV／分享政策不對</h4>
+<p><strong>結論：</strong> 政策跟 <strong>OU</strong> 走。</p>
+<p><strong>路徑：</strong> 把使用者移到正確組織單位；查該 OU 的服務與安全覆寫。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/182449" target="_blank" rel="noopener">將使用者移至其他 OU</a>（服務隨 OU）· <a href="https://support.google.com/a/answer/182433" target="_blank" rel="noopener">組織單位</a></p>
+<p><strong>升級：</strong> 無。</p>
+<h4 id="faq-q55">Q55. 離職要刪帳還是暫停？</h4>
+<p><strong>結論：</strong> 先轉 Drive／Gmail → 暫停觀察 → 再刪。有 Vault Hold 不要刪。</p>
+<p><strong>路徑：</strong> 見 <a href="https://support.google.com/a/answer/1247777" target="_blank" rel="noopener">轉移 Drive 資料</a> 後暫停。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/33314" target="_blank" rel="noopener">暫停使用者</a> · <a href="https://support.google.com/a/answer/111127" target="_blank" rel="noopener">刪除使用者</a></p>
+<p><strong>升級：</strong> Hold → 法務。</p>
+<h4 id="faq-q56">Q56. 刪了使用者還能救嗎？</h4>
+<p><strong>結論：</strong> 有官方復原窗（Admin「最近刪除的使用者」，天數以當下畫面為準，常見約 20 天）。</p>
+<p><strong>路徑：</strong> 使用者 → 更多 → 最近刪除的使用者 → 還原。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/111127" target="_blank" rel="noopener">還原最近刪除的使用者</a></p>
+<p><strong>升級：</strong> 超過窗期且無 Vault → 通常救不回。</p>
+<h4 id="faq-q57">Q57. 離職者雲端硬碟主管看不到</h4>
+<p><strong>結論：</strong> 刪前沒做所有權轉移。</p>
+<p><strong>路徑：</strong> 復原窗內先還原使用者，再轉移 Drive，再暫停。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/1247777" target="_blank" rel="noopener">轉移 Drive 資料</a></p>
+<p><strong>升級：</strong> 已過窗 → Vault 有規則才可能有副本。</p>
+<h4 id="faq-q58">Q58. GCDS 同步後人消失</h4>
+<p><strong>結論：</strong> 刪除規則設錯。當 P1。</p>
+<p><strong>路徑：</strong> 立刻停同步；從最近刪除還原；修規則後小範圍再同步。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/106368" target="_blank" rel="noopener">Google Cloud Directory Sync</a></p>
+<p><strong>升級：</strong> 大量無法還原 → 原廠。</p>
+<h4 id="faq-q59">Q59. 建了群組，外部寄信被拒</h4>
+<p><strong>結論：</strong> 預設常是「僅機構內」。</p>
+<p><strong>路徑：</strong> 群組存取 → 允許外部寄件者；再測。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/167430" target="_blank" rel="noopener">誰可以將郵件傳送至群組</a></p>
+<p><strong>升級：</strong> 無。</p>
+<h4 id="faq-q60">Q60. 使用者被自動暫停（濫用）</h4>
+<p><strong>結論：</strong> 可能外寄異常或遭盜。</p>
+<p><strong>路徑：</strong> 看暫停原因；當被盜處理（Q93）；不要只恢復不管。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/1116867" target="_blank" rel="noopener">遭停權的使用者</a></p>
+<p><strong>升級：</strong> 申訴 → Google 支援。</p>
+<h4 id="faq-q61">Q61. 人建了但沒有 Gmail／Drive 圖示</h4>
+<p><strong>結論：</strong> 沒指派 Workspace 授權，或該 OU 關了服務。</p>
+<p><strong>路徑：</strong> 使用者 → 授權；應用程式服務對 OU。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/172716" target="_blank" rel="noopener">指派授權</a></p>
+<p><strong>升級：</strong> 無授權可指派 → Q51。</p>
+<h4 id="faq-q62">Q62. 想做「共用信箱」多人同時收</h4>
+<p><strong>結論：</strong> Workspace 沒有和 Exchange 一模一樣的共用信箱；用群組或協作收件匣。</p>
+<p><strong>路徑：</strong> 多數情況建群組即可。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/167430" target="_blank" rel="noopener">群組</a> · <a href="https://support.google.com/a/answer/167541" target="_blank" rel="noopener">協作收件匣</a>（進階）</p>
+<p><strong>升級：</strong> 複雜輪派 → L2。</p>
+<hr>
+<h3>E. 資料搬家（不是換經銷商）（Q63–Q72）</h3>
+<h4 id="faq-q63">Q63. 從 Microsoft 365 搬家，技術第一步？</h4>
+<p><strong>結論：</strong> 驗證網域＋建齊使用者，<strong>先不要切 MX</strong>。</p>
+<p><strong>路徑：</strong> 見 <a href="#sop-06">移轉</a>「資料搬家」；官方用管理控制台「資料匯入」。</p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/migrate/migrate-data-from-an-exchange-online-account" target="_blank" rel="noopener">從 Exchange Online 匯入</a></p>
+<p><strong>升級：</strong> 無。</p>
+<h4 id="faq-q64">Q64. 資料匯入會把 Outlook 的信刪掉嗎？</h4>
+<p><strong>結論：</strong> 官方：複製，不刪、不改來源。</p>
+<p><strong>路徑：</strong> Admin → 資料 → 資料匯入 → Exchange Online，用 M365 全域管理員授權。</p>
+<p><strong>官方：</strong> 同上。</p>
+<p><strong>升級：</strong> 無。</p>
+<h4 id="faq-q65">Q65. 什麼時候跑增量（delta）？</h4>
+<p><strong>結論：</strong> 切 MX 之後，補空窗期新信；也可補第一次失敗的項目。</p>
+<p><strong>路徑：</strong> 同一資料匯入工具跑增量。</p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/migrate/migrate-data-from-an-exchange-online-account" target="_blank" rel="noopener">Exchange Online 匯入</a>（頁內 delta）</p>
+<p><strong>升級：</strong> 無。</p>
+<h4 id="faq-q66">Q66. Exchange 共用信箱怎麼遷？</h4>
+<p><strong>結論：</strong> 對成群組或獨立使用者再匯入；權限不會 100% 一樣。</p>
+<p><strong>路徑：</strong> 先盤點清單；不要承諾委派／完整權限。</p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/migrate/migrate-data-from-an-exchange-online-account" target="_blank" rel="noopener">匯入內容與限制</a></p>
+<p><strong>升級：</strong> 複雜權限 → 遷移專案。</p>
+<h4 id="faq-q67">Q67. SharePoint／OneDrive 會自動進 Drive 嗎？</h4>
+<p><strong>結論：</strong> 不會。檔案另案。</p>
+<p><strong>路徑：</strong> 小客戶手動／Drive 上傳；大客戶評估 Workspace Migrate 或第三方。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/6250907" target="_blank" rel="noopener">遷移工具對照</a></p>
+<p><strong>升級：</strong> 另報工。</p>
+<h4 id="faq-q68">Q68. 搬家期間要兩邊都看得到信</h4>
+<p><strong>結論：</strong> 短時間用雙重傳遞；分批用分割傳遞。MX 要先指到 Google 才轉得動。</p>
+<p><strong>路徑：</strong> Q29／Q30。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/2685650" target="_blank" rel="noopener">雙重傳遞</a> · <a href="https://support.google.com/a/answer/12971016" target="_blank" rel="noopener">分割傳遞</a></p>
+<p><strong>升級：</strong> L2。</p>
+<h4 id="faq-q69">Q69. 哪一天改 MX 最安全？</h4>
+<p><strong>結論：</strong> 帳號齊、第一輪匯入完、SPF／DKIM 已備、TTL 已降低之後。</p>
+<p><strong>路徑：</strong> <a href="#sop-03">開通</a> 階段 E 檢查清單。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/140034" target="_blank" rel="noopener">設定 MX</a></p>
+<p><strong>升級：</strong> 無。</p>
+<h4 id="faq-q70">Q70. 資料匯入卡住或部分失敗</h4>
+<p><strong>結論：</strong> 有 API 配額；不是所有 Exchange 功能都支援。</p>
+<p><strong>路徑：</strong> 看工作狀態；跑增量補失敗項；大環境改 GWMME。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/180898" target="_blank" rel="noopener">GWMME</a> · <a href="https://support.google.com/a/answer/6250907" target="_blank" rel="noopener">工具對照</a></p>
+<p><strong>升級：</strong> L2。</p>
+<h4 id="faq-q71">Q71. 日曆會議室遷完還是亂</h4>
+<p><strong>結論：</strong> 資源信箱模型不同，常需在 Workspace 重建資源。</p>
+<p><strong>路徑：</strong> Admin → 目錄 → 建築物與資源；舊會議可能要重訂。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/1033925" target="_blank" rel="noopener">新增日曆資源</a></p>
+<p><strong>升級：</strong> 無。</p>
+<h4 id="faq-q72">Q72. 搬家後 Outlook 還在連舊伺服器</h4>
+<p><strong>結論：</strong> 用戶端沒改。</p>
+<p><strong>路徑：</strong> 改用官方 Gmail／Google 日曆；或新設定檔。不要 POP 雙拉。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/166334" target="_blank" rel="noopener">設定 Outlook 使用 Google Workspace</a></p>
+<p><strong>升級：</strong> 無。</p>
+<hr>
+<h3>F. Drive 與檔案（Q73–Q84）</h3>
+<h4 id="faq-q73">Q73. 外部說連結打不開</h4>
+<p><strong>結論：</strong> 檔案「受限」，或機構禁止外部分享。</p>
+<p><strong>路徑：</strong></p>
+<ol class='tight'><li>檔案分享：改「知道連結者」或指定外部信箱（政策允許時）。</li><li>Admin → Drive 共用設定：該 OU 是否禁止外部。</li></ol>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/60781" target="_blank" rel="noopener">管理外部分享</a></p>
+<p><strong>升級：</strong> 無。</p>
+<h4 id="faq-q74">Q74. 員工要外部分享但按鈕沒有</h4>
+<p><strong>結論：</strong> 組織政策關掉，不是 Drive 壞了。</p>
+<p><strong>路徑：</strong> 對 OU 查共用設定；要開必須客戶同意風險。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/60781" target="_blank" rel="noopener">管理外部分享</a></p>
+<p><strong>升級：</strong> 無。</p>
+<h4 id="faq-q75">Q75. 部門檔案該放個人雲端硬碟還是共用雲端硬碟？</h4>
+<p><strong>結論：</strong> 部門資產用共用雲端硬碟，人走檔留。</p>
+<p><strong>路徑：</strong> 建立共用雲端硬碟，成員用群組。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/7212025" target="_blank" rel="noopener">共用雲端硬碟</a></p>
+<p><strong>升級：</strong> Starter 能力較弱，對版本。</p>
+<h4 id="faq-q76">Q76. 提示儲存空間不足</h4>
+<p><strong>結論：</strong> 官方是組織<strong>匯總池</strong>，不是每人硬切。</p>
+<p><strong>路徑：</strong> Admin 儲存報表找 Top 使用者與共用硬碟；清垃圾桶／錄影；不夠 → 上游加購。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/6373632" target="_blank" rel="noopener">儲存空間與方案</a> · <a href="https://support.google.com/a/answer/1044516" target="_blank" rel="noopener">儲存空間報表</a></p>
+<p><strong>升級：</strong> 加購 → 上游。</p>
+<h4 id="faq-q77">Q77. Google 相片把空間吃光</h4>
+<p><strong>結論：</strong> 匯總池含 Photos。</p>
+<p><strong>路徑：</strong> 報表看 Photos；清大檔或改政策。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/6373632" target="_blank" rel="noopener">儲存空間</a></p>
+<p><strong>升級：</strong> 無。</p>
+<h4 id="faq-q78">Q78. Drive 電腦版同步衝突、複製一堆檔</h4>
+<p><strong>結論：</strong> 離線快取或雙人同編衝突。</p>
+<p><strong>路徑：</strong> 重登 Drive for desktop；改以瀏覽器即時協作。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/drive/answer/7324379" target="_blank" rel="noopener">Drive 電腦版</a></p>
+<p><strong>升級：</strong> 無。</p>
+<h4 id="faq-q79">Q79. 檔案在誰那裡找不到</h4>
+<p><strong>結論：</strong> 用 Drive 搜尋與稽核，刪除。</p>
+<p><strong>路徑：</strong> 進階：報表 → 稽核 → Drive；或調查工具（視版本）。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/4579579" target="_blank" rel="noopener">Drive 稽核日誌</a></p>
+<p><strong>升級：</strong> 無調查工具 → 版本限制。</p>
+<h4 id="faq-q80">Q80. 共用雲端硬碟權限太亂</h4>
+<p><strong>結論：</strong> 用群組管成員，少加個人。</p>
+<p><strong>路徑：</strong> 內容管理員／貢獻者／檢視者對照官方層級。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/7337554" target="_blank" rel="noopener">共用雲端硬碟權限</a></p>
+<p><strong>升級：</strong> 無。</p>
+<h4 id="faq-q81">Q81. 離職帳號刪了，主管要檔</h4>
+<p><strong>結論：</strong> 同 Q57。</p>
+<p><strong>路徑：</strong> 復原窗內還原再轉移。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/1247777" target="_blank" rel="noopener">轉移 Drive 資料</a></p>
+<p><strong>升級：</strong> 過窗 → Vault。</p>
+<h4 id="faq-q82">Q82. 連結設成「知道連結的人都能編輯」，怕外流</h4>
+<p><strong>結論：</strong> 預設應改「受限」。</p>
+<p><strong>路徑：</strong> Drive 共用設定：預設連結為受限；清查公開連結。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/60781" target="_blank" rel="noopener">管理外部分享</a></p>
+<p><strong>升級：</strong> 已外流 → Q93 思維＋權限撤回。</p>
+<h4 id="faq-q83">Q83. 電腦版顯示未同步</h4>
+<p><strong>結論：</strong> 帳戶錯、磁碟滿、或檔案類型被排除。</p>
+<p><strong>路徑：</strong> 確認登的是公司帳；看同步資料夾；更新用戶端。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/drive/answer/2565056" target="_blank" rel="noopener">排解 Drive 電腦版問題</a></p>
+<p><strong>升級：</strong> 無。</p>
+<h4 id="faq-q84">Q84. 外部訪客一直被要求登入 Google</h4>
+<p><strong>結論：</strong> 分享對象是 Google 帳戶，或政策要求登入。</p>
+<p><strong>路徑：</strong> 若政策允許，用「知道連結者」；否則請對方用 Google 帳登入。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/60781" target="_blank" rel="noopener">管理外部分享</a></p>
+<p><strong>升級：</strong> 無。</p>
+<hr>
+<h3>G. 日曆、Meet、Chat（Q85–Q92）</h3>
+<h4 id="faq-q85">Q85. 會議室怎麼建？不能開一個 <code>room@</code> 當人嗎？</h4>
+<p><strong>結論：</strong> 用建築物與<strong>資源</strong>，不是一般使用者（那會占授權）。</p>
+<p><strong>路徑：</strong> Admin → 目錄 → 建築物與資源。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/1033925" target="_blank" rel="noopener">新增日曆資源</a></p>
+<p><strong>升級：</strong> 無。</p>
+<h4 id="faq-q86">Q86. 看不到同事行事曆</h4>
+<p><strong>結論：</strong> 對方沒分享，或 Admin 關掉內部／外部共用。</p>
+<p><strong>路徑：</strong> 使用者日曆設定；Admin → 日曆 → 共用設定。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/60765" target="_blank" rel="noopener">日曆共用設定</a></p>
+<p><strong>升級：</strong> 無。</p>
+<h4 id="faq-q87">Q87. Meet 不能錄影</h4>
+<p><strong>結論：</strong> 版本不含，或主持人沒權限。錄影檔在<strong>主持人 Drive</strong>。</p>
+<p><strong>路徑：</strong> 對版本；確認 Meet 錄製對該 OU 開啟。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/7549927" target="_blank" rel="noopener">管理 Meet 錄製</a></p>
+<p><strong>升級：</strong> 要錄製但版本沒有 → 商務升級。</p>
+<h4 id="faq-q88">Q88. 外部／客戶進不了 Meet</h4>
+<p><strong>結論：</strong> Admin 關掉外部或匿名加入。</p>
+<p><strong>路徑：</strong> 應用程式 → Google Meet → 會議安全性／外部。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/7587493" target="_blank" rel="noopener">Meet 安全性設定</a></p>
+<p><strong>升級：</strong> 無。</p>
+<h4 id="faq-q89">Q89. 會議人數太多進不去</h4>
+<p><strong>結論：</strong> 版本人數上限。</p>
+<p><strong>路徑：</strong> 對版本或拆場。不要當故障。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/6043385" target="_blank" rel="noopener">比較版本</a></p>
+<p><strong>升級：</strong> 商務。</p>
+<h4 id="faq-q90">Q90. 客戶要保留 Chat／Spaces 紀錄</h4>
+<p><strong>結論：</strong> 看版本與 Vault 是否涵蓋 Chat。沒規則就沒保留。</p>
+<p><strong>路徑：</strong> 先對 SKU 再承諾；合規走 Vault。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/vault/answer/2799699" target="_blank" rel="noopener">Vault 保留的服務</a></p>
+<p><strong>升級：</strong> 法務＋L2。</p>
+<h4 id="faq-q91">Q91. 會議邀請進對方垃圾</h4>
+<p><strong>結論：</strong> 出站認證問題，同 Q36。</p>
+<p><strong>路徑：</strong> SPF／DKIM；日曆邀請也是郵件。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/33786" target="_blank" rel="noopener">設定 SPF</a></p>
+<p><strong>升級：</strong> 無。</p>
+<h4 id="faq-q92">Q92. 會議室被亂訂、要審批</h4>
+<p><strong>結論：</strong> 資源日曆可設自動接受／審批（視設定）。</p>
+<p><strong>路徑：</strong> 資源設定與委派；教育使用者用群組權限。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/1033925" target="_blank" rel="noopener">日曆資源</a></p>
+<p><strong>升級：</strong> 無。</p>
+<hr>
+<h3>H. 安全、Vault、裝置、原廠支援（Q93–Q100）</h3>
+<h4 id="faq-q93">Q93. 懷疑帳號被盜（亂寄信、轉帳詐騙）</h4>
+<p><strong>結論：</strong> 先停損再查。</p>
+<p><strong>路徑：</strong></p>
+<ol class='tight'><li>暫停或立刻重設密碼＋撤 2SV 裝置。</li><li>報表 → 稽核 → 登入／Gmail。</li><li>看篩選器、轉寄、委派是否被加。</li><li>大量外寄 → 當濫用，必要時原廠。</li></ol>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/1116867" target="_blank" rel="noopener">遭盜用的帳戶</a> · <a href="https://support.google.com/a/answer/4579579" target="_blank" rel="noopener">稽核日誌</a></p>
+<p><strong>升級：</strong> 停權／濫用 → Google 支援。</p>
+<h4 id="faq-q94">Q94. Vault 是不是備份還原系統？</h4>
+<p><strong>結論：</strong> 不是。沒有保留規則，使用者刪了就沒有。</p>
+<p><strong>路徑：</strong> 有 Plus／Enterprise／加購 Vault 才進 https://vault.google.com</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/vault/answer/2799699" target="_blank" rel="noopener">Google Vault 簡介</a></p>
+<p><strong>升級：</strong> Starter／Standard 要 eDiscovery → 商務升級。</p>
+<h4 id="faq-q95">Q95. Vault 保不保 Gemini 對話裡上傳的檔？</h4>
+<p><strong>結論：</strong> 拆 Drive 落地 vs 對話內即時上傳。不能一句「都有」。</p>
+<p><strong>路徑：</strong> 見 <a href="#vault">保管箱</a> 與 <a href="#notebook-export">筆記本匯出</a>。落地 Drive 的檔走 Drive Vault；對話內即時上傳的媒體，Vault 不當作獨立媒體匯出。</p>
+<p><strong>官方：</strong>保管箱服務範圍見 <a href="https://support.google.com/vault/answer/6127699" target="_blank" rel="noopener">支援服務與資料類型</a>。</p>
+<p><strong>升級：</strong> 無。</p>
+<h4 id="faq-q96">Q96. 筆電丟了，要遠端抹除嗎？</h4>
+<p><strong>結論：</strong> 先撤銷帳戶與 2SV。進階裝置管理才能工作資料 Wipe；個人機勿整機抹除非政策允許。</p>
+<p><strong>路徑：</strong> Admin → 裝置；無 MDM 就改密＋撤工作階段。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/173937" target="_blank" rel="noopener">裝置管理</a></p>
+<p><strong>升級：</strong> 無進階管理 → 版本限制。</p>
+<h4 id="faq-q97">Q97. 要查誰改過檔案權限、誰登入過</h4>
+<p><strong>結論：</strong> Admin 稽核日誌，不是 Vault 主場。</p>
+<p><strong>路徑：</strong> 報表 → 稽核：管理員、登入、Drive。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/4579579" target="_blank" rel="noopener">稽核與調查工具</a></p>
+<p><strong>升級：</strong> 無。</p>
+<h4 id="faq-q98">Q98. 多客戶同時掛、或全公司無預警</h4>
+<p><strong>結論：</strong> 先看狀態頁，不要先改 MX。</p>
+<p><strong>路徑：</strong> <a href="https://www.google.com/appsstatus/dashboard/" target="_blank" rel="noopener">狀態儀表板</a> → 蒐證時間與錯誤 → 開原廠。</p>
+<p><strong>官方：</strong> 狀態儀表板 · <a href="https://support.google.com/a/answer/1047213" target="_blank" rel="noopener">聯絡支援</a></p>
+<p><strong>升級：</strong> 確認中斷 → P1。</p>
+<h4 id="faq-q99">Q99. 技術解不了，要怎麼開 Google 支援？</h4>
+<p><strong>結論：</strong> 超管在 Admin 開案；樂雲代擬內容。</p>
+<p><strong>路徑：</strong></p>
+<ol class='tight'><li>超管登入 Admin → 支援。</li><li>貼 <a href="#support">09-支援升級</a> 模板（網域、時間、影響範圍、已查 MX／授權、訊息 ID）。</li></ol>
+<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/1047213" target="_blank" rel="noopener">與支援團隊聯絡</a> · <a href="https://knowledge.workspace.google.com/admin/support/google-workspace-support-offerings?hl=zh-tw" target="_blank" rel="noopener">支援方案</a></p>
+<p><strong>升級：</strong> 開 Google 支援。</p>
+<h4 id="faq-q100">Q100. 這張單到底是技術還是要開上游？</h4>
+<p><strong>結論：</strong> 登入／收信／帳號／Drive／搬家設定＝樂雲。下單／開通租戶／訂閱轉移／加授權／帳單＝上游。</p>
+<p><strong>路徑：</strong> 見 <a href="#use">分工與接單</a>。技術單沒有管理控制台權限時，先請客戶委派，不要直接開給上游。</p>
+<p><strong>官方：</strong> 無單一頁；支援分層見 <a href="https://knowledge.workspace.google.com/admin/support/google-workspace-support-offerings?hl=zh-tw" target="_blank" rel="noopener">支援方案</a></p>
+<p><strong>升級：</strong> 需操作銷售控制台時，把資料包開給上游。</p>
+<hr>
+<h3>關鍵字速查</h3>
+<table><thead><tr><th>關鍵字</th><th>題號</th></tr></thead><tbody><tr><td>登入／密碼／2SV／SSO</td><td>Q1–Q15</td></tr><tr><td>收不到信／MX／驗證</td><td>Q16–Q35</td></tr><tr><td>垃圾信／SPF／DKIM／DMARC</td><td>Q36–Q48</td></tr><tr><td>開帳／離職／群組／授權</td><td>Q49–Q62</td></tr><tr><td>M365 搬家／雙重／分割</td><td>Q63–Q72</td></tr><tr><td>Drive／空間／分享</td><td>Q73–Q84</td></tr><tr><td>日曆／Meet</td><td>Q85–Q92</td></tr><tr><td>被盜／Vault／裝置／原廠單</td><td>Q93–Q100</td></tr></tbody></table>
+</section>
+
+<section id="sources">
+  <h2>官方來源</h2>
+  <table>
+    <thead><tr><th>主題</th><th>URL</th></tr></thead>
+    <tbody>
+      <tr><td>台灣定價與功能行銷表</td><td><a href="https://workspace.google.com/pricing?hl=zh-tw">workspace.google.com/pricing?hl=zh-tw</a></td></tr>
+      <tr><td>版本比較入口</td><td><a href="https://support.google.com/a/answer/6043385">support.google.com/a/answer/6043385</a></td></tr>
+      <tr><td>Business 版本 Help</td><td><a href="https://knowledge.workspace.google.com/admin/getting-started/editions/business-editions">Business editions</a></td></tr>
+      <tr><td>Enterprise 對照</td><td><a href="https://knowledge.workspace.google.com/admin/getting-started/editions/compare-enterprise-editions">Compare Enterprise editions</a></td></tr>
+      <tr><td>儲存集區</td><td><a href="https://support.google.com/a/answer/172541">answer/172541</a></td></tr>
+      <tr><td>Vault 簡介</td><td><a href="https://support.google.com/vault/answer/2462365">answer/2462365</a></td></tr>
+      <tr><td>Vault 支援服務</td><td><a href="https://support.google.com/vault/answer/6127699">answer/6127699</a></td></tr>
+      <tr><td>Vault 匯出內容</td><td><a href="https://support.google.com/vault/answer/6099459">answer/6099459</a></td></tr>
+      <tr><td>Vault 搜尋匯出入門</td><td><a href="https://support.google.com/vault/answer/6161352">answer/6161352</a></td></tr>
+      <tr><td>Vault 權限</td><td><a href="https://support.google.com/vault/answer/2799699">answer/2799699</a></td></tr>
+      <tr><td>Gemini app 保留</td><td><a href="https://support.google.com/vault/answer/16677125">answer/16677125</a></td></tr>
+      <tr><td>Notebook 工作帳用量</td><td><a href="https://support.google.com/notebooklm/answer/16337734">answer/16337734</a></td></tr>
+      <tr><td>匯出 Gemini Notebook</td><td><a href="https://support.google.com/a/answer/16054396">answer/16054396</a></td></tr>
+      <tr><td>MX</td><td><a href="https://support.google.com/a/answer/140034">answer/140034</a></td></tr>
+      <tr><td>狀態儀表板</td><td><a href="https://www.google.com/appsstatus/dashboard/">google.com/appsstatus/dashboard</a></td></tr>
+    </tbody>
+  </table>
+  <p>畫面與本文不符時，以連結當日內容為準。排查見「常見問題 100」。</p>
+</section>
+
+</main>
+<footer>
+  樂雲智能 · 技術單位 · 功能以 Google 說明中心為準
+</footer>
+</div>
+
+<script>
+const nav = document.getElementById('toc');
+const dim = document.getElementById('dim');
+const btnOpen = document.getElementById('navOpen');
+const btnClose = document.getElementById('navClose');
+function setNav(open){
+  document.body.classList.toggle('nav-closed', !open);
+  try { localStorage.setItem('gws-nav-open', open ? '1' : '0'); } catch (e) {}
+}
+btnOpen.addEventListener('click', () => setNav(true));
+btnClose.addEventListener('click', () => setNav(false));
+dim.addEventListener('click', () => setNav(false));
+nav.querySelectorAll('a.toc').forEach(a => a.addEventListener('click', () => {
+  if (window.matchMedia('(max-width:720px)').matches) setNav(false);
+}));
+try {
+  if (localStorage.getItem('gws-nav-open') === '0') setNav(false);
+} catch (e) {}
+const q = document.getElementById('q');
+q.addEventListener('input', () => {
+  const t = q.value.trim().toLowerCase();
+  document.querySelectorAll('main section').forEach(s => {
+    s.classList.toggle('hidden', t && !s.innerText.toLowerCase().includes(t));
+  });
+});
+const tocLinks = [...document.querySelectorAll('nav a.toc')];
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      tocLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
+    }
+  });
+}, {rootMargin: '-20% 0px -70% 0px'});
+document.querySelectorAll('main section, main .app').forEach(s => { if (s.id) io.observe(s); });
+</script>
+</body>
+</html>
