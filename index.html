@@ -14,7 +14,7 @@
   --radius:10px;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:auto}
 body{margin:0;font:15px/1.65 "Segoe UI","Noto Sans TC","Microsoft JhengHei",sans-serif;background:#fff;color:var(--text)}
 a{color:var(--blue);text-decoration:none}
 a:hover{text-decoration:underline}
@@ -36,8 +36,18 @@ nav.sidebar{position:fixed;left:0;top:0;width:var(--sidebar-w);height:100vh;over
 .content{margin-left:var(--sidebar-w);min-width:0;background:#fff}
 nav .brand{font-weight:750;margin:0 0 2px;color:#102033}
 nav .sub{color:var(--muted);font-size:12px;margin:0 0 14px}
-nav input{width:100%;background:#fff;border:1px solid var(--line);color:var(--text);border-radius:8px;padding:8px 10px;margin-bottom:12px}
+nav input{width:100%;background:#fff;border:1px solid var(--line);color:var(--text);border-radius:8px;padding:8px 10px}
+.search-box{position:relative;margin-bottom:12px}
+.search-meta{font-size:11px;color:var(--muted);margin:4px 2px 0;line-height:1.4}
+.search-hits{background:#fff;border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 20px rgba(16,32,51,.1);max-height:min(42vh,320px);overflow:auto;margin:6px 0 4px}
+.search-hits a{display:block;padding:8px 10px;font-size:12.5px;color:#243447;text-decoration:none;border-bottom:1px solid var(--panel2)}
+.search-hits a:last-child{border-bottom:0}
+.search-hits a:hover,.search-hits a.is-active{background:#e7eef8;text-decoration:none}
+.search-hits a .hit-k{display:block;color:var(--dim);font-size:11px;margin-top:1px}
+.search-focus{outline:2px solid #1558d6;outline-offset:6px;border-radius:6px;background:#f4f8ff}
 nav a.toc{display:block;color:#334155;padding:6px 8px;border-radius:6px;font-size:13px;text-decoration:none}
+nav a.toc.miss{display:none !important}
+.faq-chip.miss,.faq-item.miss,.app.miss,h3.miss,nav .g.miss{display:none !important}
 nav a.toc:hover,nav a.toc.active{background:#e7eef8;color:#102033;text-decoration:none}
 nav .g{color:#7b8b9c;font-size:11px;letter-spacing:.06em;margin:14px 8px 6px;font-weight:700}
 header.top{padding:28px 36px 16px;border-bottom:1px solid var(--line);background:#fff}
@@ -45,8 +55,9 @@ header.top h1{margin:0 0 8px;font-size:26px;color:#102033}
 header.top p{margin:0;color:var(--muted);max-width:88ch}
 main{padding:8px 36px 80px;max-width:1100px}
 section{padding:28px 0;border-bottom:1px solid var(--line)}
-section h2{margin:0 0 8px;font-size:22px;color:#102033}
-section h3{margin:22px 0 8px;font-size:17px;color:#1b2b40}
+section h2{margin:0 0 8px;font-size:22px;color:#102033;scroll-margin-top:16px}
+section h3{margin:22px 0 8px;font-size:17px;color:#1b2b40;scroll-margin-top:16px}
+section h4,.app h3{scroll-margin-top:16px}
 section h4{margin:16px 0 6px;font-size:15px;color:#243447}
 .lead{color:var(--muted);margin:0 0 16px}
 .callout{border:1px solid var(--line);background:var(--panel);border-radius:var(--radius);padding:14px 16px;margin:12px 0}
@@ -111,11 +122,16 @@ hr{border:0;border-top:1px solid var(--line);margin:20px 0}
     </div>
     <button class="nav-close" id="navClose" type="button">關閉</button>
   </div>
-  <input id="q" type="search" placeholder="搜尋開通、MX、考試、常見問題…">
+  <div class="search-box">
+    <input id="q" type="search" placeholder="搜尋：方案、收不到信、Vault、登入、搬家、DLP…" autocomplete="off" enterkeyhint="search" aria-label="搜尋手冊">
+    <div id="searchMeta" class="search-meta" hidden></div>
+    <div id="searchHits" class="search-hits" hidden role="listbox"></div>
+  </div>
   <div class="g">概覽</div>
   <a class="toc" href="#use">分工與接單</a>
   <a class="toc" href="#glossary">名詞對照</a>
   <a class="toc" href="#plans">方案與功能</a>
+  <a class="toc" href="#matrix">　功能對照</a>
   <a class="toc" href="#apps">應用說明</a>
   <a class="toc" href="#gmail">　Gmail（電子郵件）</a>
   <a class="toc" href="#calendar">　日曆 Calendar</a>
@@ -151,7 +167,7 @@ hr{border:0;border-top:1px solid var(--line);margin:20px 0}
 </header>
 <main id="main">
 
-<section id="use">
+<section id="use" data-keys="分工 接單 上游 樂雲 技術窗口 下單 psc partner sales 委派 共屏 故障單">
   <h2>分工與接單</h2>
   <p class="lead">樂雲是客戶的技術窗口，不是下單窗口。進客戶環境需超級管理員加委派，或共屏。</p>
   <div class="grid e2">
@@ -195,7 +211,7 @@ hr{border:0;border-top:1px solid var(--line);margin:20px 0}
   <p>美金牌價見方案章；報價問商務與上游。台灣定價頁常有新客促銷，不以該頁對客戶報價。</p>
 </section>
 
-<section id="glossary">
+<section id="glossary" data-keys="名詞 英文 縮寫 sku ou mx spf dkim dmarc vault dlp sso 2sv cse notebooklm 別名">
   <h2>名詞對照</h2>
   <p class="lead">中文與官方英文並陳，對客戶時兩邊都可以講。</p>
   <table>
@@ -239,7 +255,7 @@ hr{border:0;border-top:1px solid var(--line);margin:20px 0}
   </table>
 </section>
 
-<section id="plans">
+<section id="plans" data-keys="方案 版本 edition sku starter standard plus enterprise 牌價 年約 彈性 入門 商業 企業 訂閱 授權 pricing business 功能">
   <h2>方案與功能</h2><p class="src">功能與牌價以 <a href="https://knowledge.workspace.google.com/admin/getting-started/editions/business-editions">商業版 Help</a>、<a href="https://knowledge.workspace.google.com/admin/getting-started/editions/compare-enterprise-editions">企業版對照</a> 為準；台灣 <a href="https://workspace.google.com/pricing?hl=zh-tw">定價頁</a> 僅供對行銷賣點。</p>
   <p class="lead">商業線四張臉：Starter／Standard／Plus（最多 300 人）與 Enterprise（不限人數，實務再拆 Standard／Plus）。儲存是<strong>全組織集區</strong>，不是每人硬切不能借。</p>
 
@@ -358,8 +374,8 @@ hr{border:0;border-top:1px solid var(--line);margin:20px 0}
   <p>年繳已預付：官方不退費、也不把餘額轉到新訂閱。應排在服務年底再轉經銷商。</p>
 </section>
 
-<section id="matrix">
-  <h3>功能對照</h3>
+<section id="matrix" data-keys="方案 版本 功能對照 比較 edition starter standard plus enterprise vault meet 人數 儲存">
+  <h2>功能對照</h2>
   <p class="src">來源：<a href="https://knowledge.workspace.google.com/admin/getting-started/editions/business-editions">商業版</a>、<a href="https://knowledge.workspace.google.com/admin/getting-started/editions/compare-enterprise-editions">企業版</a>。入門版「受限」出自台灣定價頁。</p>
   <table>
     <thead>
@@ -392,11 +408,11 @@ hr{border:0;border-top:1px solid var(--line);margin:20px 0}
   <p>授權怎麼數：一個要登入的使用者 ≈ 一顆 Workspace。別名、群組、共用雲端硬碟不另算。授權用盡通常不能新開帳，舊人仍可登入。</p>
 </section>
 
-<section id="apps">
+<section id="apps" data-keys="方案 版本 功能 應用 starter standard plus enterprise vault meet">
   <h2>應用說明</h2>
   <p class="lead">每個服務：能做什麼、管理員控什麼、資料在哪、保管箱管不管。</p>
 
-  <article class="app" id="gmail">
+  <article class="app" id="gmail" data-keys="gmail 郵件 信箱 電子郵件 收信 寄信 mx imap pop 別名 委派 釣魚 垃圾 隔離">
     <p class="kicker">核心服務 · 所有有 Gmail 的 SKU</p>
     <h3>Gmail — 公司網域電子郵件</h3>
     <p><strong>能做什麼：</strong>用 <code>名字@公司網域</code> 收發信，而不是 @gmail.com。網頁、手機 App、IMAP／POP（若管理員允許）、Outlook 外掛都可。標籤（不是資料夾樹）、篩選器、委派（秘書代收）、別名、密件副本、假期自動回覆、機密模式（連結取代內文）、離線、會議時段。</p>
@@ -419,7 +435,7 @@ hr{border:0;border-top:1px solid var(--line);margin:20px 0}
     <p>使用者刪信清空垃圾桶後，若沒有 Vault 規則／Hold，就救不回。Vault 搜 Gmail 可匯出 mbox 或 PST；<strong>不是</strong>跟 Drive 混成一個 zip。可另開「匯出連結的 Drive 檔案」→ 另外一個 Drive 包＋<code>drive-links.csv</code> 對照（見第 6、7 章）。</p>
   </article>
 
-  <article class="app" id="calendar">
+  <article class="app" id="calendar" data-keys="日曆 calendar 行事曆 會議室 資源 預約 行程 邀請">
     <p class="kicker">核心服務</p>
     <h3>Google 日曆 — 行程與資源</h3>
     <p><strong>能做什麼：</strong>個人／團隊行事曆、邀請內部外部、看忙碌／空閒、會議室與資源（投影機、車位）、預約時段、附加 Meet 連結、重複事件、時區、委派。</p>
@@ -430,7 +446,7 @@ hr{border:0;border-top:1px solid var(--line);margin:20px 0}
     </ul>
   </article>
 
-  <article class="app" id="drive">
+  <article class="app" id="drive" data-keys="drive 雲端硬碟 共用雲端硬碟 分享 同步 檔案 權限 連結 空間">
     <p class="kicker">核心服務 · 儲存池主角</p>
     <h3>Google 雲端硬碟 — 檔案與共用雲端硬碟</h3>
     <p><strong>能做什麼：</strong>存放 Google 檔與上傳的 PDF／Office／圖片／影片；共用連結；共用雲端硬碟（團隊擁有、人不在檔還在）；電腦版 Drive 串流／鏡像；離線；標籤（進階版）；核准流程。</p>
@@ -460,7 +476,7 @@ hr{border:0;border-top:1px solid var(--line);margin:20px 0}
     <p>單一 zip 上限約 <strong>10 GB</strong>，超過就切多個。檔名＝原名＋底線＋Drive 檔案 ID。</p>
   </article>
 
-  <article class="app" id="editors">
+  <article class="app" id="editors" data-keys="文件 docs 試算表 sheets 簡報 slides 表單 forms sites keep tasks 協作平台">
     <p class="kicker">核心服務</p>
     <h3>文件、試算表、簡報、表單、Sites、Keep、Tasks</h3>
     <h4>Google 文件 Docs</h4>
@@ -477,7 +493,7 @@ hr{border:0;border-top:1px solid var(--line);margin:20px 0}
     <p>Keep＝便利貼；Tasks＝待辦；聯絡人＝全域通訊錄＋個人。Keep／Tasks <strong>不是</strong> Vault 原生服務。分享 Keep 時發出的郵件，要靠綜合郵件儲存才進 Gmail Vault。</p>
   </article>
 
-  <article class="app" id="meet">
+  <article class="app" id="meet" data-keys="meet 視訊 錄影 錄製 會議 直播 人數 等候室 字幕">
     <p class="kicker">核心服務</p>
     <h3>Google Meet — 視訊會議</h3>
     <p><strong>能做什麼：</strong>瀏覽器或 App 開會、螢幕分享、即時字幕、舉手、分組討論室（進階版）、等候室、投票／Q&amp;A、降噪、錄製、直播、電話撥入（常搭 Voice）。</p>
@@ -496,7 +512,7 @@ hr{border:0;border-top:1px solid var(--line);margin:20px 0}
     <p><strong>Vault：</strong>錄製檔、Gemini 會議筆記、會中聊天／Q&amp;A／投票紀錄預設吃 <strong>Drive 規則</strong>；可另開 Meet 專用保留規則（開了以後 Drive 規則就不再套用在錄製檔）。搜尋匯出走 Drive，沒有獨立「Meet 服務」匯出鈕。</p>
   </article>
 
-  <article class="app" id="chat">
+  <article class="app" id="chat" data-keys="chat 聊天 spaces 群組 groups 即時訊息">
     <p class="kicker">核心服務</p>
     <h3>Google Chat 與 Groups</h3>
     <h4>Chat</h4>
@@ -508,7 +524,7 @@ hr{border:0;border-top:1px solid var(--line);margin:20px 0}
     <p>保留／Hold 跟 Chat 規則；搜尋匯出走 Gmail。</p>
   </article>
 
-  <article class="app" id="other-apps">
+  <article class="app" id="other-apps" data-keys="vids voice appsheet chrome colab studio 其他服務">
     <p class="kicker">核心或附加</p>
     <h3>Vids、Voice、AppSheet、Workspace Studio、Chrome、Colab</h3>
     <ul class="tight">
@@ -522,7 +538,7 @@ hr{border:0;border-top:1px solid var(--line);margin:20px 0}
   </article>
 </section>
 
-<section id="gemini">
+<section id="gemini" data-keys="gemini notebooklm 筆記本 notebook ai 音訊總覽 用量">
   <h2>Gemini 與筆記本 Gemini Notebook</h2>
   <p class="lead">客戶口中的「NotebookLM」在 Workspace 文件已改稱 <strong>Gemini Notebook</strong>。它跟「Gmail 側邊欄 Gemini」跟「gemini.google.com 對話」是三條產品，Vault 範圍不一樣。</p>
 
@@ -558,7 +574,7 @@ hr{border:0;border-top:1px solid var(--line);margin:20px 0}
   </div>
 </section>
 
-<section id="notebook-export">
+<section id="notebook-export" data-keys="筆記本匯出 notebooklm notebook data export 來源檔 音訊總覽">
   <h2>筆記本能否匯出、檔案會不會一起走</h2>
   <div class="callout warn">
     <b class="tag">一句話</b>
@@ -592,7 +608,7 @@ hr{border:0;border-top:1px solid var(--line);margin:20px 0}
   </ul>
 </section>
 
-<section id="security">
+<section id="security" data-keys="資安 dlp caa cse smime 資料地區 情境感知 外洩 調查工具 加密 ldap">
   <h2>企業資安</h2>
   <p class="lead">「Enterprise 比較安全」不是口號，是一組 Admin 能打開、Starter 根本沒有的控制項。責任仍在客戶超管與法務；樂雲可代設定，不書面保證不外洩。</p>
 
@@ -660,7 +676,7 @@ hr{border:0;border-top:1px solid var(--line);margin:20px 0}
   <p>多方核准 MPA：敏感動作（含 Vault 匯出）要第二人點頭。Enterprise 有此能力。</p>
 </section>
 
-<section id="vault">
+<section id="vault" data-keys="vault 保管箱 ediscovery 保留 hold 電子蒐證">
   <h2>保管箱 Google Vault</h2><p class="src">來源：<a href="https://support.google.com/vault/answer/2462365">Vault 簡介</a>、<a href="https://support.google.com/vault/answer/6127699">支援服務</a>、<a href="https://support.google.com/vault/answer/6099459">匯出內容</a>。</p>
   <div class="callout bad">
     <b class="tag">不是備份</b>
@@ -745,7 +761,7 @@ hr{border:0;border-top:1px solid var(--line);margin:20px 0}
   </ul>
 </section>
 
-<section id="export">
+<section id="export" data-keys="資料匯出 data export takeout 還原 備份 zip 離職帶走">
   <h2>資料怎麼匯出</h2>
   <div class="tree">
     <div class="step"><strong>A. 使用者自己要一份檔</strong> → Drive 下載／「建立副本」／Meet 錄製本來就在 Drive。Google 檔下載會轉 Office／PDF。</div>
@@ -767,7 +783,7 @@ hr{border:0;border-top:1px solid var(--line);margin:20px 0}
   </table>
 </section>
 
-<section id="admin">
+<section id="admin" data-keys="管理控制台 admin console 委派 超級管理員 psc 入口 admin.google.com">
   <h2>管理控制台</h2>
   <p>三層不要混：<strong>使用者 App</strong>（mail.google.com）／<strong>Admin console</strong>（admin.google.com）／<strong>Partner Sales Console</strong>（樂雲現在沒有）。Vault 是第四個站 vault.google.com。</p>
   <ul class="tight">
@@ -798,7 +814,7 @@ hr{border:0;border-top:1px solid var(--line);margin:20px 0}
 <p>委派給樂雲：使用者、群組、服務設定即可。保管箱權限單獨做角色，保留規則與匯出不要集中在同一人。</p>
 </section>
 
-<section id="storage">
+<section id="storage" data-keys="方案 儲存 集區 空間 空間滿 空間不足 quota 30gb 2tb 5tb photos 相片 加量">
   <h2>儲存空間</h2>
   <p class="lead">官方：儲存是「每位使用者額度 × 授權數」的<strong>全組織共用池</strong>，含多數情況下的封存使用者。Gmail、Drive、Meet 錄製、Photos（若當核心／附加開著）都從同一池扣。</p>
   <table>
@@ -819,7 +835,7 @@ hr{border:0;border-top:1px solid var(--line);margin:20px 0}
   </ul>
 </section>
 
-<section id="mail-auth">
+<section id="mail-auth" data-keys="mx 郵件交換 smtp.google.com spf dkim dmarc 收不到信 寄不出 收信 dns 雙重傳遞 分割傳遞">
   <h2>網域與郵件認證</h2>
   <h3>DNS 四件套</h3>
   <table>
@@ -859,7 +875,7 @@ hr{border:0;border-top:1px solid var(--line);margin:20px 0}
   <p>交驗：用 <a href="https://toolbox.googleapps.com/apps/dig/" target="_blank" rel="noopener">Admin Toolbox Dig</a> 查 MX／TXT；DKIM 看管理控制台是否已「以 DKIM 驗證電子郵件」。</p>
 </section>
 
-<section id="endpoint">
+<section id="endpoint" data-keys="裝置 手機 筆電 平板 抹除 mdm endpoint 遠端 遺失 註冊 android ios">
   <h2>裝置管理</h2>
   <table>
     <thead><tr><th>層</th><th>大約誰有</th><th>能做</th></tr></thead>
@@ -872,7 +888,7 @@ hr{border:0;border-top:1px solid var(--line);margin:20px 0}
   <p>客戶說「遠端把手機資料清掉」：要確認已開啟進階行動管理，且裝置曾經註冊。沒註冊＝做不到，不是 Workspace「壞了」。</p>
 </section>
 
-<section id="missell">
+<section id="missell" data-keys="方案 版本 錯賣 300 starter vault enterprise 無限儲存">
   <h2>常見錯配</h2>
   <table>
     <thead><tr><th>客戶原話</th><th>不要回</th><th>要回</th></tr></thead>
@@ -891,7 +907,7 @@ hr{border:0;border-top:1px solid var(--line);margin:20px 0}
   </table>
 </section>
 
-<section id="support">
+<section id="support" data-keys="支援 升級 原廠 p1 enhanced premium tam 開單 slo 狀態儀表板">
   <h2>支援升級</h2><p class="src">來源：<a href="https://knowledge.workspace.google.com/admin/support/google-workspace-support-offerings?hl=zh-tw">Google Workspace 支援服務</a>（2026-09-14）。P1 首次回應目標：Standard 4 小時、Enhanced 1 小時、Premium 15 分鐘。Enhanced／Premium 全年無休日語僅營業時間；勿保證中文 24/7。</p>
   <table>
     <thead><tr><th>層級</th><th>誰有</th><th>技術含義</th></tr></thead>
@@ -905,7 +921,7 @@ hr{border:0;border-top:1px solid var(--line);margin:20px 0}
   <p>升級順序：官方狀態儀表板 → 客戶管理控制台開 Google 支援（視合約）→ 上游。樂雲不是 Google 原廠支援窗口。</p>
 </section>
 
-<section id="cert">
+<section id="cert" data-keys="考試 認證 agwa 報名 associate 證照 workspace administrator">
   <h2>考試與認證</h2>
   <p class="lead"><strong>Associate Google Workspace Administrator</strong>（助理級 Google Workspace 管理員）認證你能管理 Workspace 日常環境：帳號與目錄、Gmail／Drive 等核心服務、資料治理與合規、安全與存取、端點，以及常見問題排查。</p>
   <p class="src">官方：<a href="https://cloud.google.com/learn/certification/associate-google-workspace-administrator" target="_blank" rel="noopener">Associate Google Workspace Administrator</a></p>
@@ -917,7 +933,7 @@ hr{border:0;border-top:1px solid var(--line);margin:20px 0}
   </ol>
 </section>
 
-<section id="sop-03">
+<section id="sop-03" data-keys="開通 建客 驗證網域 啟用gmail mx 第一次 admin 資料包">
   <h2>開通</h2>
 
 <div class='callout'><p>官方：<a href="https://support.google.com/channelservices/answer/9548627" target="_blank" rel="noopener">Add a customer</a>、<a href="https://support.google.com/a/answer/60216" target="_blank" rel="noopener">Verify domain</a>、<a href="https://support.google.com/a/answer/140034" target="_blank" rel="noopener">Set up MX</a>。<strong>下單／建客由上游處理。</strong> 階段 A 開給上游；租戶存在後，樂雲做驗證、開帳、切 MX。<strong>已有 Workspace、只是換經銷商</strong> → 請改走 <a href="#sop-06">移轉</a>。</p></div>
@@ -978,7 +994,7 @@ DNS 由誰管:
 <table><thead><tr><th>現象</th><th>先查</th></tr></thead><tbody><tr><td>驗證一直失敗</td><td>TXT 貼錯、貼在子網域、有兩家 DNS、Cloudflare 代理搞錯記錄類型</td></tr><tr><td>建立客戶失敗</td><td>網域已被其他 Workspace 租戶占用</td></tr><tr><td>下單後沒服務</td><td>客戶沒接 ToS、訂閱暫停、選錯 Team／Domain</td></tr><tr><td>啟用 Gmail 按鈕灰的</td><td>網域未驗證、缺少網域設定管理員權限</td></tr><tr><td>部分人有信部分沒有</td><td>使用者沒建、被暫停、MX 殘留舊紀錄、分割傳遞設錯</td></tr></tbody></table>
 <p>對照 <a href="#sop-10">常見問題 100</a> Q16–Q35（進信／網域）。</p>
 </section>
-<section id="sop-05">
+<section id="sop-05" data-keys="使用者 ou 組織單位 群組 別名 授權 離職 csv 暫停 刪除 gcds 開帳">
   <h2>使用者與組織</h2>
 
 <div class='callout'><p>官方入口：Admin → 目錄 → 使用者。新增使用者說明見 Help 搜尋「Add users」。</p></div>
@@ -1011,7 +1027,7 @@ DNS 由誰管:
 <h3>授權不夠時的標準回覆</h3>
 <ol class='tight'><li>管理控制台帳單（或請上游）確認已用／購買數。</li><li>清暫停帳、別名誤建成完整使用者、測試帳。</li><li>仍不足 → 走加購（年約可能依剩餘合約天數計價，細節問上游）。</li><li>一顆授權不能給兩人同時使用。</li></ol>
 </section>
-<section id="sop-06">
+<section id="sop-06" data-keys="搬家 遷移 exchange m365 雙重投遞 分割投遞 gwmme 匯入">
   <h2>移轉（換商／搬家）</h2>
 
 <p>先問客戶一句話：<strong>「帳號已經在用 Google，只是要換廠商；還是現在還在用 Microsoft／自建信箱？」</strong></p>
@@ -1067,7 +1083,7 @@ DNS 由誰管:
 <h3>轉移 vs 搬家 一頁檢查</h3>
 <table><thead><tr><th>問項</th><th>轉移</th><th>搬家</th></tr></thead><tbody><tr><td>要 Public ID？</td><td>要</td><td>不要</td></tr><tr><td>要改 MX？</td><td>不要</td><td>要（最後才改）</td></tr><tr><td>服務會停嗎？</td><td>官方：使用不受影響</td><td>切 MX 有傳播窗</td></tr><tr><td>誰按最後一下？</td><td><strong>上游</strong> PSC Complete transfer（樂雲無 PSC）</td><td>客戶 DNS＋Admin 啟用 Gmail</td></tr><tr><td>雙人覆核？</td><td>必須</td><td>必須</td></tr></tbody></table>
 </section>
-<section id="sop-07">
+<section id="sop-07" data-keys="維運 日常 狀態 儀表板 警示 排查">
   <h2>日常維運</h2>
   <p class="lead">管理控制台操作位置。步驟細節見 <a href="#sop-10">常見問題 100</a>。</p>
   <table>
@@ -1088,7 +1104,7 @@ DNS 由誰管:
   </table>
   <p>平時維持至少兩位超級管理員。合規客戶的 Chat 歷史／Spaces 保留與保管箱版本有關，不要隨口開關。</p>
 </section>
-<section id="sop-10">
+<section id="sop-10" data-keys="一百問 faq 常見問題">
   <h2>常見問題 100</h2>
 <div class="faq-index"><a class="faq-chip" href="#faq-q1">Q1. 使用者說密碼錯誤、登不進去</a><a class="faq-chip" href="#faq-q2">Q2. 重設密碼後還是進不去</a><a class="faq-chip" href="#faq-q3">Q3. 強制 2SV 後一批人進不去</a><a class="faq-chip" href="#faq-q4">Q4. 手機丟了</a><a class="faq-chip" href="#faq-q5">Q5. 超級管理員自己被鎖</a><a class="faq-chip" href="#faq-q6">Q6. 開了 SSO，重設 Google 密碼沒用</a><a class="faq-chip" href="#faq-q7">Q7. 使用者被暫停，信箱停了</a><a class="faq-chip" href="#faq-q8">Q8. 全公司突然都不能登，像被停權</a><a class="faq-chip" href="#faq-q9">Q9. 使用者搞混個人 Gmail 跟公司帳號</a><a class="faq-chip" href="#faq-q10">Q10. 新筆電一直要驗證、收不到驗證碼</a><a class="faq-chip" href="#faq-q11">Q11. 備份碼用完了</a><a class="faq-chip" href="#faq-q12">Q12. 委派管理員看不到「網域／Gmail 設定」</a><a class="faq-chip" href="#faq-q13">Q13. 樂雲要進客戶 Admin，沒有 PSC</a><a class="faq-chip" href="#faq-q14">Q14. 登入顯示帳號不存在，但目錄裡看得到</a><a class="faq-chip" href="#faq-q15">Q15. 使用者被要求改密後，一次性密碼失效</a><a class="faq-chip" href="#faq-q16">Q16. 網域驗證跟能收信是同一件事嗎？</a><a class="faq-chip" href="#faq-q17">Q17. 驗證 TXT 一直失敗</a><a class="faq-chip" href="#faq-q18">Q18. 「啟用 Gmail」是灰的</a><a class="faq-chip" href="#faq-q19">Q19. 現在 MX 應該填什麼？</a><a class="faq-chip" href="#faq-q20">Q20. 舊的 ASPMX.L.GOOGLE.COM 要改掉嗎？</a><a class="faq-chip" href="#faq-q21">Q21. MX 改了，信還進舊信箱</a><a class="faq-chip" href="#faq-q22">Q22. 全公司都收不到</a><a class="faq-chip" href="#faq-q23">Q23. 只有一個人收不到</a><a class="faq-chip" href="#faq-q24">Q24. 外部寄來的信進隔離／垃圾</a><a class="faq-chip" href="#faq-q25">Q25. 寄到群組 `sales@` 沒人收到</a><a class="faq-chip" href="#faq-q26">Q26. 客戶說 DNS 面板已改，要怎麼證明？</a><a class="faq-chip" href="#faq-q27">Q27. Cloudflare 要開橘雲（Proxy）嗎？</a><a class="faq-chip" href="#faq-q28">Q28. 還沒改 MX，Gmail 轉送規則有用嗎？</a><a class="faq-chip" href="#faq-q29">Q29. 雙重傳遞出現重複信或迴圈</a><a class="faq-chip" href="#faq-q30">Q30. 分割傳遞：有人有信、未遷移的人沒信</a><a class="faq-chip" href="#faq-q31">Q31. 次要網域跟網域別名差在哪？</a><a class="faq-chip" href="#faq-q32">Q32. 要用 `mail.example.com` 當信箱網域</a><a class="faq-chip" href="#faq-q33">Q33. 客戶要改主要網域</a><a class="faq-chip" href="#faq-q34">Q34. 要查「那封信到底去哪了」</a><a class="faq-chip" href="#faq-q35">Q35. 某部門突然沒有 Gmail</a><a class="faq-chip" href="#faq-q36">Q36. 寄出去進對方垃圾匣</a><a class="faq-chip" href="#faq-q37">Q37. SPF 要寫什麼？</a><a class="faq-chip" href="#faq-q38">Q38. 查到兩筆 SPF，或 include 太多</a><a class="faq-chip" href="#faq-q39">Q39. DKIM 怎麼開？</a><a class="faq-chip" href="#faq-q40">Q40. DNS 已加 DKIM 但還是 fail</a><a class="faq-chip" href="#faq-q41">Q41. DMARC 一開始就要 `p=reject` 嗎？</a><a class="faq-chip" href="#faq-q42">Q42. 一次寄給很多人被拒或進垃圾</a><a class="faq-chip" href="#faq-q43">Q43. 大附件寄不出</a><a class="faq-chip" href="#faq-q44">Q44. 提示達到郵件傳送上限</a><a class="faq-chip" href="#faq-q45">Q45. 助理「以誰的身分傳送」失敗</a><a class="faq-chip" href="#faq-q46">Q46. 加了公司簽名檔／保密聲明後，對方說 DKIM 失敗</a><a class="faq-chip" href="#faq-q47">Q47. 內部互寄正常，外部收不到我們的信</a><a class="faq-chip" href="#faq-q48">Q48. 行銷系統（EDM）用公司網域寄信變垃圾</a><a class="faq-chip" href="#faq-q49">Q49. 新增使用者失敗</a><a class="faq-chip" href="#faq-q50">Q50. CSV 批次中文亂碼、整批失敗</a><a class="faq-chip" href="#faq-q51">Q51. 授權買 50 個卻開不了第 51 人</a><a class="faq-chip" href="#faq-q52">Q52. 別名要不要多買一顆授權？</a><a class="faq-chip" href="#faq-q53">Q53. `info@` 該用別名還是群組？</a><a class="faq-chip" href="#faq-q54">Q54. 人在錯誤部門，2SV／分享政策不對</a><a class="faq-chip" href="#faq-q55">Q55. 離職要刪帳還是暫停？</a><a class="faq-chip" href="#faq-q56">Q56. 刪了使用者還能救嗎？</a><a class="faq-chip" href="#faq-q57">Q57. 離職者雲端硬碟主管看不到</a><a class="faq-chip" href="#faq-q58">Q58. GCDS 同步後人消失</a><a class="faq-chip" href="#faq-q59">Q59. 建了群組，外部寄信被拒</a><a class="faq-chip" href="#faq-q60">Q60. 使用者被自動暫停（濫用）</a><a class="faq-chip" href="#faq-q61">Q61. 人建了但沒有 Gmail／Drive 圖示</a><a class="faq-chip" href="#faq-q62">Q62. 想做「共用信箱」多人同時收</a><a class="faq-chip" href="#faq-q63">Q63. 從 Microsoft 365 搬家，技術第一步？</a><a class="faq-chip" href="#faq-q64">Q64. 資料匯入會把 Outlook 的信刪掉嗎？</a><a class="faq-chip" href="#faq-q65">Q65. 什麼時候跑增量（delta）？</a><a class="faq-chip" href="#faq-q66">Q66. Exchange 共用信箱怎麼遷？</a><a class="faq-chip" href="#faq-q67">Q67. SharePoint／OneDrive 會自動進 Drive 嗎？</a><a class="faq-chip" href="#faq-q68">Q68. 搬家期間要兩邊都看得到信</a><a class="faq-chip" href="#faq-q69">Q69. 哪一天改 MX 最安全？</a><a class="faq-chip" href="#faq-q70">Q70. 資料匯入卡住或部分失敗</a><a class="faq-chip" href="#faq-q71">Q71. 日曆會議室遷完還是亂</a><a class="faq-chip" href="#faq-q72">Q72. 搬家後 Outlook 還在連舊伺服器</a><a class="faq-chip" href="#faq-q73">Q73. 外部說連結打不開</a><a class="faq-chip" href="#faq-q74">Q74. 員工要外部分享但按鈕沒有</a><a class="faq-chip" href="#faq-q75">Q75. 部門檔案該放個人雲端硬碟還是共用雲端硬碟？</a><a class="faq-chip" href="#faq-q76">Q76. 提示儲存空間不足</a><a class="faq-chip" href="#faq-q77">Q77. Google 相片把空間吃光</a><a class="faq-chip" href="#faq-q78">Q78. Drive 電腦版同步衝突、複製一堆檔</a><a class="faq-chip" href="#faq-q79">Q79. 檔案在誰那裡找不到</a><a class="faq-chip" href="#faq-q80">Q80. 共用雲端硬碟權限太亂</a><a class="faq-chip" href="#faq-q81">Q81. 離職帳號刪了，主管要檔</a><a class="faq-chip" href="#faq-q82">Q82. 連結設成「知道連結的人都能編輯」，怕外流</a><a class="faq-chip" href="#faq-q83">Q83. 電腦版顯示未同步</a><a class="faq-chip" href="#faq-q84">Q84. 外部訪客一直被要求登入 Google</a><a class="faq-chip" href="#faq-q85">Q85. 會議室怎麼建？不能開一個 `room@` 當人嗎？</a><a class="faq-chip" href="#faq-q86">Q86. 看不到同事行事曆</a><a class="faq-chip" href="#faq-q87">Q87. Meet 不能錄影</a><a class="faq-chip" href="#faq-q88">Q88. 外部／客戶進不了 Meet</a><a class="faq-chip" href="#faq-q89">Q89. 會議人數太多進不去</a><a class="faq-chip" href="#faq-q90">Q90. 客戶要保留 Chat／Spaces 紀錄</a><a class="faq-chip" href="#faq-q91">Q91. 會議邀請進對方垃圾</a><a class="faq-chip" href="#faq-q92">Q92. 會議室被亂訂、要審批</a><a class="faq-chip" href="#faq-q93">Q93. 懷疑帳號被盜（亂寄信、轉帳詐騙）</a><a class="faq-chip" href="#faq-q94">Q94. Vault 是不是備份還原系統？</a><a class="faq-chip" href="#faq-q95">Q95. Vault 保不保 Gemini 對話裡上傳的檔？</a><a class="faq-chip" href="#faq-q96">Q96. 筆電丟了，要遠端抹除嗎？</a><a class="faq-chip" href="#faq-q97">Q97. 要查誰改過檔案權限、誰登入過</a><a class="faq-chip" href="#faq-q98">Q98. 多客戶同時掛、或全公司無預警</a><a class="faq-chip" href="#faq-q99">Q99. 技術解不了，要怎麼開 Google 支援？</a><a class="faq-chip" href="#faq-q100">Q100. 這張單到底是技術還是要開上游？</a></div>
 <div class='callout'><p>本節供技術單位排查。下單、開通租戶、訂閱轉移見 <a href="#use">分工與接單</a>、<a href="#sop-03">開通</a>、<a href="#sop-06">移轉</a>。每題：<strong>結論</strong> → <strong>路徑</strong> → <strong>官方</strong>（畫面不符以連結為準）→ <strong>升級</strong>。</p></div>
@@ -1646,7 +1662,7 @@ DNS 由誰管:
 <table><thead><tr><th>關鍵字</th><th>題號</th></tr></thead><tbody><tr><td>登入／密碼／2SV／SSO</td><td>Q1–Q15</td></tr><tr><td>收不到信／MX／驗證</td><td>Q16–Q35</td></tr><tr><td>垃圾信／SPF／DKIM／DMARC</td><td>Q36–Q48</td></tr><tr><td>開帳／離職／群組／授權</td><td>Q49–Q62</td></tr><tr><td>M365 搬家／雙重／分割</td><td>Q63–Q72</td></tr><tr><td>Drive／空間／分享</td><td>Q73–Q84</td></tr><tr><td>日曆／Meet</td><td>Q85–Q92</td></tr><tr><td>被盜／Vault／裝置／原廠單</td><td>Q93–Q100</td></tr></tbody></table>
 </section>
 
-<section id="sources">
+<section id="sources" data-keys="官方來源 help knowledge 說明中心 連結">
   <h2>官方來源</h2>
   <table>
     <thead><tr><th>主題</th><th>URL</th></tr></thead>
@@ -1701,16 +1717,368 @@ try {
   if (localStorage.getItem('gws-nav-open') === '0') setNav(false);
 } catch (e) {}
 const q = document.getElementById('q');
-q.addEventListener('input', () => {
-  const t = q.value.trim().toLowerCase();
-  document.querySelectorAll('main section').forEach(s => {
-    s.classList.toggle('hidden', t && !s.innerText.toLowerCase().includes(t));
+const meta = document.getElementById('searchMeta');
+const hitsBox = document.getElementById('searchHits');
+const tocLinks = [...document.querySelectorAll('nav a.toc')];
+
+const ALIAS_GROUPS = [
+  ['方案','版本','edition','sku','牌價','年約','彈性','入門','pricing','功能對照','比較版本','business starter','business standard','business plus','商業版','企業版'],
+  ['收不到信','收不到','收信','進信','mx','郵件交換','smtp.google.com','dns','dig','啟用gmail','驗證網域','信箱收不到'],
+  ['寄不出','寄信','出信','垃圾信','進垃圾','spf','dkim','dmarc','寄件者指南','edm'],
+  ['vault','保管箱','ediscovery','電子蒐證','訴訟保留','hold','不是備份'],
+  ['登入','登不進去','登不進','密碼','2sv','兩步驟','sso','被鎖','停權','驗證碼','備份碼','帳號不存在'],
+  ['搬家','遷移','換商','exchange','m365','microsoft 365','outlook','雙重投遞','分割投遞','gwmme','匯入','移轉'],
+  ['drive','雲端硬碟','共用雲端硬碟','分享','連結打不開','同步','檔案找不到'],
+  ['meet','錄影','錄製','視訊','開會','進不去會議','會議室'],
+  ['日曆','calendar','行事曆','預約頁','資源日曆'],
+  ['chat','spaces','聊天','群組信件'],
+  ['gmail','郵件','信箱','電子郵件'],
+  ['gemini','notebooklm','筆記本','notebook'],
+  ['dlp','外洩','caa','情境感知','cse','smime','加密','資安'],
+  ['儲存','空間滿','空間不足','quota','集區','相片','photos','加量'],
+  ['裝置','手機丟了','筆電丟了','抹除','遠端抹除','mdm','遺失'],
+  ['考試','agwa','報名','證照','associate'],
+  ['帳單','上游','psc','complete transfer','開通','加授權','請款'],
+  ['使用者','開帳','離職','ou','組織單位','別名','授權','csv','暫停','刪除'],
+  ['管理控制台','admin','委派','超級管理員'],
+  ['支援','原廠','開單','upgrade','premium','tam']
+];
+
+function norm(s){
+  return String(s || '').normalize('NFKC').toLowerCase().replace(/\s+/g, ' ').trim();
+}
+function compact(s){ return norm(s).replace(/[\s\-_/.,:：、+＋]/g, ''); }
+function expandQuery(raw){
+  const t = compact(raw);
+  if (!t) return [];
+  const out = new Set([t]);
+  const tooShort = t.length < 2 && !/[a-z0-9]/.test(t);
+  if (tooShort) return [...out];
+  ALIAS_GROUPS.forEach(g => {
+    const ng = g.map(compact).filter(Boolean);
+    const hit = ng.some(x => {
+      if (x === t) return true;
+      if (x.length >= 2 && t.length >= 2 && (x.includes(t) || t.includes(x))) return true;
+      return false;
+    });
+    if (hit) ng.forEach(x => out.add(x));
+  });
+  return [...out];
+}
+function queryTokens(raw){
+  const parts = norm(raw).split(/[\s,，、/|]+/).filter(p => compact(p).length >= 2 || /[a-z0-9]/.test(p));
+  const bag = new Set(expandQuery(raw));
+  parts.forEach(p => expandQuery(p).forEach(x => bag.add(x)));
+  return { rawC: compact(raw), terms: [...bag].filter(Boolean), parts: parts.map(compact).filter(Boolean) };
+}
+
+(function wrapFaq(){
+  const sec = document.getElementById('sop-10');
+  if (!sec) return;
+  [...sec.querySelectorAll('h4[id^="faq-q"]')].forEach(h => {
+    if (h.parentElement.classList.contains('faq-item')) return;
+    const art = document.createElement('article');
+    art.className = 'faq-item';
+    h.parentNode.insertBefore(art, h);
+    art.appendChild(h);
+    let n = art.nextSibling;
+    while (n){
+      if (n.nodeType === 1 && (n.matches('h4[id^="faq-q"]') || n.matches('h3') || n.matches('hr') || n.tagName === 'H2')) break;
+      const next = n.nextSibling;
+      art.appendChild(n);
+      n = next;
+    }
+  });
+})();
+
+const FAQ_CAT = [
+  [15, '登入 登不進去 密碼 2sv 兩步驟 sso 被鎖 停權 驗證碼 備份碼 帳號'],
+  [35, '收不到信 收不到 mx 網域 驗證 dns 進信 隔離 垃圾 啟用gmail'],
+  [48, '寄不出 垃圾信 spf dkim dmarc 出信 edm 上限 附件'],
+  [62, '使用者 開帳 離職 群組 授權 別名 ou csv 暫停 刪除 gcds'],
+  [72, '搬家 遷移 m365 exchange 雙重 分割 匯入 改mx'],
+  [84, 'drive 雲端硬碟 分享 空間 連結 同步 檔案 權限'],
+  [92, '日曆 meet 錄影 會議室 chat spaces 人數'],
+  [100, '被盜 vault 保管箱 裝置 抹除 支援 上游 原廠']
+];
+function faqCatKeys(id){
+  const n = parseInt(String(id).replace(/\D/g, ''), 10);
+  if (!n) return '';
+  for (let i = 0; i < FAQ_CAT.length; i++){
+    if (n <= FAQ_CAT[i][0]) return FAQ_CAT[i][1];
+  }
+  return '';
+}
+
+const units = [];
+function pushUnit(u){
+  units.push({
+    kind: u.kind,
+    el: u.el,
+    id: u.id,
+    parent: u.parent || '',
+    title: u.title,
+    blob: compact((u.keys || '') + ' ' + (u.blob || '')),
+    titleN: compact(u.title),
+    keysN: compact(u.keys || '')
+  });
+}
+document.querySelectorAll('main > section').forEach(sec => {
+  const titleEl = sec.querySelector('h2');
+  pushUnit({
+    kind: 'section',
+    el: sec,
+    id: sec.id,
+    title: (titleEl && titleEl.innerText) || sec.id,
+    keys: sec.dataset.keys || '',
+    blob: sec.innerText
+  });
+  sec.querySelectorAll('h3').forEach(h3 => {
+    if (h3.closest('.app')) return;
+    const title = (h3.innerText || '').trim();
+    if (title.length < 2) return;
+    let chunk = title;
+    let n = h3.nextElementSibling;
+    while (n && n.tagName !== 'H3' && n.tagName !== 'H2' && n.tagName !== 'H4'){
+      chunk += ' ' + (n.innerText || '');
+      n = n.nextElementSibling;
+    }
+    pushUnit({
+      kind: 'topic',
+      el: h3,
+      id: sec.id,
+      parent: sec.id,
+      title: title,
+      keys: title,
+      blob: chunk
+    });
   });
 });
-const tocLinks = [...document.querySelectorAll('nav a.toc')];
+document.querySelectorAll('main .app[id]').forEach(app => {
+  const titleEl = app.querySelector('h3');
+  pushUnit({
+    kind: 'app',
+    el: app,
+    id: app.id,
+    parent: 'apps',
+    title: (titleEl && titleEl.innerText) || app.id,
+    keys: app.dataset.keys || '',
+    blob: app.innerText
+  });
+});
+document.querySelectorAll('.faq-item').forEach(item => {
+  const h = item.querySelector('h4[id^="faq-q"]');
+  if (!h) return;
+  const keys = faqCatKeys(h.id) + ' ' + h.innerText;
+  pushUnit({
+    kind: 'faq',
+    el: item,
+    id: h.id,
+    parent: 'sop-10',
+    title: h.innerText,
+    keys: keys,
+    blob: item.innerText
+  });
+});
+
+function scoreUnit(u, terms, rawC, parts){
+  let s = 0;
+  if (rawC && u.titleN.includes(rawC)) s += 90;
+  if (rawC && u.keysN.includes(rawC)) s += 70;
+  if (rawC && rawC.length >= 2 && u.blob.includes(rawC)) s += 18;
+  const seen = new Set();
+  terms.forEach(t => {
+    if (!t || t === rawC || seen.has(t)) return;
+    seen.add(t);
+    if (t.length < 2) return;
+    if (u.titleN.includes(t)) s += 26;
+    if (u.keysN.includes(t)) s += 20;
+  });
+  if (parts && parts.length > 1){
+    const hitAll = parts.every(p => u.titleN.includes(p) || u.keysN.includes(p) || u.blob.includes(p));
+    if (hitAll) s += 24;
+  }
+  if (u.kind === 'topic') s -= 8;
+  return s;
+}
+
+let composing = false;
+let hitIndex = -1;
+let currentHits = [];
+
+function clearMarks(){
+  document.querySelectorAll('.search-focus').forEach(el => el.classList.remove('search-focus'));
+}
+function headingOf(u){
+  return u.el.querySelector('h2,h3,h4') || u.el;
+}
+function scrollToUnit(u, instant){
+  const head = headingOf(u);
+  head.classList.add('search-focus');
+  u.el.classList.remove('hidden', 'miss');
+  const sec = u.el.closest('section') || u.el;
+  sec.classList.remove('hidden');
+  const y = Math.max(0, window.scrollY + head.getBoundingClientRect().top - 10);
+  window.scrollTo({top: y, behavior: instant ? 'auto' : 'smooth'});
+}
+
+function applySearch(scrollFirst){
+  const raw = q.value.trim();
+  const { rawC, terms, parts } = queryTokens(raw);
+  clearMarks();
+  document.querySelectorAll('main > section, main .app, .faq-item, .faq-chip, nav a.toc, nav .g, #sop-10 h3').forEach(el => {
+    el.classList.remove('hidden', 'miss');
+  });
+  meta.hidden = true;
+  hitsBox.hidden = true;
+  hitsBox.innerHTML = '';
+  currentHits = [];
+  hitIndex = -1;
+  if (!rawC){
+    document.body.classList.remove('is-searching');
+    return;
+  }
+  if (rawC.length < 2 && !/[a-z0-9]/.test(rawC)){
+    document.body.classList.add('is-searching');
+    meta.hidden = false;
+    meta.textContent = '再打一個字，例如「方案」「MX」「登入」。';
+    return;
+  }
+  document.body.classList.add('is-searching');
+  const scored = units.map(u => ({u, s: scoreUnit(u, terms, rawC, parts)})).filter(x => x.s > 0);
+  scored.sort((a,b) => b.s - a.s || a.u.title.localeCompare(b.u.title, 'zh-Hant'));
+
+  const matchIds = new Set(scored.map(x => x.u.id));
+  const matchParents = new Set(scored.map(x => x.u.parent).filter(Boolean));
+  scored.forEach(x => matchIds.add(x.u.id));
+
+  document.querySelectorAll('main > section').forEach(sec => {
+    const keep = matchIds.has(sec.id) || matchParents.has(sec.id);
+    sec.classList.toggle('hidden', !keep);
+  });
+  const appHit = scored.some(x => x.u.kind === 'app');
+  document.querySelectorAll('main .app[id]').forEach(app => {
+    app.classList.toggle('miss', appHit && !matchIds.has(app.id));
+    if (matchIds.has(app.id)) document.getElementById('apps')?.classList.remove('hidden');
+  });
+  const faqMatched = scored.some(x => x.u.kind === 'faq');
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const id = item.querySelector('h4')?.id;
+    item.classList.toggle('miss', faqMatched && !matchIds.has(id));
+  });
+  document.querySelectorAll('.faq-chip').forEach(chip => {
+    const id = (chip.getAttribute('href') || '').slice(1);
+    chip.classList.toggle('miss', faqMatched && !matchIds.has(id));
+  });
+  if (faqMatched){
+    document.getElementById('sop-10')?.classList.remove('hidden');
+    document.querySelectorAll('#sop-10 h3').forEach(h3 => {
+      let el = h3.nextElementSibling, any = false;
+      while (el && el.tagName !== 'H3' && el.tagName !== 'H2'){
+        if (el.classList.contains('faq-item') && !el.classList.contains('miss')) any = true;
+        el = el.nextElementSibling;
+      }
+      h3.classList.toggle('miss', !any);
+    });
+  }
+  tocLinks.forEach(a => {
+    const id = (a.getAttribute('href') || '').slice(1);
+    const keep = matchIds.has(id) || matchParents.has(id) ||
+      (id === 'apps' && scored.some(x => x.u.kind === 'app')) ||
+      (id === 'sop-10' && faqMatched);
+    a.classList.toggle('miss', !keep);
+  });
+  document.querySelectorAll('nav .g').forEach(g => {
+    let el = g.nextElementSibling, any = false;
+    while (el && !el.classList.contains('g')){
+      if (el.matches && el.matches('a.toc') && !el.classList.contains('miss')) any = true;
+      el = el.nextElementSibling;
+    }
+    g.classList.toggle('miss', !any);
+  });
+
+  const chapters = scored.filter(x => x.u.kind !== 'faq');
+  const faqs = scored.filter(x => x.u.kind === 'faq');
+  const picked = [];
+  const usedTitle = new Set();
+  chapters.forEach(x => {
+    if (picked.length >= 7) return;
+    const key = x.u.kind + ':' + x.u.title;
+    if (usedTitle.has(key)) return;
+    usedTitle.add(key);
+    picked.push(x);
+  });
+  faqs.forEach(x => { if (picked.length < 12) picked.push(x); });
+  currentHits = picked.slice(0, 12);
+  meta.hidden = false;
+  if (!scored.length){
+    meta.textContent = '沒有符合「' + raw + '」的章節。試試 方案、收不到信、Vault、登入、搬家、DLP。';
+    hitsBox.hidden = true;
+    return;
+  }
+  const nSec = new Set(scored.filter(x => x.u.kind !== 'faq').map(x => x.u.id)).size;
+  const nFaq = scored.filter(x => x.u.kind === 'faq').length;
+  meta.textContent = '找到 ' + nSec + ' 個章節' + (nFaq ? '、' + nFaq + ' 則一百問' : '') + '。Enter 跳第一筆。';
+  hitsBox.hidden = false;
+  hitsBox.innerHTML = currentHits.map((x,i) => {
+    const kind = x.u.kind === 'faq' ? '一百問' : (x.u.kind === 'app' ? '應用' : (x.u.kind === 'topic' ? '小節' : '章節'));
+    return '<a href="#' + x.u.id + '" data-i="' + i + '" role="option"><strong>' + x.u.title.replace(/</g,'') + '</strong><span class="hit-k">' + kind + '</span></a>';
+  }).join('');
+  [...hitsBox.querySelectorAll('a')].forEach(a => {
+    a.addEventListener('mousedown', ev => ev.preventDefault());
+    a.addEventListener('click', ev => {
+      ev.preventDefault();
+      goHit(Number(a.dataset.i));
+    });
+  });
+  if (scrollFirst) goHit(0, true);
+  else if (currentHits[0]) scrollToUnit(currentHits[0].u, true);
+}
+
+function goHit(i, instant){
+  const row = currentHits[i];
+  if (!row) return;
+  hitIndex = i;
+  [...hitsBox.querySelectorAll('a')].forEach((a,j) => a.classList.toggle('is-active', j === i));
+  clearMarks();
+  scrollToUnit(row.u, instant);
+}
+
+q.addEventListener('compositionstart', () => { composing = true; });
+q.addEventListener('compositionend', () => { composing = false; applySearch(false); });
+q.addEventListener('input', () => { if (!composing) applySearch(false); });
+q.addEventListener('keydown', e => {
+  if (e.key === 'Escape'){
+    q.value = '';
+    applySearch(false);
+    q.blur();
+    return;
+  }
+  if (e.key === 'ArrowDown' && currentHits.length){
+    e.preventDefault();
+    hitsBox.hidden = false;
+    hitIndex = Math.min(currentHits.length - 1, hitIndex + 1);
+    [...hitsBox.querySelectorAll('a')].forEach((a,j) => a.classList.toggle('is-active', j === hitIndex));
+    return;
+  }
+  if (e.key === 'ArrowUp' && currentHits.length){
+    e.preventDefault();
+    hitIndex = Math.max(0, hitIndex - 1);
+    [...hitsBox.querySelectorAll('a')].forEach((a,j) => a.classList.toggle('is-active', j === hitIndex));
+    return;
+  }
+  if (e.key === 'Enter'){
+    e.preventDefault();
+    goHit(hitIndex >= 0 ? hitIndex : 0);
+  }
+});
+document.addEventListener('click', e => {
+  if (!e.target.closest('.search-box')) hitsBox.hidden = true;
+});
+
 const io = new IntersectionObserver(entries => {
   entries.forEach(e => {
-    if (e.isIntersecting) {
+    if (e.isIntersecting && !e.target.classList.contains('hidden')) {
       tocLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
     }
   });
