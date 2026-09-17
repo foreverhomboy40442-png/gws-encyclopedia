@@ -313,7 +313,7 @@ hr{border:0;border-top:1px solid var(--line);margin:20px 0}
       <p class="price">聯絡銷售 <small>拆 Standard／Plus</small></p>
       <p class="kicker">行銷頁常把兩張合成「Enterprise」；接單時要確認是 Standard 還是 Plus</p>
       <ul class="tight">
-        <li>集區儲存 <strong>5 TB × 人數</strong>；5 人以上可向 Google 申請更多</li>
+        <li>集區儲存 <strong>5 TB × 人數</strong>；Enterprise Standard／Plus、5 人以上且接近上限，可在管理控制台申請加量（Google 裁量，不保證）</li>
         <li>Meet：行銷頁寫 1000 人＋網域內直播（Help 見下表拆分）</li>
         <li>DLP、情境感知存取</li>
         <li>企業資料地區、Cloud Identity 進階版</li>
@@ -867,8 +867,8 @@ hr{border:0;border-top:1px solid var(--line);margin:20px 0}
   <p>進信看 MX，出信看 SPF／DKIM／DMARC。</p>
   <ul class="tight">
     <li><strong>MX：</strong>新開通只留一筆，主機 <code>@</code>、優先順序 1、值 <code>smtp.google.com</code>（部分廠商要結尾點）。刪除其他 MX。2023 年前若仍用 ASPMX 且能收信，不必為了改新值而改。<a href="https://support.google.com/a/answer/140034" target="_blank" rel="noopener">設定 MX</a></li>
-    <li><strong>SPF：</strong>每個網域一筆 TXT。純 Google：<code>v=spf1 include:_spf.google.com ~all</code>。第三方寄信把對方 <code>include:</code> 併進同一筆；官方寫一筆最多 10 個 <code>include:</code>。Google 建議 <code>~all</code>。<a href="https://support.google.com/a/answer/33786" target="_blank" rel="noopener">設定 SPF</a></li>
-    <li><strong>DKIM：</strong>管理控制台 → 應用程式 → Gmail → 驗證電子郵件 → 產生新記錄（主機支援則用 2048 位元，否則 1024）→ 加 DNS TXT → 再按<strong>開始驗證</strong>。只加 DNS、未按開始驗證，外寄仍未簽章。Gmail 啟用後需等 24–72 小時才能產生金鑰。<a href="https://support.google.com/a/answer/174124" target="_blank" rel="noopener">設定 DKIM</a></li>
+    <li><strong>SPF：</strong>每個網域只能一筆以 <code>v=spf1</code> 開頭的 TXT。純 Google：<code>v=spf1 include:_spf.google.com ~all</code>。第三方（EDM／ERP）把對方 <code>include:</code> 併進同一筆，不要另開第二筆。官方寫一筆最多 10 個 <code>include:</code>；驗證時 DNS lookup（含巢狀 include）上限也是 10 次，超過會驗證失敗。Google 建議 <code>~all</code>。查詢數用 <a href="https://toolbox.googleapps.com/apps/checkmx/" target="_blank" rel="noopener">Admin Toolbox Check MX</a>。<a href="https://support.google.com/a/answer/33786" target="_blank" rel="noopener">設定 SPF</a> · <a href="https://support.google.com/a/answer/10685928" target="_blank" rel="noopener">排解 SPF</a></li>
+    <li><strong>DKIM：</strong>管理控制台 → 應用程式 → Gmail → 驗證電子郵件 → 產生新記錄（主機支援則用 2048 位元，否則 1024）→ 加 DNS TXT → 再按<strong>開始驗證</strong>。只加 DNS、未按開始驗證，外寄仍未簽章。Gmail 啟用後需等 24–72 小時才能產生金鑰。若 DNS 限制單一 TXT 字串 255 字元，官方要把 2048 位元金鑰拆成多段、各加引號寫進<strong>同一筆</strong>，或改選 1024。<a href="https://support.google.com/a/answer/174124" target="_blank" rel="noopener">設定 DKIM</a> · <a href="https://knowledge.workspace.google.com/admin/security/troubleshoot-dkim-issues?hl=zh-tw" target="_blank" rel="noopener">排解 DKIM</a></li>
     <li><strong>DMARC：</strong>先 <code>p=none</code> 加 <code>rua=</code> 收報表，再考慮隔離／拒絕。<a href="https://support.google.com/a/answer/2466580" target="_blank" rel="noopener">設定 DMARC</a></li>
   </ul>
   <p>寄到個人 Gmail（@gmail.com／@googlemail.com）：所有寄件者須設 SPF <strong>或</strong> DKIM；每日超過 5,000 封還須 SPF、<strong>且</strong> DKIM、<strong>且</strong> DMARC（政策可為 <code>p=none</code>）。<a href="https://support.google.com/a/answer/81126" target="_blank" rel="noopener">電子郵件寄件者指南</a></p>
@@ -1334,8 +1334,8 @@ DNS 由誰管:
 <p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/security/set-up-spf?hl=zh-tw" target="_blank" rel="noopener">設定 SPF</a></p>
 <p><strong>升級：</strong> permerror → Q38。</p>
 <h4 id="faq-q38">Q38. 查到兩筆 SPF，或 include 太多</h4>
-<p><strong>結論：</strong> 兩筆 SPF＝失效；<code>include:</code> 過多也會失敗。</p>
-<p><strong>路徑：</strong> 刪到只剩一筆；官方一筆最多 10 個 <code>include:</code>。</p>
+<p><strong>結論：</strong> 每個網域只能一筆 SPF；多筆官方寫可能進垃圾。驗證時 DNS lookup（含巢狀 include）上限 10 次，超過會失敗（信頭可能 <code>spf=permerror</code>）。</p>
+<p><strong>路徑：</strong> 刪到只剩一筆；精簡 include；用 <a href="https://toolbox.googleapps.com/apps/checkmx/" target="_blank" rel="noopener">Check MX</a> 看查詢數。官方另寫一筆最多 10 個 <code>include:</code>。</p>
 <p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/security/set-up-spf?hl=zh-tw" target="_blank" rel="noopener">設定 SPF</a> · <a href="https://knowledge.workspace.google.com/admin/security/troubleshoot-spf-issues?hl=zh-tw" target="_blank" rel="noopener">排解 SPF 問題</a></p>
 <p><strong>升級：</strong> L2 幫精簡。</p>
 <h4 id="faq-q39">Q39. DKIM 怎麼開？</h4>
@@ -1345,10 +1345,10 @@ DNS 由誰管:
 <p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/security/set-up-dkim?hl=zh-tw" target="_blank" rel="noopener">設定 DKIM</a></p>
 <p><strong>升級：</strong> 無。</p>
 <h4 id="faq-q40">Q40. DNS 已加 DKIM 但還是 fail</h4>
-<p><strong>結論：</strong> 還沒按「開始驗證」、選取器不一致、或出站閘道改寫信件。</p>
+<p><strong>結論：</strong> 還沒按「開始驗證」、選取器不一致、出站閘道改寫信件，或 2048 位元 TXT 被 255 字元上限截斷。</p>
 <p><strong>路徑：</strong></p>
-<ol class='tight'><li>確認 Admin 已啟用驗證。</li><li>TXT 主機名稱與精靈完全一致。</li><li>有簽名檔閘道 → 測關掉改寫或改 DKIM 時機。</li></ol>
-<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/security/set-up-dkim?hl=zh-tw" target="_blank" rel="noopener">設定 DKIM（含疑難排解）</a>（頁內疑難排解）</p>
+<ol class='tight'><li>確認 Admin 已按開始驗證，狀態為「以 DKIM 驗證電子郵件」。</li><li>TXT 主機名稱與精靈完全一致；用 Dig 對過金鑰。</li><li>DNS 報 TXT 太長：依官方把金鑰拆成多段加引號寫進同一筆，或改 1024 位元。</li><li>有簽名檔閘道 → 測關掉改寫或改 DKIM 時機。</li></ol>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/security/set-up-dkim?hl=zh-tw" target="_blank" rel="noopener">設定 DKIM</a> · <a href="https://knowledge.workspace.google.com/admin/security/troubleshoot-dkim-issues?hl=zh-tw" target="_blank" rel="noopener">排解 DKIM 問題</a></p>
 <p><strong>升級：</strong> L2。</p>
 <h4 id="faq-q41">Q41. DMARC 一開始就要 <code>p=reject</code> 嗎？</h4>
 <p><strong>結論：</strong> 不要。先 <code>p=none</code> 看報表。</p>
@@ -1690,7 +1690,9 @@ DNS 由誰管:
       <tr><td>匯出 Gemini Notebook</td><td><a href="https://support.google.com/a/answer/16054396">answer/16054396</a></td></tr>
       <tr><td>MX</td><td><a href="https://support.google.com/a/answer/140034">answer/140034</a></td></tr>
       <tr><td>SPF</td><td><a href="https://support.google.com/a/answer/33786">answer/33786</a></td></tr>
+      <tr><td>排解 SPF</td><td><a href="https://support.google.com/a/answer/10685928">answer/10685928</a></td></tr>
       <tr><td>DKIM</td><td><a href="https://support.google.com/a/answer/174124">answer/174124</a></td></tr>
+      <tr><td>排解 DKIM</td><td><a href="https://knowledge.workspace.google.com/admin/security/troubleshoot-dkim-issues?hl=zh-tw">troubleshoot-dkim-issues</a></td></tr>
       <tr><td>寄件者指南</td><td><a href="https://support.google.com/a/answer/81126">answer/81126</a></td></tr>
       <tr><td>申請更多儲存空間</td><td><a href="https://support.google.com/a/answer/14515121">answer/14515121</a></td></tr>
       <tr><td>狀態儀表板</td><td><a href="https://www.google.com/appsstatus/dashboard/">google.com/appsstatus/dashboard</a></td></tr>
