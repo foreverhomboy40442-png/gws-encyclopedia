@@ -808,11 +808,11 @@ hr{border:0;border-top:1px solid var(--line);margin:20px 0}
       <tr><td>Standard 25 人</td><td>2 TB × 25</td><td>50 TB 池</td></tr>
       <tr><td>Plus 8 人</td><td>5 TB × 8</td><td>40 TB 池</td></tr>
       <tr><td>一人丟 200 GB 影片（Starter 10 人）</td><td>從 300 GB 扣</td><td>其他人只剩 100 GB 可搶</td></tr>
-      <tr><td>Enterprise 5 人以上覺得不夠</td><td>向 Google 申請加量（裁量）</td><td>不是自動無限。也可買 Additional Storage</td></tr>
+      <tr><td>Enterprise 5 人以上覺得不夠</td><td>Enterprise Standard／Plus：接近上限才可在管理控制台「儲存」申請加量，Google 裁量；沒有申請按鈕＝未符條件。也可買 Additional Storage</td><td>不是自動無限</td></tr>
     </tbody>
   </table>
   <ul class="tight">
-    <li>新訂閱可能先給部分額度，付滿約 30 USD 後 72 小時內加到滿額（Help 172541）。</li>
+    <li>新訂閱可能先給部分額度，付滿約 30 USD 後 72 小時內加到滿額（<a href="https://support.google.com/a/answer/172541" target="_blank" rel="noopener">儲存上限</a>）。Enterprise 加量申請見 <a href="https://support.google.com/a/answer/14515121" target="_blank" rel="noopener">Request more storage</a>。</li>
     <li>爆倉症狀：Gmail 不能寄、Drive 不能上傳、Meet 不能錄。先看 Admin 儲存報表，不要先怪單一使用者電腦。</li>
     <li>共用雲端硬碟吃的是組織池，不是「另給一桶」。</li>
     <li>Google 檔（Docs）佔的是雲端格式空間，下載成 DOCX 後大小會變，Vault 匯出 zip 也會變大。</li>
@@ -848,8 +848,15 @@ hr{border:0;border-top:1px solid var(--line);margin:20px 0}
   </ul>
 
   <h3>建議紀錄值</h3>
-  <p>進信看 MX，出信看 SPF／DKIM／DMARC。新開通 MX 只留一筆：主機 <code>@</code>、優先順序 1、值 <code>smtp.google.com</code>（部分廠商要結尾點）。舊租戶若 ASPMX 已在收信，不要無故改。來源：<a href="https://support.google.com/a/answer/140034">MX</a>。</p>
-  <p>純 Google 寄信的 SPF 一筆即可：<code>v=spf1 include:_spf.google.com ~all</code>。兩筆 SPF 會失效。第三方寄信要把 <code>include:</code> 併進同一筆。DKIM 在管理控制台 Gmail「驗證電子郵件」產生。DMARC 建議先 <code>p=none</code> 觀察再考慮隔離／拒絕。</p>
+  <p>進信看 MX，出信看 SPF／DKIM／DMARC。</p>
+  <ul class="tight">
+    <li><strong>MX：</strong>新開通只留一筆，主機 <code>@</code>、優先順序 1、值 <code>smtp.google.com</code>（部分廠商要結尾點）。刪除其他 MX。2023 年前若仍用 ASPMX 且能收信，不必為了改新值而改。<a href="https://support.google.com/a/answer/140034" target="_blank" rel="noopener">設定 MX</a></li>
+    <li><strong>SPF：</strong>每個網域一筆 TXT。純 Google：<code>v=spf1 include:_spf.google.com ~all</code>。第三方寄信把對方 <code>include:</code> 併進同一筆；官方寫一筆最多 10 個 <code>include:</code>。Google 建議 <code>~all</code>。<a href="https://support.google.com/a/answer/33786" target="_blank" rel="noopener">設定 SPF</a></li>
+    <li><strong>DKIM：</strong>管理控制台 → 應用程式 → Gmail → 驗證電子郵件 → 產生新記錄（主機支援則用 2048 位元，否則 1024）→ 加 DNS TXT → 再按<strong>開始驗證</strong>。只加 DNS、未按開始驗證，外寄仍未簽章。Gmail 啟用後需等 24–72 小時才能產生金鑰。<a href="https://support.google.com/a/answer/174124" target="_blank" rel="noopener">設定 DKIM</a></li>
+    <li><strong>DMARC：</strong>先 <code>p=none</code> 加 <code>rua=</code> 收報表，再考慮隔離／拒絕。<a href="https://support.google.com/a/answer/2466580" target="_blank" rel="noopener">設定 DMARC</a></li>
+  </ul>
+  <p>寄到個人 Gmail（@gmail.com／@googlemail.com）：所有寄件者須設 SPF <strong>或</strong> DKIM；每日超過 5,000 封還須 SPF、<strong>且</strong> DKIM、<strong>且</strong> DMARC（政策可為 <code>p=none</code>）。<a href="https://support.google.com/a/answer/81126" target="_blank" rel="noopener">電子郵件寄件者指南</a></p>
+  <p>交驗：用 <a href="https://toolbox.googleapps.com/apps/dig/" target="_blank" rel="noopener">Admin Toolbox Dig</a> 查 MX／TXT；DKIM 看管理控制台是否已「以 DKIM 驗證電子郵件」。</p>
 </section>
 
 <section id="endpoint">
@@ -878,7 +885,7 @@ hr{border:0;border-top:1px solid var(--line);margin:20px 0}
       <tr><td>信裡貼的 Drive 跟附件一樣會進 Vault 搜尋</td><td>連結等於附檔</td><td>搜尋／保留不含連結檔；匯出可另選，且是第二個包＋CSV</td></tr>
       <tr><td>GWS 掛掉找 GCP 技術支援</td><td>同一張雲合約</td><td>兩條產品、兩套支援。狀態看 appsstatus dashboard</td></tr>
       <tr><td>樂雲直接幫我們下單開租戶</td><td>我們有 PSC</td><td>2026-09 起開通／轉移走上游。樂雲做 DNS／帳號／遷移技術段</td></tr>
-      <tr><td>無限儲存</td><td>Enterprise 就是無限</td><td>5TB×人數的池，5 人以上可申請，不是契約無限</td></tr>
+      <tr><td>無限儲存</td><td>Enterprise 就是無限</td><td>5TB×人數的池。Enterprise Standard／Plus 且 5 人以上、接近上限才可申請加量，Google 裁量，不保證通過</td></tr>
       <tr><td>Meet 1000 人直播 10 萬</td><td>買 Enterprise 就有</td><td>1000 人與 10 萬觀眾是 <strong>Plus</strong> 檔；Std 是 500 人／1 萬觀眾</td></tr>
     </tbody>
   </table>
@@ -957,7 +964,7 @@ DNS 由誰管:
 <h3>階段 E — 啟用 Gmail（改 MX）</h3>
 <p><strong>不要跟驗證同一分鐘做</strong>，除非客戶接受「現在開始信進 Google」。</p>
 <p>檢查清單（全勾才改 MX）：</p>
-<ul class='tight'><li>[ ] 網域已驗證</li><li>[ ] 使用者與別名已建</li><li>[ ] SPF／DKIM 記錄已準備（可先加 SPF、DKIM；DMARC 先 <code>p=none</code>）見 <a href="#mail-auth">網域與郵件認證</a></li><li>[ ] DNS TTL 已在 24–48 小時前降低（若做得到）</li><li>[ ] 客戶知道 Outlook／手機要改連 Gmail</li><li>[ ] 若還要從舊信箱搬信 → 搬遷第一輪建議在切 MX <strong>前</strong>做完，切後再跑增量（<a href="#sop-06">移轉</a>）</li><li>[ ] 已約定回切條件（保留舊 MX 截圖）</li></ul>
+<ul class='tight'><li>[ ] 網域已驗證</li><li>[ ] 使用者與別名已建</li><li>[ ] SPF／DKIM 記錄已準備（可先加 SPF、DKIM；DKIM 須在管理控制台按「開始驗證」；DMARC 先 <code>p=none</code>）見 <a href="#mail-auth">網域與郵件認證</a></li><li>[ ] DNS TTL 已在 24–48 小時前降低（若做得到）</li><li>[ ] 客戶知道 Outlook／手機要改連 Gmail</li><li>[ ] 若還要從舊信箱搬信 → 搬遷第一輪建議在切 MX <strong>前</strong>做完，切後再跑增量（<a href="#sop-06">移轉</a>）</li><li>[ ] 已約定回切條件（保留舊 MX 截圖）</li></ul>
 <p>操作：</p>
 <ol class='tight'><li>DNS：<strong>刪光舊 MX</strong>，只留 Google。新帳戶用：</li></ol>
 <table><thead><tr><th>類型</th><th>主機</th><th>優先順序</th><th>值</th></tr></thead><tbody><tr><td>MX</td><td><code>@</code></td><td>1</td><td><code>smtp.google.com</code></td></tr></tbody></table>
@@ -1303,8 +1310,8 @@ DNS 由誰管:
 <p><strong>官方：</strong> <a href="https://support.google.com/a/answer/33786" target="_blank" rel="noopener">設定 SPF</a></p>
 <p><strong>升級：</strong> permerror → Q38。</p>
 <h4 id="faq-q38">Q38. 查到兩筆 SPF，或 include 太多</h4>
-<p><strong>結論：</strong> 兩筆 SPF＝失效；<code>include</code> DNS 查詢過多會 permerror。</p>
-<p><strong>路徑：</strong> 刪到只剩一筆；精簡 include（官方約 10 次查詢上限）。</p>
+<p><strong>結論：</strong> 兩筆 SPF＝失效；<code>include:</code> 過多也會失敗。</p>
+<p><strong>路徑：</strong> 刪到只剩一筆；官方一筆最多 10 個 <code>include:</code>。</p>
 <p><strong>官方：</strong> <a href="https://support.google.com/a/answer/33786" target="_blank" rel="noopener">SPF 記錄</a> · <a href="https://support.google.com/a/answer/33785" target="_blank" rel="noopener">排解 SPF 問題</a></p>
 <p><strong>升級：</strong> L2 幫精簡。</p>
 <h4 id="faq-q39">Q39. DKIM 怎麼開？</h4>
@@ -1325,8 +1332,8 @@ DNS 由誰管:
 <p><strong>官方：</strong> <a href="https://support.google.com/a/answer/2466580" target="_blank" rel="noopener">設定 DMARC</a></p>
 <p><strong>升級：</strong> 無。</p>
 <h4 id="faq-q42">Q42. 一次寄給很多人被拒或進垃圾</h4>
-<p><strong>結論：</strong> 受 Gmail 寄件者指南與 Workspace 傳送上限約束。</p>
-<p><strong>路徑：</strong> 確認 SPF＋DKIM＋DMARC；分批；看是否走 Gmail 還是第三方。</p>
+<p><strong>結論：</strong> 受 Gmail 寄件者指南與 Workspace 傳送上限約束。寄到個人 Gmail：所有寄件者須 SPF 或 DKIM；每日超過 5,000 封須 SPF、DKIM 與 DMARC。</p>
+<p><strong>路徑：</strong> 對照 <a href="https://support.google.com/a/answer/81126" target="_blank" rel="noopener">電子郵件寄件者指南</a>；分批；看是否走 Gmail 還是第三方。</p>
 <p><strong>官方：</strong> <a href="https://support.google.com/a/answer/81126" target="_blank" rel="noopener">電子郵件寄件者指南</a> · <a href="https://support.google.com/a/answer/166852" target="_blank" rel="noopener">Gmail 傳送限制</a></p>
 <p><strong>升級：</strong> 被當濫用 → 原廠。</p>
 <h4 id="faq-q43">Q43. 大附件寄不出</h4>
@@ -1658,6 +1665,10 @@ DNS 由誰管:
       <tr><td>Notebook 工作帳用量</td><td><a href="https://support.google.com/notebooklm/answer/16337734">answer/16337734</a></td></tr>
       <tr><td>匯出 Gemini Notebook</td><td><a href="https://support.google.com/a/answer/16054396">answer/16054396</a></td></tr>
       <tr><td>MX</td><td><a href="https://support.google.com/a/answer/140034">answer/140034</a></td></tr>
+      <tr><td>SPF</td><td><a href="https://support.google.com/a/answer/33786">answer/33786</a></td></tr>
+      <tr><td>DKIM</td><td><a href="https://support.google.com/a/answer/174124">answer/174124</a></td></tr>
+      <tr><td>寄件者指南</td><td><a href="https://support.google.com/a/answer/81126">answer/81126</a></td></tr>
+      <tr><td>申請更多儲存空間</td><td><a href="https://support.google.com/a/answer/14515121">answer/14515121</a></td></tr>
       <tr><td>狀態儀表板</td><td><a href="https://www.google.com/appsstatus/dashboard/">google.com/appsstatus/dashboard</a></td></tr>
       <tr><td>Associate Workspace 管理員證照</td><td><a href="https://cloud.google.com/learn/certification/associate-google-workspace-administrator">cloud.google.com/learn/certification/associate-google-workspace-administrator</a></td></tr>
     </tbody>
