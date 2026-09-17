@@ -111,7 +111,7 @@ hr{border:0;border-top:1px solid var(--line);margin:20px 0}
     </div>
     <button class="nav-close" id="navClose" type="button">關閉</button>
   </div>
-  <input id="q" type="search" placeholder="搜尋開通、MX、常見問題…">
+  <input id="q" type="search" placeholder="搜尋開通、MX、考試、常見問題…">
   <div class="g">概覽</div>
   <a class="toc" href="#use">分工與接單</a>
   <a class="toc" href="#glossary">名詞對照</a>
@@ -135,6 +135,7 @@ hr{border:0;border-top:1px solid var(--line);margin:20px 0}
   <a class="toc" href="#endpoint">裝置管理</a>
   <a class="toc" href="#missell">常見錯配</a>
   <a class="toc" href="#support">支援升級</a>
+  <a class="toc" href="#cert">考試與認證</a>
   <div class="g">操作步驟</div>
   <a class="toc" href="#sop-03">開通</a>
   <a class="toc" href="#sop-05">使用者與組織</a>
@@ -146,7 +147,7 @@ hr{border:0;border-top:1px solid var(--line);margin:20px 0}
 <div class="content">
 <header class="top">
   <h1>Google Workspace 技術手冊</h1>
-  <p>樂雲技術單位用。功能與數字以 Google 說明中心為準；本頁美金為官方牌價，不是樂雲報價。訂閱與請款走上游；登入、收信、帳號、雲端硬碟由樂雲協助。</p>
+  <p>樂雲技術單位用。功能與數字以 Google 說明中心為準；本頁美金為官方牌價，不是樂雲報價。訂閱與請款走上游；登入、收信、帳號、雲端硬碟由樂雲協助。歡迎技術同仁報考 Google Workspace 管理員認證，報名路徑見「考試與認證」。</p>
 </header>
 <main id="main">
 
@@ -895,6 +896,88 @@ hr{border:0;border-top:1px solid var(--line);margin:20px 0}
   </table>
   <p>GCP 的 Basic／Standard／Enhanced／Premium 是另一條合約，不可套用到 Gmail 中斷的服務水準協議 SLA。</p>
   <p>升級順序：官方狀態儀表板 → 客戶管理控制台開 Google 支援（視合約）→ 上游。樂雲不是 Google 原廠支援窗口。</p>
+</section>
+
+<section id="cert">
+  <h2>考試與認證</h2>
+  <p class="lead">技術同仁日常在做的帳號、郵件、雲端硬碟、保管箱、排查，就是這張證的考綱。建議報考現役的 <strong>Associate Google Workspace Administrator</strong>（助理級 Google Workspace 管理員）。舊的 Professional 已於 <strong>2024-12-31</strong> 停考，不要再排那一科。</p>
+  <p class="src">來源：<a href="https://cloud.google.com/learn/certification/associate-google-workspace-administrator" target="_blank" rel="noopener">Associate Google Workspace Administrator</a>（2026-09 擷取）。費用與語系以報名當日畫面為準。</p>
+
+  <div class="callout ok">
+    <p><b class="tag">為什麼值得考</b></p>
+    <ul class="tight">
+      <li>對客戶：值班窗口有官方證照，比「我會點管理控制台」好對外說明。</li>
+      <li>對自己：考綱逼你把 Gmail、Drive、OU、2SV、Vault、端點一次補齊，本手冊各章就是實作對照。</li>
+      <li>對團隊：技術服務已在接 GWS 單；有證的人較能獨立關單，少把排查丟回上游。</li>
+    </ul>
+  </div>
+
+  <h3>現役證照（要考這張）</h3>
+  <table>
+    <thead><tr><th>項目</th><th>官方內容</th></tr></thead>
+    <tbody>
+      <tr><td>名稱</td><td>Associate Google Workspace Administrator（助理級 Google Workspace 管理員）</td></tr>
+      <tr><td>考試代碼（常見）</td><td>AGWA／GGLVCH-GCCAGWA（代金券代碼）</td></tr>
+      <tr><td>時長</td><td>2 小時</td></tr>
+      <tr><td>題型</td><td>50–60 題選擇／複選</td></tr>
+      <tr><td>報名費</td><td><strong>US$125</strong>＋適用稅額</td></tr>
+      <tr><td>考試語言</td><td><strong>英文、日文</strong>（沒有繁體中文）</td></tr>
+      <tr><td>先決條件</td><td>無</td></tr>
+      <tr><td>建議經驗</td><td>約 6 個月超級管理員實務（真實或測試環境）；熟悉 Business Plus，並了解 Enterprise 功能</td></tr>
+      <tr><td>應考方式</td><td>遠端線上監考，或 Pearson 考場（搜尋 Google Cloud）</td></tr>
+    </tbody>
+  </table>
+  <p>不要報 <a href="https://cloud.google.com/learn/certification/google-workspace-administrator" target="_blank" rel="noopener">Professional Google Workspace Administrator</a>：該科已停考；既有證書仍依通過日起算有效期，但不能續考同一科。</p>
+
+  <h3>報名路徑（按這個走）</h3>
+  <ol class="tight">
+    <li>打開官方證照頁：<a href="https://cloud.google.com/learn/certification/associate-google-workspace-administrator" target="_blank" rel="noopener">Associate Google Workspace Administrator</a>。</li>
+    <li>下載考綱 PDF：<a href="https://services.google.com/fh/files/misc/associate_google_workspace_administrator_exam_guide_english.pdf" target="_blank" rel="noopener">Associate Google Workspace Administrator exam guide</a>。</li>
+    <li>走官方學習路徑：<a href="https://cloud.google.com/learn/training/workspace" target="_blank" rel="noopener">Google Workspace training</a> → Workspace Administrator learning path（課程與實驗以 Google Skills／Skills Boost 當日清單為準）。</li>
+    <li>在證照頁按 <strong>Sample questions</strong> 做官方樣題，熟悉題型。</li>
+    <li>登入考生入口 <strong>CM Connect</strong>：<a href="https://cp.certmetrics.com/google/en/login" target="_blank" rel="noopener">cp.certmetrics.com/google</a>。自 <strong>2026-07-07</strong> 起用 <strong>Google Skills</strong> 帳號登入；Skills 與 CM Connect 請用<strong>同一組電子郵件</strong>，否則成績會拆成兩個帳戶（可在 Profile 申請合併）。說明：<a href="https://support.google.com/cloud-certification/answer/14093796" target="_blank" rel="noopener">Certification Candidate Portal</a>。</li>
+    <li>在入口選 Associate Google Workspace Administrator → 選<strong>遠端監考</strong>或<strong>考場</strong> → 選日期 → 以信用卡付款，或先買 Pearson 代金券再兌換（代金券 12 個月內用完、售出不退）。</li>
+    <li>考完約 24 小時內成績會進 CM Connect；通過後下載數位徽章。工作信箱可填在 Professional Affiliation，方便之後對到夥伴計畫（若公司有）。</li>
+  </ol>
+  <div class="callout warn">
+    <p><b class="tag">報名前先看</b></p>
+    <ul class="tight">
+      <li>考題沒有繁中，英文閱讀要夠用來解情境題。</li>
+      <li>遠端考要單獨房間、穩定網路、Webcam；細節以 Pearson 線上應考規定為準（從證照頁 Online testing requirements 進入）。</li>
+      <li>台灣考場名額不固定，先在入口搜尋 Google Cloud 考場；沒有近場就排遠端。</li>
+    </ul>
+  </div>
+
+  <h3>考綱對照本手冊</h3>
+  <p>百分比出自官方 exam guide。值班單做過，讀起來會快很多。</p>
+  <table>
+    <thead><tr><th>考綱</th><th>約略比重</th><th>本手冊先看</th></tr></thead>
+    <tbody>
+      <tr><td>帳號、網域、目錄（使用者生命週期、OU、群組、授權）</td><td>20%</td><td><a href="#sop-05">使用者與組織</a>、<a href="#sop-03">開通</a>、<a href="#admin">管理控制台</a></td></tr>
+      <tr><td>核心服務（Gmail、Drive、日曆、Meet、Chat、Gemini）</td><td>23%</td><td><a href="#apps">應用說明</a>、<a href="#mail-auth">網域與郵件認證</a>、<a href="#gemini">Gemini 與筆記本</a></td></tr>
+      <tr><td>資料治理與合規（Vault、DLP、匯出）</td><td>15%</td><td><a href="#vault">保管箱</a>、<a href="#export">資料怎麼匯出</a>、<a href="#security">企業資安</a></td></tr>
+      <tr><td>安全政策與存取控制（2SV、角色、稽核）</td><td>20%</td><td><a href="#security">企業資安</a>、<a href="#admin">管理控制台</a></td></tr>
+      <tr><td>瀏覽器與端點</td><td>10%</td><td><a href="#endpoint">裝置管理</a></td></tr>
+      <tr><td>監控與常見問題排查</td><td>13%</td><td><a href="#sop-07">日常維運</a>、<a href="#sop-10">常見問題 100</a>、<a href="#support">支援升級</a></td></tr>
+    </tbody>
+  </table>
+
+  <h3>建議準備節奏（約 4 週，可依班表拉長）</h3>
+  <ol class="tight">
+    <li>第 1 週：使用者／OU／群組／授權＋開通與驗證網域。對照 FAQ Q1–Q15、Q49–Q62。</li>
+    <li>第 2 週：MX、SPF／DKIM／DMARC、Gmail 進信與隔離。對照 FAQ Q16–Q48。</li>
+    <li>第 3 週：Drive 分享、儲存池、Vault／匯出、2SV 與端點。對照 FAQ Q73–Q84、Q93–Q97。</li>
+    <li>第 4 週：官方樣題＋弱項回考綱 PDF；約好考試日再衝刺排查章。</li>
+  </ol>
+
+  <h3>公司補助怎麼走</h3>
+  <p>證照獎勵與報名費補助是<strong>通過後</strong>才申請；未通過不補助、重考自費。考前先跟直屬主管說要報哪一科、哪一天，避免公假對不上班表。</p>
+  <ol class="tight">
+    <li>考前：Email 或訓練申請給主管 → 人資（課程名稱寫官方全名、費用 US$125、考試日）。</li>
+    <li>應考：自行在 CM Connect／Pearson 完成報名與繳費，保留收據。</li>
+    <li>通過後<strong>一個月內</strong>：證照獎勵申請單＋證照影本＋繳費收據 → 主管 → 人資。</li>
+  </ol>
+  <p>Google Workspace 管理員證屬職務相關證照，是否列入當年度核定清單、獎金／報名費能否核銷，<strong>以人資回覆為準</strong>，不要自行對 AWS 獎勵表套金額。細節問總管理部。</p>
 </section>
 
 <section id="sop-03">
@@ -1646,6 +1729,9 @@ DNS 由誰管:
       <tr><td>匯出 Gemini Notebook</td><td><a href="https://support.google.com/a/answer/16054396">answer/16054396</a></td></tr>
       <tr><td>MX</td><td><a href="https://support.google.com/a/answer/140034">answer/140034</a></td></tr>
       <tr><td>狀態儀表板</td><td><a href="https://www.google.com/appsstatus/dashboard/">google.com/appsstatus/dashboard</a></td></tr>
+      <tr><td>Associate Workspace 管理員證照</td><td><a href="https://cloud.google.com/learn/certification/associate-google-workspace-administrator">cloud.google.com/learn/certification/associate-google-workspace-administrator</a></td></tr>
+      <tr><td>Associate 考綱 PDF</td><td><a href="https://services.google.com/fh/files/misc/associate_google_workspace_administrator_exam_guide_english.pdf">associate_google_workspace_administrator_exam_guide_english.pdf</a></td></tr>
+      <tr><td>考生入口 CM Connect</td><td><a href="https://cp.certmetrics.com/google/en/login">cp.certmetrics.com/google</a></td></tr>
     </tbody>
   </table>
   <p>畫面與本文不符時，以連結當日內容為準。排查見「常見問題 100」。</p>
