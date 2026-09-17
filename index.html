@@ -676,7 +676,7 @@ hr{border:0;border-top:1px solid var(--line);margin:20px 0}
   <p>多方核准 MPA：敏感動作（含 Vault 匯出）要第二人點頭。Enterprise 有此能力。</p>
 </section>
 
-<section id="vault" data-keys="vault 保管箱 ediscovery 保留 hold 電子蒐證">
+<section id="vault" data-keys="vault 保管箱 ediscovery 保留 hold 電子蒐證 備份 不是備份">
   <h2>保管箱 Google Vault</h2><p class="src">來源：<a href="https://support.google.com/vault/answer/2462365">Vault 簡介</a>、<a href="https://support.google.com/vault/answer/6127699">支援服務</a>、<a href="https://support.google.com/vault/answer/6099459">匯出內容</a>。</p>
   <div class="callout bad">
     <b class="tag">不是備份</b>
@@ -1725,7 +1725,7 @@ const ALIAS_GROUPS = [
   ['方案','版本','edition','sku','牌價','年約','彈性','入門','pricing','功能對照','比較版本','business starter','business standard','business plus','商業版','企業版'],
   ['收不到信','收不到','收信','進信','mx','郵件交換','smtp.google.com','dns','dig','啟用gmail','驗證網域','信箱收不到'],
   ['寄不出','寄信','出信','垃圾信','進垃圾','spf','dkim','dmarc','寄件者指南','edm'],
-  ['vault','保管箱','ediscovery','電子蒐證','訴訟保留','hold','不是備份'],
+  ['vault','保管箱','ediscovery','電子蒐證','訴訟保留','hold','備份','不是備份'],
   ['登入','登不進去','登不進','密碼','2sv','兩步驟','sso','被鎖','停權','驗證碼','備份碼','帳號不存在'],
   ['搬家','遷移','換商','exchange','m365','microsoft 365','outlook','雙重投遞','分割投遞','gwmme','匯入','移轉'],
   ['drive','雲端硬碟','共用雲端硬碟','分享','連結打不開','同步','檔案找不到'],
@@ -1735,7 +1735,7 @@ const ALIAS_GROUPS = [
   ['gmail','郵件','信箱','電子郵件'],
   ['gemini','notebooklm','筆記本','notebook'],
   ['dlp','外洩','caa','情境感知','cse','smime','加密','資安'],
-  ['儲存','空間滿','空間不足','quota','集區','相片','photos','加量'],
+  ['儲存','空間','空間滿','空間不足','quota','集區','相片','photos','加量'],
   ['裝置','手機丟了','筆電丟了','抹除','遠端抹除','mdm','遺失'],
   ['考試','agwa','報名','證照','associate'],
   ['帳單','上游','psc','complete transfer','開通','加授權','請款'],
@@ -1757,8 +1757,10 @@ function expandQuery(raw){
   ALIAS_GROUPS.forEach(g => {
     const ng = g.map(compact).filter(Boolean);
     const hit = ng.some(x => {
+      if (!x) return false;
       if (x === t) return true;
-      if (x.length >= 2 && t.length >= 2 && (x.includes(t) || t.includes(x))) return true;
+      if (t.length >= 3 && x.length >= 2 && t.includes(x)) return true;
+      if (x.length >= 3 && t.length >= 3 && x.includes(t)) return true;
       return false;
     });
     if (hit) ng.forEach(x => out.add(x));
@@ -1898,6 +1900,7 @@ function scoreUnit(u, terms, rawC, parts){
     const hitAll = parts.every(p => u.titleN.includes(p) || u.keysN.includes(p) || u.blob.includes(p));
     if (hitAll) s += 24;
   }
+  if (u.kind === 'faq') s -= 4;
   if (u.kind === 'topic') s -= 8;
   return s;
 }
