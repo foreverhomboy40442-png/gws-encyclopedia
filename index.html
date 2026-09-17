@@ -1099,114 +1099,114 @@ DNS 由誰管:
 <p><strong>結論：</strong> 先分「帳號不存在／暫停／密碼／2SV／SSO」，不要一連串重設。</p>
 <p><strong>路徑：</strong></p>
 <ol class='tight'><li>Admin → 目錄 → 使用者，搜尋該信箱：有沒有人、是否暫停、有沒有授權。</li><li>沒有人 → 建帳（Q49）。暫停 → 查原因後恢復（Q7）。</li><li>有人且啟用：重設密碼，用電話把暫時密碼給本人，勾首次登入須改密。</li><li>仍進不去 → Q2（2SV）或 Q6（SSO）。</li></ol>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/33386" target="_blank" rel="noopener">重設使用者密碼</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/users/reset-a-users-password?hl=zh-tw" target="_blank" rel="noopener">重設使用者密碼</a></p>
 <p><strong>升級：</strong> 超管也進不去 → Q5。</p>
 <h4 id="faq-q2">Q2. 重設密碼後還是進不去</h4>
 <p><strong>結論：</strong> 多半是 2 步驟驗證卡住，不是密碼。</p>
 <p><strong>路徑：</strong></p>
 <ol class='tight'><li>使用者 → 安全性 → 看 2 步驟驗證是否開啟。</li><li>請管理員產生<strong>備份碼</strong>給本人，或撤銷舊裝置後再登。</li><li>緊急：暫時把人移到未強制 2SV 的例外 OU，登入完成再移回。</li></ol>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/175197" target="_blank" rel="noopener">為機構部署 2 步驟驗證</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/security/protect-your-business-with-2-step-verification?hl=zh-tw" target="_blank" rel="noopener">使用兩步驟驗證保障企業資料</a></p>
 <p><strong>升級：</strong> 無。</p>
 <h4 id="faq-q3">Q3. 強制 2SV 後一批人進不去</h4>
 <p><strong>結論：</strong> 寬限天數已過，裝置沒登記。</p>
 <p><strong>路徑：</strong></p>
 <ol class='tight'><li>安全性 → 2 步驟驗證：看強制範圍與寬限。</li><li>對還沒登錄的人發備份碼，或暫緩該 OU 強制。</li><li>不要把例外 OU 變成永久後門。</li></ol>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/9176657" target="_blank" rel="noopener">強制使用 2 步驟驗證</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/security/deploy-2-step-verification?hl=zh-tw" target="_blank" rel="noopener">部署兩步驟驗證</a></p>
 <p><strong>升級：</strong> 無。</p>
 <h4 id="faq-q4">Q4. 手機丟了</h4>
 <p><strong>結論：</strong> 只改密碼不夠，要撤 2SV 裝置。</p>
 <p><strong>路徑：</strong></p>
 <ol class='tight'><li>重設密碼。</li><li>使用者 → 安全性 → 2 步驟驗證：撤銷手機／提示。</li><li>發新備份碼；必要時遠端登出工作階段。</li></ol>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/6355290" target="_blank" rel="noopener">管理員協助使用者使用 2SV</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/security/recover-an-account-protected-by-2-step-verification?hl=zh-tw" target="_blank" rel="noopener">復原受兩步驟驗證保護的帳戶</a></p>
 <p><strong>升級：</strong> 無。</p>
 <h4 id="faq-q5">Q5. 超級管理員自己被鎖</h4>
 <p><strong>結論：</strong> 用第二位超管救。只留一位超管是事故。</p>
 <p><strong>路徑：</strong></p>
 <ol class='tight'><li>另一位超管重設密碼＋處理 2SV。</li><li>沒有第二超管：走 Google 帳戶復原，備公司網域與身分證明。</li><li>救回來立刻加第二位超管。</li></ol>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/185196" target="_blank" rel="noopener">無法登入管理員帳戶</a></p>
-<p><strong>升級：</strong> 復原失敗 → <a href="https://support.google.com/a/answer/1047213" target="_blank" rel="noopener">與支援團隊聯絡</a>。</p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/users/recovering-administrator-access-to-your-account?hl=zh-tw" target="_blank" rel="noopener">復原管理員帳戶存取權</a></p>
+<p><strong>升級：</strong> 復原失敗 → <a href="https://knowledge.workspace.google.com/admin/support/contact-google-workspace-support?hl=zh-tw" target="_blank" rel="noopener">與 Google Workspace 支援團隊聯絡</a>。</p>
 <h4 id="faq-q6">Q6. 開了 SSO，重設 Google 密碼沒用</h4>
 <p><strong>結論：</strong> 正常。登入改走 IdP（Entra／Okta）。</p>
 <p><strong>路徑：</strong></p>
 <ol class='tight'><li>Admin → 安全性 → 驗證 → SSO 設定，確認已開啟。</li><li>到 IdP 解鎖／重設。排除 SSO 的緊急超管帳戶用來救援。</li></ol>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/60224" target="_blank" rel="noopener">設定 SSO</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/apps/about-sso?hl=zh-tw" target="_blank" rel="noopener">關於單一登入 (SSO)</a></p>
 <p><strong>升級：</strong> IdP 方。</p>
 <h4 id="faq-q7">Q7. 使用者被暫停，信箱停了</h4>
 <p><strong>結論：</strong> 暫停＝不能登入；資料通常還在。</p>
 <p><strong>路徑：</strong></p>
 <ol class='tight'><li>使用者列上看「已暫停」與原因（管理員、濫用、帳單）。</li><li>管理員暫停 → 選使用者 → 恢復。</li><li>濫用／停權 → 不要自己亂恢復，走 Q60／原廠。</li></ol>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/33314" target="_blank" rel="noopener">暫停使用者</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/users/suspend-a-user-temporarily?hl=zh-tw" target="_blank" rel="noopener">暫時暫停使用者</a></p>
 <p><strong>升級：</strong> 濫用申訴 → Google 支援。</p>
 <h4 id="faq-q8">Q8. 全公司突然都不能登，像被停權</h4>
 <p><strong>結論：</strong> 先看訂閱是否因帳單暫停；再看狀態儀表板。</p>
 <p><strong>路徑：</strong></p>
 <ol class='tight'><li><a href="https://www.google.com/appsstatus/dashboard/" target="_blank" rel="noopener">Workspace 狀態</a>。</li><li>Admin → 帳單：訂閱是否暫停。</li><li>帳單暫停 → 商務／上游；服務中斷 → Q98。</li></ol>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/topic/25838" target="_blank" rel="noopener">解決帳單問題</a>（帳單主題）；狀態儀表板見上。</p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/billing/restore-a-suspended-subscription?hl=zh-tw" target="_blank" rel="noopener">還原已暫停的訂閱</a>（帳單主題）；狀態儀表板見上。</p>
 <p><strong>升級：</strong> 停權申訴、請款 → 上游。</p>
 <h4 id="faq-q9">Q9. 使用者搞混個人 Gmail 跟公司帳號</h4>
 <p><strong>結論：</strong> 公司帳號是 <code>名字@客戶網域</code>，不是 <code>@gmail.com</code>。</p>
 <p><strong>路徑：</strong></p>
 <ol class='tight'><li>請對方用完整公司信箱登入 admin／mail。</li><li>Chrome 用不同設定檔，避免自動帶入個人 Gmail。</li></ol>
-<p><strong>官方：</strong> <a href="https://support.google.com/accounts/answer/6250166" target="_blank" rel="noopener">工作或學校 Google 帳戶</a> · <a href="https://support.google.com/a/answer/6142901" target="_blank" rel="noopener">登入 Google Workspace</a></p>
+<p><strong>官方：</strong> <a href="https://support.google.com/accounts/answer/6250166?hl=zh-Hant" target="_blank" rel="noopener">公司或學校專用的 Google 帳戶</a> · <a href="https://knowledge.workspace.google.com/admin/getting-started/google-workspace-setup-faq?hl=zh-tw" target="_blank" rel="noopener">Google Workspace 設定常見問題</a></p>
 <p><strong>升級：</strong> 無。</p>
 <h4 id="faq-q10">Q10. 新筆電一直要驗證、收不到驗證碼</h4>
 <p><strong>結論：</strong> 復原電話／信過期，或驗證碼寄到舊手機。</p>
 <p><strong>路徑：</strong></p>
 <ol class='tight'><li>超管更新使用者的復原信箱／電話。</li><li>用備份碼或管理員重設 2SV。</li></ol>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/33386" target="_blank" rel="noopener">新增復原選項（管理員）</a>（重設密碼流程一併處理復原）</p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/security/manage-a-users-security-settings?hl=zh-tw" target="_blank" rel="noopener">管理使用者的安全性設定（復原資訊）</a>（重設密碼流程一併處理復原）</p>
 <p><strong>升級：</strong> 無。</p>
 <h4 id="faq-q11">Q11. 備份碼用完了</h4>
 <p><strong>結論：</strong> 超管可請使用者重新產生，或管理員協助重設 2SV。</p>
 <p><strong>路徑：</strong> 使用者自行：帳戶 → 安全性 → 2SV → 備份碼。進不去就走 Q2。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/accounts/answer/1187538" target="_blank" rel="noopener">2 步驟驗證備份碼</a></p>
+<p><strong>官方：</strong> <a href="https://support.google.com/accounts/answer/1187538?hl=zh-Hant" target="_blank" rel="noopener">使用備用碼登入帳戶</a></p>
 <p><strong>升級：</strong> 無。</p>
 <h4 id="faq-q12">Q12. 委派管理員看不到「網域／Gmail 設定」</h4>
 <p><strong>結論：</strong> 角色沒有「網域設定」或「Gmail 設定」權限。</p>
 <p><strong>路徑：</strong></p>
 <ol class='tight'><li>帳號 → 管理員角色：看該人被派什麼。</li><li>需要啟用 Gmail／改 MX 相關設定 → 用超管，或加權限。</li></ol>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/121201" target="_blank" rel="noopener">管理員角色權限</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/users/administrator-privilege-definitions?hl=zh-tw" target="_blank" rel="noopener">管理員權限定義</a></p>
 <p><strong>升級：</strong> 無。</p>
 <h4 id="faq-q13">Q13. 樂雲要進客戶 Admin，沒有 PSC</h4>
 <p><strong>結論：</strong> 請超管加委派；或共屏；或請上游用經銷商存取。</p>
 <p><strong>路徑：</strong></p>
 <ol class='tight'><li>超管 → 目錄 → 使用者 → 把樂雲帳號加成管理員（建議不要給刪網域）。</li><li>客戶拒絕 → 共屏口述。</li></ol>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/172190" target="_blank" rel="noopener">指派管理員角色</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/users/assign-specific-admin-roles?hl=zh-tw" target="_blank" rel="noopener">指派特定管理員角色</a></p>
 <p><strong>升級：</strong> 客戶不給權限 → 只能諮詢，不要開上游當技術單。</p>
 <h4 id="faq-q14">Q14. 登入顯示帳號不存在，但目錄裡看得到</h4>
 <p><strong>結論：</strong> 網域沒驗證、打錯網域、或還沒傳播。</p>
 <p><strong>路徑：</strong></p>
 <ol class='tight'><li>對一下完整信箱拼寫與網域。</li><li>管理網域：主要網域是否已驗證。</li><li>剛建帳等幾分鐘再試。</li></ol>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/60216" target="_blank" rel="noopener">驗證網域</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/domains/verify-your-domain-for-google-workspace?hl=zh-tw" target="_blank" rel="noopener">驗證 Google Workspace 網域</a></p>
 <p><strong>升級：</strong> 無。</p>
 <h4 id="faq-q15">Q15. 使用者被要求改密後，一次性密碼失效</h4>
 <p><strong>結論：</strong> 官方：MX／Gmail 啟用後，一次性密碼會失效，要先設正式密碼。</p>
 <p><strong>路徑：</strong> 啟用 Gmail 前，請超管到 accounts.google.com 設好密碼。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/60216" target="_blank" rel="noopener">驗證網域說明中的「避免被鎖在帳戶外」</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/domains/verify-your-domain-for-google-workspace?hl=zh-tw" target="_blank" rel="noopener">驗證網域（避免被鎖在帳戶外）</a></p>
 <p><strong>升級：</strong> 無。</p>
 <hr>
 <h3>B. 進信與網域（Q16–Q35）</h3>
 <h4 id="faq-q16">Q16. 網域驗證跟能收信是同一件事嗎？</h4>
 <p><strong>結論：</strong> 不是。驗證＝所有權；MX＝進信。</p>
 <p><strong>路徑：</strong> 先 TXT 驗證，帳號建齊，<strong>最後</strong>才改 MX。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/60216" target="_blank" rel="noopener">驗證網域</a> · <a href="https://support.google.com/a/answer/140034" target="_blank" rel="noopener">設定 MX</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/domains/verify-your-domain-for-google-workspace?hl=zh-tw" target="_blank" rel="noopener">驗證 Google Workspace 網域</a> · <a href="https://knowledge.workspace.google.com/admin/domains/set-up-mx-records-for-google-workspace?hl=zh-tw" target="_blank" rel="noopener">設定 Google Workspace 的 MX 記錄</a></p>
 <p><strong>升級：</strong> 無。</p>
 <h4 id="faq-q17">Q17. 驗證 TXT 一直失敗</h4>
 <p><strong>結論：</strong> 貼錯層級、雙 DNS、或還沒生效。</p>
 <p><strong>路徑：</strong></p>
 <ol class='tight'><li>設定精靈複製完整字串，加在 <strong>@</strong>（不是 www）。</li><li><a href="https://toolbox.googleapps.com/apps/dig/" target="_blank" rel="noopener">Admin Toolbox Dig</a> 查 TXT，網路上看不看到。</li><li>等 DNS；Cloudflare 用 DNS only。</li></ol>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/60216" target="_blank" rel="noopener">驗證網域</a> · <a href="https://toolbox.googleapps.com/apps/dig/" target="_blank" rel="noopener">Dig</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/domains/verify-your-domain-for-google-workspace?hl=zh-tw" target="_blank" rel="noopener">驗證 Google Workspace 網域</a> · <a href="https://toolbox.googleapps.com/apps/dig/" target="_blank" rel="noopener">Dig</a></p>
 <p><strong>升級：</strong> 超過數小時 Dig 仍沒紀錄 → 網域商。</p>
 <h4 id="faq-q18">Q18. 「啟用 Gmail」是灰的</h4>
 <p><strong>結論：</strong> 網域未驗證，或操作者沒有網域設定權限。</p>
 <p><strong>路徑：</strong></p>
 <ol class='tight'><li>帳戶 → 網域 → 管理網域：狀態是否已驗證。</li><li>換成超管再試。</li></ol>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/140034" target="_blank" rel="noopener">設定 MX／啟用 Gmail</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/domains/set-up-mx-records-for-google-workspace?hl=zh-tw" target="_blank" rel="noopener">設定 MX／啟用 Gmail</a></p>
 <p><strong>升級：</strong> 已驗證仍灰 → 開 Google 支援，附截圖。</p>
 <h4 id="faq-q19">Q19. 現在 MX 應該填什麼？</h4>
 <p><strong>結論：</strong> 新開通用一筆：<code>smtp.google.com</code>，優先順序 1，<strong>刪光其他 MX</strong>。</p>
 <p><strong>路徑：</strong></p>
 <ol class='tight'><li>DNS 刪舊 MX（含 Microsoft／舊主機）。</li><li>新增 MX → <code>smtp.google.com</code>（有些廠商要結尾點 <code>smtp.google.com.</code>）。</li><li>Admin 啟用 Gmail；Dig 確認。</li></ol>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/140034" target="_blank" rel="noopener">設定 Google Workspace 的 MX 記錄</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/domains/set-up-mx-records-for-google-workspace?hl=zh-tw" target="_blank" rel="noopener">設定 Google Workspace 的 MX 記錄</a></p>
 <p><strong>升級：</strong> 網域商介面加不了 → 網域商客服。</p>
 <h4 id="faq-q20">Q20. 舊的 ASPMX.L.GOOGLE.COM 要改掉嗎？</h4>
 <p><strong>結論：</strong> 能收信就不要動。新開通才用 <code>smtp.google.com</code>。</p>
@@ -1217,31 +1217,31 @@ DNS 由誰管:
 <p><strong>結論：</strong> 舊 MX 沒刪光，或 TTL／快取未過。</p>
 <p><strong>路徑：</strong></p>
 <ol class='tight'><li>Dig MX：只能剩 Google。</li><li>刪殘留；等 TTL（官方最多約 72 小時）。</li><li>從外部 Gmail 再寄測試。</li></ol>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/140034" target="_blank" rel="noopener">MX 疑難排解</a>（頁內 Troubleshooting）</p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/domains/set-up-mx-records-for-google-workspace?hl=zh-tw" target="_blank" rel="noopener">設定 MX 記錄（含疑難排解）</a>（頁內 Troubleshooting）</p>
 <p><strong>升級：</strong> 72 小時後 Dig 已對仍錯 → Q30 分割傳遞。</p>
 <h4 id="faq-q22">Q22. 全公司都收不到</h4>
 <p><strong>結論：</strong> MX、Google 中斷、或 Gmail 服務被關。</p>
 <p><strong>路徑：</strong></p>
 <ol class='tight'><li><a href="https://www.google.com/appsstatus/dashboard/" target="_blank" rel="noopener">狀態儀表板</a>。</li><li>Dig MX。</li><li>應用程式 → Gmail：是否對根 OU 關閉。</li><li>電子郵件記錄搜尋一封測試信。</li></ol>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/182449" target="_blank" rel="noopener">開啟或關閉 Gmail</a> · <a href="https://support.google.com/a/answer/2613641" target="_blank" rel="noopener">電子郵件記錄搜尋</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/users/advanced/turn-a-service-on-or-off-for-google-workspace-users?hl=zh-tw" target="_blank" rel="noopener">為使用者開啟或關閉服務</a> · <a href="https://knowledge.workspace.google.com/admin/support/troubleshooting/find-messages-with-email-log-search?hl=zh-tw" target="_blank" rel="noopener">使用電子郵件記錄搜尋找出郵件</a></p>
 <p><strong>升級：</strong> 儀表板紅燈 → 原廠 P1。</p>
 <h4 id="faq-q23">Q23. 只有一個人收不到</h4>
 <p><strong>結論：</strong> 不是 MX。</p>
 <p><strong>路徑：</strong></p>
 <ol class='tight'><li>使用者：暫停？沒授權？信箱拼寫？</li><li>該人 Gmail 篩選器／轉寄／委派。</li><li>隔離區、垃圾郵件。</li><li>記錄搜尋：該訊息是投遞、延遲還是拒收。</li></ol>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/2613641" target="_blank" rel="noopener">電子郵件記錄搜尋</a> · <a href="https://support.google.com/a/answer/4340942" target="_blank" rel="noopener">管理隔離區</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/support/troubleshooting/find-messages-with-email-log-search?hl=zh-tw" target="_blank" rel="noopener">使用電子郵件記錄搜尋找出郵件</a> · <a href="https://knowledge.workspace.google.com/admin/gmail/advanced/manage-quarantined-messages?hl=zh-tw" target="_blank" rel="noopener">管理隔離郵件</a></p>
 <p><strong>升級：</strong> 無。</p>
 <h4 id="faq-q24">Q24. 外部寄來的信進隔離／垃圾</h4>
 <p><strong>結論：</strong> 進階內容過濾或使用者垃圾分類，不是 MX 壞了。</p>
 <p><strong>路徑：</strong></p>
 <ol class='tight'><li>安全性／Gmail → 隔離區：放行並看規則。</li><li>使用者垃圾郵件匣。</li><li>必要時調整合規規則；不要關閉防毒／垃圾郵件防護。</li></ol>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/4340942" target="_blank" rel="noopener">管理隔離區</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/gmail/advanced/manage-quarantined-messages?hl=zh-tw" target="_blank" rel="noopener">管理隔離郵件</a></p>
 <p><strong>升級：</strong> 規則複雜 → L2。</p>
 <h4 id="faq-q25">Q25. 寄到群組 <code>sales@</code> 沒人收到</h4>
 <p><strong>結論：</strong> 「誰可以傳送郵件給群組」太嚴，或成員關閉群組郵件。</p>
 <p><strong>路徑：</strong></p>
 <ol class='tight'><li>目錄 → 群組 → 存取設定：允許外部？</li><li>成員是否開啟「從群組接收郵件」。</li><li>從外部寄一封測試。</li></ol>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/167430" target="_blank" rel="noopener">建立群組</a> · <a href="https://support.google.com/a/answer/167430" target="_blank" rel="noopener">群組存取設定</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/groups/create-a-group-in-your-organization?hl=zh-tw" target="_blank" rel="noopener">在機構中建立群組</a> · <a href="https://knowledge.workspace.google.com/admin/support/troubleshooting/fix-common-issues-with-group-settings?hl=zh-tw" target="_blank" rel="noopener">修正群組設定常見問題（外部寄信）</a></p>
 <p><strong>升級：</strong> 無。</p>
 <h4 id="faq-q26">Q26. 客戶說 DNS 面板已改，要怎麼證明？</h4>
 <p><strong>結論：</strong> 用 Dig 看<strong>網路上</strong>的值，不要只看面板。</p>
@@ -1251,50 +1251,50 @@ DNS 由誰管:
 <h4 id="faq-q27">Q27. Cloudflare 要開橘雲（Proxy）嗎？</h4>
 <p><strong>結論：</strong> MX、TXT 不要代理，用 DNS only。</p>
 <p><strong>路徑：</strong> 檢查 MX／驗證 TXT／DKIM 的雲朵圖示為灰。</p>
-<p><strong>官方：</strong> MX 通用步驟見 <a href="https://support.google.com/a/answer/140034" target="_blank" rel="noopener">設定 MX</a>；Proxy 依 Cloudflare 文件。</p>
+<p><strong>官方：</strong> MX 通用步驟見 <a href="https://knowledge.workspace.google.com/admin/domains/set-up-mx-records-for-google-workspace?hl=zh-tw" target="_blank" rel="noopener">設定 MX</a>；Proxy 依 <a href="https://developers.cloudflare.com/dns/proxy-status/" target="_blank" rel="noopener">Cloudflare DNS proxy status</a>。</p>
 <p><strong>升級：</strong> 無。</p>
 <h4 id="faq-q28">Q28. 還沒改 MX，Gmail 轉送規則有用嗎？</h4>
 <p><strong>結論：</strong> 沒有。進信先看 MX。</p>
 <p><strong>路徑：</strong> 要 Google 當入口，先切 MX；或維持舊商直到切換窗。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/140034" target="_blank" rel="noopener">設定 MX</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/domains/set-up-mx-records-for-google-workspace?hl=zh-tw" target="_blank" rel="noopener">設定 MX</a></p>
 <p><strong>升級：</strong> 無。</p>
 <h4 id="faq-q29">Q29. 雙重傳遞出現重複信或迴圈</h4>
 <p><strong>結論：</strong> 同一封進 Gmail 又轉回舊伺服器。短時間用，不要當長期架構。</p>
 <p><strong>路徑：</strong></p>
 <ol class='tight'><li>確認先「新增路由」再設轉送。</li><li>迴圈 → 關掉雙重，改分割或直接切 MX。</li></ol>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/2685650" target="_blank" rel="noopener">設定雙重傳遞</a> · <a href="https://support.google.com/a/answer/2614757" target="_blank" rel="noopener">新增郵件路線</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/gmail/advanced/deliver-email-to-multiple-inboxes-with-dual-delivery?hl=zh-tw" target="_blank" rel="noopener">使用雙重傳遞將郵件送到多個收件匣</a> · <a href="https://knowledge.workspace.google.com/admin/gmail/advanced/add-mail-servers-for-gmail-email-routing?hl=zh-tw" target="_blank" rel="noopener">為 Gmail 轉送新增郵件伺服器</a></p>
 <p><strong>升級：</strong> L2。</p>
 <h4 id="faq-q30">Q30. 分割傳遞：有人有信、未遷移的人沒信</h4>
 <p><strong>結論：</strong> MX 已指 Google，未遷移使用者要靠「不存在則改送舊伺服器」的規則。</p>
 <p><strong>路徑：</strong></p>
 <ol class='tight'><li>MX 必須已是 Google。</li><li>依官方設分割：不在目錄的收件人改送舊主機。</li><li>測已建帳 vs 未建帳各一封。</li></ol>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/12971016" target="_blank" rel="noopener">使用分割傳遞</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/gmail/advanced/send-email-to-2-email-systems-with-split-delivery?hl=zh-tw" target="_blank" rel="noopener">使用分類傳送將郵件送到兩個系統</a></p>
 <p><strong>升級：</strong> 內部互寄失敗 → L2。</p>
 <h4 id="faq-q31">Q31. 次要網域跟網域別名差在哪？</h4>
 <p><strong>結論：</strong> 次要＝可有獨立 <code>user@b.com</code>；別名＝同一批人自動多一個 @。</p>
 <p><strong>路徑：</strong> 帳戶 → 網域 → 新增時看類型。別名不耗授權。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/7502379" target="_blank" rel="noopener">新增網域或網域別名</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/domains/add-a-user-alias-domain-or-secondary-domain?hl=zh-tw" target="_blank" rel="noopener">新增使用者別名網域或次要網域</a></p>
 <p><strong>升級：</strong> 無。</p>
 <h4 id="faq-q32">Q32. 要用 <code>mail.example.com</code> 當信箱網域</h4>
 <p><strong>結論：</strong> 子網域要自己驗證、自己的 MX。</p>
 <p><strong>路徑：</strong> MX 名稱填子網域，不是 <code>@</code>。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/140034" target="_blank" rel="noopener">設定 MX</a>（子網域欄位說明）</p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/domains/set-up-mx-records-for-google-workspace?hl=zh-tw" target="_blank" rel="noopener">設定 MX（含子網域）</a>（子網域欄位說明）</p>
 <p><strong>升級：</strong> 無。</p>
 <h4 id="faq-q33">Q33. 客戶要改主要網域</h4>
 <p><strong>結論：</strong> 高風險專案，技術單位不接。</p>
 <p><strong>路徑：</strong> 另開變更單、雙人、維護窗；依官方「變更主要網域」當下步驟。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/7009002" target="_blank" rel="noopener">變更主要網域</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/domains/change-your-primary-domain-for-google-workspace?hl=zh-tw" target="_blank" rel="noopener">變更 Google Workspace 的主要網域</a></p>
 <p><strong>升級：</strong> 一律 L2。</p>
 <h4 id="faq-q34">Q34. 要查「那封信到底去哪了」</h4>
 <p><strong>結論：</strong> 用電子郵件記錄搜尋，。</p>
 <p><strong>路徑：</strong></p>
 <ol class='tight'><li>Admin → 報表 → 電子郵件記錄搜尋（權限視版本）。</li><li>用訊息 ID、寄件者、時間窗。</li><li>看投遞／拒收／延遲原因。</li></ol>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/2613641" target="_blank" rel="noopener">電子郵件記錄搜尋</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/support/troubleshooting/find-messages-with-email-log-search?hl=zh-tw" target="_blank" rel="noopener">使用電子郵件記錄搜尋找出郵件</a></p>
 <p><strong>升級：</strong> 沒有此功能 → 版本限制，改從使用者垃圾匣／隔離查。</p>
 <h4 id="faq-q35">Q35. 某部門突然沒有 Gmail</h4>
 <p><strong>結論：</strong> 該 OU 被關掉 Gmail 服務。</p>
 <p><strong>路徑：</strong> 應用程式 → Google Workspace → Gmail → 看組織單位覆寫。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/182449" target="_blank" rel="noopener">開啟或關閉 Google Workspace 服務</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/users/advanced/turn-a-service-on-or-off-for-google-workspace-users?hl=zh-tw" target="_blank" rel="noopener">為使用者開啟或關閉服務</a></p>
 <p><strong>升級：</strong> 無。</p>
 <hr>
 <h3>C. 出信與認證（Q36–Q48）</h3>
@@ -1302,70 +1302,70 @@ DNS 由誰管:
 <p><strong>結論：</strong> 先認證（SPF／DKIM／DMARC），再看內容與信譽。</p>
 <p><strong>路徑：</strong></p>
 <ol class='tight'><li>外寄一封到個人 Gmail，看信頭 <code>spf=</code> <code>dkim=</code> <code>dmarc=</code>。</li><li>失敗 → Q37–Q41。通過仍進垃圾 → 內容／大量寄信指南。</li></ol>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/81126" target="_blank" rel="noopener">電子郵件寄件者指南</a></p>
+<p><strong>官方：</strong> <a href="https://support.google.com/mail/answer/81126?hl=zh-Hant" target="_blank" rel="noopener">電子郵件寄件者指南</a></p>
 <p><strong>升級：</strong> 已 pass 仍大量進垃圾 → L2。</p>
 <h4 id="faq-q37">Q37. SPF 要寫什麼？</h4>
 <p><strong>結論：</strong> 純 Google：<code>v=spf1 include:_spf.google.com ~all</code>。<strong>每個網域只能一筆 SPF。</strong></p>
 <p><strong>路徑：</strong> DNS 加／合併成一筆 TXT。有 EDM／票務把對方 <code>include:</code> 併進來。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/33786" target="_blank" rel="noopener">設定 SPF</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/security/set-up-spf?hl=zh-tw" target="_blank" rel="noopener">設定 SPF</a></p>
 <p><strong>升級：</strong> permerror → Q38。</p>
 <h4 id="faq-q38">Q38. 查到兩筆 SPF，或 include 太多</h4>
 <p><strong>結論：</strong> 兩筆 SPF＝失效；<code>include:</code> 過多也會失敗。</p>
 <p><strong>路徑：</strong> 刪到只剩一筆；官方一筆最多 10 個 <code>include:</code>。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/33786" target="_blank" rel="noopener">SPF 記錄</a> · <a href="https://support.google.com/a/answer/33785" target="_blank" rel="noopener">排解 SPF 問題</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/security/set-up-spf?hl=zh-tw" target="_blank" rel="noopener">設定 SPF</a> · <a href="https://knowledge.workspace.google.com/admin/security/troubleshoot-spf-issues?hl=zh-tw" target="_blank" rel="noopener">排解 SPF 問題</a></p>
 <p><strong>升級：</strong> L2 幫精簡。</p>
 <h4 id="faq-q39">Q39. DKIM 怎麼開？</h4>
 <p><strong>結論：</strong> Admin 產生金鑰 → DNS TXT → 開始驗證。</p>
 <p><strong>路徑：</strong></p>
 <ol class='tight'><li>應用程式 → Gmail → 驗證電子郵件 → 產生新記錄。</li><li>把 TXT（多為 <code>google._domainkey</code>）加到 DNS。</li><li>Dig 看得到後，按開始驗證。</li><li>外寄看信頭 <code>dkim=pass</code>。</li></ol>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/174124" target="_blank" rel="noopener">設定 DKIM</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/security/set-up-dkim?hl=zh-tw" target="_blank" rel="noopener">設定 DKIM</a></p>
 <p><strong>升級：</strong> 無。</p>
 <h4 id="faq-q40">Q40. DNS 已加 DKIM 但還是 fail</h4>
 <p><strong>結論：</strong> 還沒按「開始驗證」、選取器不一致、或出站閘道改寫信件。</p>
 <p><strong>路徑：</strong></p>
 <ol class='tight'><li>確認 Admin 已啟用驗證。</li><li>TXT 主機名稱與精靈完全一致。</li><li>有簽名檔閘道 → 測關掉改寫或改 DKIM 時機。</li></ol>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/174124" target="_blank" rel="noopener">排解 DKIM 問題</a>（頁內疑難排解）</p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/security/set-up-dkim?hl=zh-tw" target="_blank" rel="noopener">設定 DKIM（含疑難排解）</a>（頁內疑難排解）</p>
 <p><strong>升級：</strong> L2。</p>
 <h4 id="faq-q41">Q41. DMARC 一開始就要 <code>p=reject</code> 嗎？</h4>
 <p><strong>結論：</strong> 不要。先 <code>p=none</code> 看報表。</p>
 <p><strong>路徑：</strong> 加 TXT：<code>v=DMARC1; p=none; rua=mailto:dmarc-report@客戶網域</code>。數週再考慮隔離／拒絕。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/2466580" target="_blank" rel="noopener">設定 DMARC</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/security/set-up-dmarc?hl=zh-tw" target="_blank" rel="noopener">設定 DMARC</a></p>
 <p><strong>升級：</strong> 無。</p>
 <h4 id="faq-q42">Q42. 一次寄給很多人被拒或進垃圾</h4>
 <p><strong>結論：</strong> 受 Gmail 寄件者指南與 Workspace 傳送上限約束。寄到個人 Gmail：所有寄件者須 SPF 或 DKIM；每日超過 5,000 封須 SPF、DKIM 與 DMARC。</p>
-<p><strong>路徑：</strong> 對照 <a href="https://support.google.com/a/answer/81126" target="_blank" rel="noopener">電子郵件寄件者指南</a>；分批；看是否走 Gmail 還是第三方。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/81126" target="_blank" rel="noopener">電子郵件寄件者指南</a> · <a href="https://support.google.com/a/answer/166852" target="_blank" rel="noopener">Gmail 傳送限制</a></p>
+<p><strong>路徑：</strong> 對照 <a href="https://support.google.com/mail/answer/81126?hl=zh-Hant" target="_blank" rel="noopener">電子郵件寄件者指南</a>；分批；看是否走 Gmail 還是第三方。</p>
+<p><strong>官方：</strong> <a href="https://support.google.com/mail/answer/81126?hl=zh-Hant" target="_blank" rel="noopener">電子郵件寄件者指南</a> · <a href="https://knowledge.workspace.google.com/admin/gmail/gmail-sending-limits-in-google-workspace?hl=zh-tw" target="_blank" rel="noopener">Gmail 傳送限制</a></p>
 <p><strong>升級：</strong> 被當濫用 → 原廠。</p>
 <h4 id="faq-q43">Q43. 大附件寄不出</h4>
 <p><strong>結論：</strong> Gmail 附件上限（一般 25MB）；更大應改 Drive 連結。</p>
 <p><strong>路徑：</strong> 改共用 Drive 連結；查政策是否擋外寄附件類型。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/mail/answer/6584" target="_blank" rel="noopener">附件大小上限</a></p>
+<p><strong>官方：</strong> <a href="https://support.google.com/mail/answer/6584?hl=zh-Hant" target="_blank" rel="noopener">透過 Gmail 傳送附件（大小上限）</a></p>
 <p><strong>升級：</strong> 無。</p>
 <h4 id="faq-q44">Q44. 提示達到郵件傳送上限</h4>
 <p><strong>結論：</strong> 帳號或網域當日配額用完，或被限制。</p>
 <p><strong>路徑：</strong></p>
 <ol class='tight'><li>看是否大量通知信／異常外寄（被盜 Q93）。</li><li>等重置或拆帳號；異常則暫停該使用者。</li></ol>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/166852" target="_blank" rel="noopener">Gmail 傳送限制</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/gmail/gmail-sending-limits-in-google-workspace?hl=zh-tw" target="_blank" rel="noopener">Gmail 傳送限制</a></p>
 <p><strong>升級：</strong> 濫用 → 原廠。</p>
 <h4 id="faq-q45">Q45. 助理「以誰的身分傳送」失敗</h4>
 <p><strong>結論：</strong> Gmail 委派沒設好，或政策禁止。</p>
 <p><strong>路徑：</strong> 使用者 Gmail 設定 → 帳戶 → 授予存取權；Admin 是否允許委派。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/11966655" target="_blank" rel="noopener">授權 Gmail 委派存取權</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/gmail/let-users-delegate-access-to-a-gmail-account?hl=zh-tw" target="_blank" rel="noopener">允許使用者委派 Gmail 帳戶存取權</a></p>
 <p><strong>升級：</strong> 無。</p>
 <h4 id="faq-q46">Q46. 加了公司簽名檔／保密聲明後，對方說 DKIM 失敗</h4>
 <p><strong>結論：</strong> 出站閘道改了信件本體。</p>
 <p><strong>路徑：</strong> 測不經閘道是否 pass；閘道需改為不破壞簽章，或 DKIM 在閘道後簽。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/174124" target="_blank" rel="noopener">設定 DKIM</a>（出站閘道注意事項）</p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/security/set-up-dkim?hl=zh-tw" target="_blank" rel="noopener">設定 DKIM（出站閘道）</a>（出站閘道注意事項）</p>
 <p><strong>升級：</strong> L2。</p>
 <h4 id="faq-q47">Q47. 內部互寄正常，外部收不到我們的信</h4>
 <p><strong>結論：</strong> 出站認證或對方拒收，不是 MX（MX 管進信）。</p>
 <p><strong>路徑：</strong> 信頭認證；記錄搜尋外寄狀態；對方垃圾匣。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/2613641" target="_blank" rel="noopener">電子郵件記錄搜尋</a> · <a href="https://support.google.com/a/answer/81126" target="_blank" rel="noopener">寄件者指南</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/support/troubleshooting/find-messages-with-email-log-search?hl=zh-tw" target="_blank" rel="noopener">使用電子郵件記錄搜尋找出郵件</a> · <a href="https://support.google.com/mail/answer/81126?hl=zh-Hant" target="_blank" rel="noopener">電子郵件寄件者指南</a></p>
 <p><strong>升級：</strong> 無。</p>
 <h4 id="faq-q48">Q48. 行銷系統（EDM）用公司網域寄信變垃圾</h4>
 <p><strong>結論：</strong> SPF 沒把該廠商 include 進去，或沒對齊 DMARC。</p>
 <p><strong>路徑：</strong> 把廠商指定的 include／DKIM 併入<strong>同一筆</strong> SPF；不要另開第二筆 SPF。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/33786" target="_blank" rel="noopener">設定 SPF</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/security/set-up-spf?hl=zh-tw" target="_blank" rel="noopener">設定 SPF</a></p>
 <p><strong>升級：</strong> 無。</p>
 <hr>
 <h3>D. 使用者、OU、群組（Q49–Q62）</h3>
@@ -1373,79 +1373,79 @@ DNS 由誰管:
 <p><strong>結論：</strong> 授權滿、帳號已存在、網域未驗證、OU 路徑不存在。</p>
 <p><strong>路徑：</strong></p>
 <ol class='tight'><li>帳單看授權用量。</li><li>搜尋是否已有該信箱／別名。</li><li>網域已驗證？OU 先建再建人。</li></ol>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/33310" target="_blank" rel="noopener">新增使用者</a> · <a href="https://support.google.com/a/answer/172716" target="_blank" rel="noopener">指派授權</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/users/add-an-account-for-a-new-user?hl=zh-tw" target="_blank" rel="noopener">為新使用者新增帳戶</a> · <a href="https://knowledge.workspace.google.com/admin/billing/assign-remove-and-reassign-licenses?hl=zh-tw" target="_blank" rel="noopener">指派、移除及重新指派授權</a></p>
 <p><strong>升級：</strong> 授權滿 → 診斷後開上游加購。</p>
 <h4 id="faq-q50">Q50. CSV 批次中文亂碼、整批失敗</h4>
 <p><strong>結論：</strong> Excel 編碼問題。</p>
 <p><strong>路徑：</strong> 用 Google 試算表匯出 UTF-8 CSV；先建 OU；看上傳結果失敗列。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/40057" target="_blank" rel="noopener">大量新增使用者</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/users/add-or-update-multiple-users-from-a-csv-file?hl=zh-tw" target="_blank" rel="noopener">使用 CSV 新增或更新多位使用者</a></p>
 <p><strong>升級：</strong> 無。</p>
 <h4 id="faq-q51">Q51. 授權買 50 個卻開不了第 51 人</h4>
 <p><strong>結論：</strong> 授權用盡。別名／群組不占授權；暫停帳可能可釋放。</p>
 <p><strong>路徑：</strong> 帳單對用量；清測試帳；仍不足 → 上游加購（樂雲不下單）。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/172716" target="_blank" rel="noopener">指派授權</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/billing/assign-remove-and-reassign-licenses?hl=zh-tw" target="_blank" rel="noopener">指派、移除及重新指派授權</a></p>
 <p><strong>升級：</strong> 加購 → 上游／商務。</p>
 <h4 id="faq-q52">Q52. 別名要不要多買一顆授權？</h4>
 <p><strong>結論：</strong> 不要。群組、日曆資源也不要。</p>
 <p><strong>路徑：</strong> 使用者 → 帳戶 → 電子郵件別名。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/33327" target="_blank" rel="noopener">電子郵件別名</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/users/add-or-delete-an-alternate-email-address-email-alias?hl=zh-tw" target="_blank" rel="noopener">新增或刪除備用電子郵件地址（別名）</a></p>
 <p><strong>升級：</strong> 無。</p>
 <h4 id="faq-q53">Q53. <code>info@</code> 該用別名還是群組？</h4>
 <p><strong>結論：</strong> 多人值守用群組。</p>
 <p><strong>路徑：</strong> 建群組、開放外部寄入、成員開接收。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/167430" target="_blank" rel="noopener">建立群組</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/groups/create-a-group-in-your-organization?hl=zh-tw" target="_blank" rel="noopener">在機構中建立群組</a></p>
 <p><strong>升級：</strong> 無。</p>
 <h4 id="faq-q54">Q54. 人在錯誤部門，2SV／分享政策不對</h4>
 <p><strong>結論：</strong> 政策跟 <strong>OU</strong> 走。</p>
 <p><strong>路徑：</strong> 把使用者移到正確組織單位；查該 OU 的服務與安全覆寫。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/182449" target="_blank" rel="noopener">將使用者移至其他 OU</a>（服務隨 OU）· <a href="https://support.google.com/a/answer/182433" target="_blank" rel="noopener">組織單位</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/users/advanced/move-users-to-an-organizational-unit?hl=zh-tw" target="_blank" rel="noopener">將使用者移至特定機構單位</a>（服務隨 OU）· <a href="https://knowledge.workspace.google.com/admin/users/advanced/how-the-organizational-structure-works?hl=zh-tw" target="_blank" rel="noopener">機構單位結構的運作方式</a></p>
 <p><strong>升級：</strong> 無。</p>
 <h4 id="faq-q55">Q55. 離職要刪帳還是暫停？</h4>
 <p><strong>結論：</strong> 先轉 Drive／Gmail → 暫停觀察 → 再刪。有 Vault Hold 不要刪。</p>
-<p><strong>路徑：</strong> 見 <a href="https://support.google.com/a/answer/1247777" target="_blank" rel="noopener">轉移 Drive 資料</a> 後暫停。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/33314" target="_blank" rel="noopener">暫停使用者</a> · <a href="https://support.google.com/a/answer/111127" target="_blank" rel="noopener">刪除使用者</a></p>
+<p><strong>路徑：</strong> 見 <a href="https://knowledge.workspace.google.com/admin/drive/transfer-drive-files-to-a-new-owner-as-an-admin?hl=zh-tw" target="_blank" rel="noopener">以管理員身分將 Drive 檔案轉移給新擁有者</a> 後暫停。</p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/users/suspend-a-user-temporarily?hl=zh-tw" target="_blank" rel="noopener">暫時暫停使用者</a> · <a href="https://knowledge.workspace.google.com/admin/users/delete-or-remove-a-user-from-your-organization?hl=zh-tw" target="_blank" rel="noopener">刪除或移除機構內的使用者</a></p>
 <p><strong>升級：</strong> Hold → 法務。</p>
 <h4 id="faq-q56">Q56. 刪了使用者還能救嗎？</h4>
 <p><strong>結論：</strong> 有官方復原窗（Admin「最近刪除的使用者」，天數以當下畫面為準，常見約 20 天）。</p>
 <p><strong>路徑：</strong> 使用者 → 更多 → 最近刪除的使用者 → 還原。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/111127" target="_blank" rel="noopener">還原最近刪除的使用者</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/users/restore-a-recently-deleted-user?hl=zh-tw" target="_blank" rel="noopener">還原最近刪除的使用者</a></p>
 <p><strong>升級：</strong> 超過窗期且無 Vault → 通常救不回。</p>
 <h4 id="faq-q57">Q57. 離職者雲端硬碟主管看不到</h4>
 <p><strong>結論：</strong> 刪前沒做所有權轉移。</p>
 <p><strong>路徑：</strong> 復原窗內先還原使用者，再轉移 Drive，再暫停。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/1247777" target="_blank" rel="noopener">轉移 Drive 資料</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/drive/transfer-drive-files-to-a-new-owner-as-an-admin?hl=zh-tw" target="_blank" rel="noopener">以管理員身分將 Drive 檔案轉移給新擁有者</a></p>
 <p><strong>升級：</strong> 已過窗 → Vault 有規則才可能有副本。</p>
 <h4 id="faq-q58">Q58. GCDS 同步後人消失</h4>
 <p><strong>結論：</strong> 刪除規則設錯。當 P1。</p>
 <p><strong>路徑：</strong> 立刻停同步；從最近刪除還原；修規則後小範圍再同步。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/106368" target="_blank" rel="noopener">Google Cloud Directory Sync</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/users/about-google-cloud-directory-sync?hl=zh-tw" target="_blank" rel="noopener">關於 Google Cloud Directory Sync</a></p>
 <p><strong>升級：</strong> 大量無法還原 → 原廠。</p>
 <h4 id="faq-q59">Q59. 建了群組，外部寄信被拒</h4>
 <p><strong>結論：</strong> 預設常是「僅機構內」。</p>
 <p><strong>路徑：</strong> 群組存取 → 允許外部寄件者；再測。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/167430" target="_blank" rel="noopener">誰可以將郵件傳送至群組</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/support/troubleshooting/fix-common-issues-with-group-settings?hl=zh-tw" target="_blank" rel="noopener">修正群組設定常見問題（外部寄信）</a></p>
 <p><strong>升級：</strong> 無。</p>
 <h4 id="faq-q60">Q60. 使用者被自動暫停（濫用）</h4>
 <p><strong>結論：</strong> 可能外寄異常或遭盜。</p>
 <p><strong>路徑：</strong> 看暫停原因；當被盜處理（Q93）；不要只恢復不管。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/1116867" target="_blank" rel="noopener">遭停權的使用者</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/users/restore-a-suspended-user?hl=zh-tw" target="_blank" rel="noopener">還原已暫停的使用者</a></p>
 <p><strong>升級：</strong> 申訴 → Google 支援。</p>
 <h4 id="faq-q61">Q61. 人建了但沒有 Gmail／Drive 圖示</h4>
 <p><strong>結論：</strong> 沒指派 Workspace 授權，或該 OU 關了服務。</p>
 <p><strong>路徑：</strong> 使用者 → 授權；應用程式服務對 OU。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/172716" target="_blank" rel="noopener">指派授權</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/billing/assign-remove-and-reassign-licenses?hl=zh-tw" target="_blank" rel="noopener">指派、移除及重新指派授權</a></p>
 <p><strong>升級：</strong> 無授權可指派 → Q51。</p>
 <h4 id="faq-q62">Q62. 想做「共用信箱」多人同時收</h4>
 <p><strong>結論：</strong> Workspace 沒有和 Exchange 一模一樣的共用信箱；用群組或協作收件匣。</p>
 <p><strong>路徑：</strong> 多數情況建群組即可。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/167430" target="_blank" rel="noopener">群組</a> · <a href="https://support.google.com/a/answer/167541" target="_blank" rel="noopener">協作收件匣</a>（進階）</p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/groups/create-a-group-in-your-organization?hl=zh-tw" target="_blank" rel="noopener">在機構中建立群組</a> · <a href="https://knowledge.workspace.google.com/admin/groups/add-features-and-manage-conversations-in-google-groups?hl=zh-tw" target="_blank" rel="noopener">在 Google 群組中新增功能（協作收件匣）</a>（進階）</p>
 <p><strong>升級：</strong> 複雜輪派 → L2。</p>
 <hr>
 <h3>E. 資料搬家（不是換經銷商）（Q63–Q72）</h3>
 <h4 id="faq-q63">Q63. 從 Microsoft 365 搬家，技術第一步？</h4>
 <p><strong>結論：</strong> 驗證網域＋建齊使用者，<strong>先不要切 MX</strong>。</p>
 <p><strong>路徑：</strong> 見 <a href="#sop-06">移轉</a>「資料搬家」；官方用管理控制台「資料匯入」。</p>
-<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/migrate/migrate-data-from-an-exchange-online-account" target="_blank" rel="noopener">從 Exchange Online 匯入</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/migrate/migrate-data-from-an-exchange-online-account?hl=zh-tw" target="_blank" rel="noopener">使用 Exchange Online 的預設資料匯入方法</a></p>
 <p><strong>升級：</strong> 無。</p>
 <h4 id="faq-q64">Q64. 資料匯入會把 Outlook 的信刪掉嗎？</h4>
 <p><strong>結論：</strong> 官方：複製，不刪、不改來源。</p>
@@ -1455,42 +1455,42 @@ DNS 由誰管:
 <h4 id="faq-q65">Q65. 什麼時候跑增量（delta）？</h4>
 <p><strong>結論：</strong> 切 MX 之後，補空窗期新信；也可補第一次失敗的項目。</p>
 <p><strong>路徑：</strong> 同一資料匯入工具跑增量。</p>
-<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/migrate/migrate-data-from-an-exchange-online-account" target="_blank" rel="noopener">Exchange Online 匯入</a>（頁內 delta）</p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/migrate/migrate-data-from-an-exchange-online-account?hl=zh-tw" target="_blank" rel="noopener">使用 Exchange Online 的預設資料匯入方法</a>（頁內 delta）</p>
 <p><strong>升級：</strong> 無。</p>
 <h4 id="faq-q66">Q66. Exchange 共用信箱怎麼遷？</h4>
 <p><strong>結論：</strong> 對成群組或獨立使用者再匯入；權限不會 100% 一樣。</p>
 <p><strong>路徑：</strong> 先盤點清單；不要承諾委派／完整權限。</p>
-<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/migrate/migrate-data-from-an-exchange-online-account" target="_blank" rel="noopener">匯入內容與限制</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/migrate/migrate-data-from-an-exchange-online-account?hl=zh-tw" target="_blank" rel="noopener">使用 Exchange Online 的預設資料匯入方法（內容與限制）</a></p>
 <p><strong>升級：</strong> 複雜權限 → 遷移專案。</p>
 <h4 id="faq-q67">Q67. SharePoint／OneDrive 會自動進 Drive 嗎？</h4>
 <p><strong>結論：</strong> 不會。檔案另案。</p>
 <p><strong>路徑：</strong> 小客戶手動／Drive 上傳；大客戶評估 Workspace Migrate 或第三方。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/6250907" target="_blank" rel="noopener">遷移工具對照</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/migrate/google-workspace-migration-product-matrix?hl=zh-tw" target="_blank" rel="noopener">Google Workspace 遷移產品對照</a></p>
 <p><strong>升級：</strong> 另報工。</p>
 <h4 id="faq-q68">Q68. 搬家期間要兩邊都看得到信</h4>
 <p><strong>結論：</strong> 短時間用雙重傳遞；分批用分割傳遞。MX 要先指到 Google 才轉得動。</p>
 <p><strong>路徑：</strong> Q29／Q30。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/2685650" target="_blank" rel="noopener">雙重傳遞</a> · <a href="https://support.google.com/a/answer/12971016" target="_blank" rel="noopener">分割傳遞</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/gmail/advanced/deliver-email-to-multiple-inboxes-with-dual-delivery?hl=zh-tw" target="_blank" rel="noopener">雙重傳遞</a> · <a href="https://knowledge.workspace.google.com/admin/gmail/advanced/send-email-to-2-email-systems-with-split-delivery?hl=zh-tw" target="_blank" rel="noopener">分類傳送（分割傳遞）</a></p>
 <p><strong>升級：</strong> L2。</p>
 <h4 id="faq-q69">Q69. 哪一天改 MX 最安全？</h4>
 <p><strong>結論：</strong> 帳號齊、第一輪匯入完、SPF／DKIM 已備、TTL 已降低之後。</p>
 <p><strong>路徑：</strong> <a href="#sop-03">開通</a> 階段 E 檢查清單。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/140034" target="_blank" rel="noopener">設定 MX</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/domains/set-up-mx-records-for-google-workspace?hl=zh-tw" target="_blank" rel="noopener">設定 MX</a></p>
 <p><strong>升級：</strong> 無。</p>
 <h4 id="faq-q70">Q70. 資料匯入卡住或部分失敗</h4>
 <p><strong>結論：</strong> 有 API 配額；不是所有 Exchange 功能都支援。</p>
 <p><strong>路徑：</strong> 看工作狀態；跑增量補失敗項；大環境改 GWMME。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/180898" target="_blank" rel="noopener">GWMME</a> · <a href="https://support.google.com/a/answer/6250907" target="_blank" rel="noopener">工具對照</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/migrate/about-gwmme?hl=zh-tw" target="_blank" rel="noopener">關於 GWMME</a> · <a href="https://knowledge.workspace.google.com/admin/migrate/google-workspace-migration-product-matrix?hl=zh-tw" target="_blank" rel="noopener">遷移產品對照</a></p>
 <p><strong>升級：</strong> L2。</p>
 <h4 id="faq-q71">Q71. 日曆會議室遷完還是亂</h4>
 <p><strong>結論：</strong> 資源信箱模型不同，常需在 Workspace 重建資源。</p>
 <p><strong>路徑：</strong> Admin → 目錄 → 建築物與資源；舊會議可能要重訂。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/1033925" target="_blank" rel="noopener">新增日曆資源</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/calendar/create-buildings-features-and-calendar-resources?hl=zh-tw" target="_blank" rel="noopener">建立建築物、設施和日曆資源</a></p>
 <p><strong>升級：</strong> 無。</p>
 <h4 id="faq-q72">Q72. 搬家後 Outlook 還在連舊伺服器</h4>
 <p><strong>結論：</strong> 用戶端沒改。</p>
 <p><strong>路徑：</strong> 改用官方 Gmail／Google 日曆；或新設定檔。不要 POP 雙拉。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/166334" target="_blank" rel="noopener">設定 Outlook 使用 Google Workspace</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/sync/integrating-outlook-and-exchange-with-google-workspace?hl=zh-tw" target="_blank" rel="noopener">將 Outlook 和 Exchange 與 Google Workspace 整合</a></p>
 <p><strong>升級：</strong> 無。</p>
 <hr>
 <h3>F. Drive 與檔案（Q73–Q84）</h3>
@@ -1498,104 +1498,104 @@ DNS 由誰管:
 <p><strong>結論：</strong> 檔案「受限」，或機構禁止外部分享。</p>
 <p><strong>路徑：</strong></p>
 <ol class='tight'><li>檔案分享：改「知道連結者」或指定外部信箱（政策允許時）。</li><li>Admin → Drive 共用設定：該 OU 是否禁止外部。</li></ol>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/60781" target="_blank" rel="noopener">管理外部分享</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/drive/manage-external-sharing-for-your-organization?hl=zh-tw" target="_blank" rel="noopener">管理機構的外部共用設定</a></p>
 <p><strong>升級：</strong> 無。</p>
 <h4 id="faq-q74">Q74. 員工要外部分享但按鈕沒有</h4>
 <p><strong>結論：</strong> 組織政策關掉，不是 Drive 壞了。</p>
 <p><strong>路徑：</strong> 對 OU 查共用設定；要開必須客戶同意風險。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/60781" target="_blank" rel="noopener">管理外部分享</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/drive/manage-external-sharing-for-your-organization?hl=zh-tw" target="_blank" rel="noopener">管理機構的外部共用設定</a></p>
 <p><strong>升級：</strong> 無。</p>
 <h4 id="faq-q75">Q75. 部門檔案該放個人雲端硬碟還是共用雲端硬碟？</h4>
 <p><strong>結論：</strong> 部門資產用共用雲端硬碟，人走檔留。</p>
 <p><strong>路徑：</strong> 建立共用雲端硬碟，成員用群組。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/7212025" target="_blank" rel="noopener">共用雲端硬碟</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/drive/set-up-shared-drives-for-your-organization?hl=zh-tw" target="_blank" rel="noopener">為機構設定共用雲端硬碟</a></p>
 <p><strong>升級：</strong> Starter 能力較弱，對版本。</p>
 <h4 id="faq-q76">Q76. 提示儲存空間不足</h4>
 <p><strong>結論：</strong> 官方是組織<strong>匯總池</strong>，不是每人硬切。</p>
 <p><strong>路徑：</strong> Admin 儲存報表找 Top 使用者與共用硬碟；清垃圾桶／錄影；不夠 → 上游加購。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/6373632" target="_blank" rel="noopener">儲存空間與方案</a> · <a href="https://support.google.com/a/answer/1044516" target="_blank" rel="noopener">儲存空間報表</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/drive/storage-and-upload-limits-for-google-workspace?hl=zh-tw" target="_blank" rel="noopener">Google Workspace 儲存空間與上傳上限</a> · <a href="https://knowledge.workspace.google.com/admin/storage/review-storage-use-across-your-organization?hl=zh-tw" target="_blank" rel="noopener">查看機構的儲存空間用量</a></p>
 <p><strong>升級：</strong> 加購 → 上游。</p>
 <h4 id="faq-q77">Q77. Google 相片把空間吃光</h4>
 <p><strong>結論：</strong> 匯總池含 Photos。</p>
 <p><strong>路徑：</strong> 報表看 Photos；清大檔或改政策。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/6373632" target="_blank" rel="noopener">儲存空間</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/storage/google-workspace-storage-faq-for-admins?hl=zh-tw" target="_blank" rel="noopener">管理員適用的儲存空間常見問題</a></p>
 <p><strong>升級：</strong> 無。</p>
 <h4 id="faq-q78">Q78. Drive 電腦版同步衝突、複製一堆檔</h4>
 <p><strong>結論：</strong> 離線快取或雙人同編衝突。</p>
 <p><strong>路徑：</strong> 重登 Drive for desktop；改以瀏覽器即時協作。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/drive/answer/7324379" target="_blank" rel="noopener">Drive 電腦版</a></p>
+<p><strong>官方：</strong> <a href="https://support.google.com/drive/answer/10838124?hl=zh-Hant" target="_blank" rel="noopener">使用 Google 雲端硬碟電腦版</a></p>
 <p><strong>升級：</strong> 無。</p>
 <h4 id="faq-q79">Q79. 檔案在誰那裡找不到</h4>
 <p><strong>結論：</strong> 用 Drive 搜尋與稽核，刪除。</p>
 <p><strong>路徑：</strong> 進階：報表 → 稽核 → Drive；或調查工具（視版本）。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/4579579" target="_blank" rel="noopener">Drive 稽核日誌</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/reports/drive-log-events?hl=zh-tw" target="_blank" rel="noopener">雲端硬碟記錄事件</a></p>
 <p><strong>升級：</strong> 無調查工具 → 版本限制。</p>
 <h4 id="faq-q80">Q80. 共用雲端硬碟權限太亂</h4>
 <p><strong>結論：</strong> 用群組管成員，少加個人。</p>
 <p><strong>路徑：</strong> 內容管理員／貢獻者／檢視者對照官方層級。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/7337554" target="_blank" rel="noopener">共用雲端硬碟權限</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/drive/manage-shared-drives-as-an-admin?hl=zh-tw" target="_blank" rel="noopener">以管理員身分管理共用雲端硬碟</a></p>
 <p><strong>升級：</strong> 無。</p>
 <h4 id="faq-q81">Q81. 離職帳號刪了，主管要檔</h4>
 <p><strong>結論：</strong> 同 Q57。</p>
 <p><strong>路徑：</strong> 復原窗內還原再轉移。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/1247777" target="_blank" rel="noopener">轉移 Drive 資料</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/drive/transfer-drive-files-to-a-new-owner-as-an-admin?hl=zh-tw" target="_blank" rel="noopener">以管理員身分將 Drive 檔案轉移給新擁有者</a></p>
 <p><strong>升級：</strong> 過窗 → Vault。</p>
 <h4 id="faq-q82">Q82. 連結設成「知道連結的人都能編輯」，怕外流</h4>
 <p><strong>結論：</strong> 預設應改「受限」。</p>
 <p><strong>路徑：</strong> Drive 共用設定：預設連結為受限；清查公開連結。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/60781" target="_blank" rel="noopener">管理外部分享</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/drive/manage-external-sharing-for-your-organization?hl=zh-tw" target="_blank" rel="noopener">管理機構的外部共用設定</a></p>
 <p><strong>升級：</strong> 已外流 → Q93 思維＋權限撤回。</p>
 <h4 id="faq-q83">Q83. 電腦版顯示未同步</h4>
 <p><strong>結論：</strong> 帳戶錯、磁碟滿、或檔案類型被排除。</p>
 <p><strong>路徑：</strong> 確認登的是公司帳；看同步資料夾；更新用戶端。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/drive/answer/2565056" target="_blank" rel="noopener">排解 Drive 電腦版問題</a></p>
+<p><strong>官方：</strong> <a href="https://support.google.com/drive/answer/2565956?hl=zh-Hant" target="_blank" rel="noopener">排解雲端硬碟電腦版問題</a></p>
 <p><strong>升級：</strong> 無。</p>
 <h4 id="faq-q84">Q84. 外部訪客一直被要求登入 Google</h4>
 <p><strong>結論：</strong> 分享對象是 Google 帳戶，或政策要求登入。</p>
 <p><strong>路徑：</strong> 若政策允許，用「知道連結者」；否則請對方用 Google 帳登入。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/60781" target="_blank" rel="noopener">管理外部分享</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/drive/manage-external-sharing-for-your-organization?hl=zh-tw" target="_blank" rel="noopener">管理機構的外部共用設定</a></p>
 <p><strong>升級：</strong> 無。</p>
 <hr>
 <h3>G. 日曆、Meet、Chat（Q85–Q92）</h3>
 <h4 id="faq-q85">Q85. 會議室怎麼建？不能開一個 <code>room@</code> 當人嗎？</h4>
 <p><strong>結論：</strong> 用建築物與<strong>資源</strong>，不是一般使用者（那會占授權）。</p>
 <p><strong>路徑：</strong> Admin → 目錄 → 建築物與資源。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/1033925" target="_blank" rel="noopener">新增日曆資源</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/calendar/create-buildings-features-and-calendar-resources?hl=zh-tw" target="_blank" rel="noopener">建立建築物、設施和日曆資源</a></p>
 <p><strong>升級：</strong> 無。</p>
 <h4 id="faq-q86">Q86. 看不到同事行事曆</h4>
 <p><strong>結論：</strong> 對方沒分享，或 Admin 關掉內部／外部共用。</p>
 <p><strong>路徑：</strong> 使用者日曆設定；Admin → 日曆 → 共用設定。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/60765" target="_blank" rel="noopener">日曆共用設定</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/calendar/set-google-calendar-sharing-options?hl=zh-tw" target="_blank" rel="noopener">設定 Google 日曆共用選項</a></p>
 <p><strong>升級：</strong> 無。</p>
 <h4 id="faq-q87">Q87. Meet 不能錄影</h4>
 <p><strong>結論：</strong> 版本不含，或主持人沒權限。錄影檔在<strong>主持人 Drive</strong>。</p>
 <p><strong>路徑：</strong> 對版本；確認 Meet 錄製對該 OU 開啟。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/7549927" target="_blank" rel="noopener">管理 Meet 錄製</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/meet/turn-meet-recording-on-or-off-for-your-organization?hl=zh-tw" target="_blank" rel="noopener">為機構開啟或關閉 Meet 錄製</a></p>
 <p><strong>升級：</strong> 要錄製但版本沒有 → 商務升級。</p>
 <h4 id="faq-q88">Q88. 外部／客戶進不了 Meet</h4>
 <p><strong>結論：</strong> Admin 關掉外部或匿名加入。</p>
 <p><strong>路徑：</strong> 應用程式 → Google Meet → 會議安全性／外部。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/7587493" target="_blank" rel="noopener">Meet 安全性設定</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/meet/manage-meet-settings?hl=zh-tw" target="_blank" rel="noopener">管理 Meet 設定（含安全性）</a></p>
 <p><strong>升級：</strong> 無。</p>
 <h4 id="faq-q89">Q89. 會議人數太多進不去</h4>
 <p><strong>結論：</strong> 版本人數上限。</p>
 <p><strong>路徑：</strong> 對版本或拆場。不要當故障。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/6043385" target="_blank" rel="noopener">比較版本</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/getting-started/editions/compare-google-workspace-editions?hl=zh-tw" target="_blank" rel="noopener">比較 Google Workspace 版本</a></p>
 <p><strong>升級：</strong> 商務。</p>
 <h4 id="faq-q90">Q90. 客戶要保留 Chat／Spaces 紀錄</h4>
 <p><strong>結論：</strong> 看版本與 Vault 是否涵蓋 Chat。沒規則就沒保留。</p>
 <p><strong>路徑：</strong> 先對 SKU 再承諾；合規走 Vault。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/vault/answer/2799699" target="_blank" rel="noopener">Vault 保留的服務</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/vault/getting-started/supported-services-and-data-types?hl=zh-tw" target="_blank" rel="noopener">Vault 支援的服務和資料類型</a></p>
 <p><strong>升級：</strong> 法務＋L2。</p>
 <h4 id="faq-q91">Q91. 會議邀請進對方垃圾</h4>
 <p><strong>結論：</strong> 出站認證問題，同 Q36。</p>
 <p><strong>路徑：</strong> SPF／DKIM；日曆邀請也是郵件。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/33786" target="_blank" rel="noopener">設定 SPF</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/security/set-up-spf?hl=zh-tw" target="_blank" rel="noopener">設定 SPF</a></p>
 <p><strong>升級：</strong> 無。</p>
 <h4 id="faq-q92">Q92. 會議室被亂訂、要審批</h4>
 <p><strong>結論：</strong> 資源日曆可設自動接受／審批（視設定）。</p>
 <p><strong>路徑：</strong> 資源設定與委派；教育使用者用群組權限。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/1033925" target="_blank" rel="noopener">日曆資源</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/calendar/create-buildings-features-and-calendar-resources?hl=zh-tw" target="_blank" rel="noopener">建立建築物、設施和日曆資源</a></p>
 <p><strong>升級：</strong> 無。</p>
 <hr>
 <h3>H. 安全、Vault、裝置、原廠支援（Q93–Q100）</h3>
@@ -1603,43 +1603,43 @@ DNS 由誰管:
 <p><strong>結論：</strong> 先停損再查。</p>
 <p><strong>路徑：</strong></p>
 <ol class='tight'><li>暫停或立刻重設密碼＋撤 2SV 裝置。</li><li>報表 → 稽核 → 登入／Gmail。</li><li>看篩選器、轉寄、委派是否被加。</li><li>大量外寄 → 當濫用，必要時原廠。</li></ol>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/1116867" target="_blank" rel="noopener">遭盜用的帳戶</a> · <a href="https://support.google.com/a/answer/4579579" target="_blank" rel="noopener">稽核日誌</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/support/troubleshooting/identify-and-secure-compromised-accounts?hl=zh-tw" target="_blank" rel="noopener">找出並保護遭盜用的帳戶</a> · <a href="https://knowledge.workspace.google.com/admin/reports/search-and-investigate-user-log-events?hl=zh-tw" target="_blank" rel="noopener">搜尋及調查使用者記錄事件</a></p>
 <p><strong>升級：</strong> 停權／濫用 → Google 支援。</p>
 <h4 id="faq-q94">Q94. Vault 是不是備份還原系統？</h4>
 <p><strong>結論：</strong> 不是。沒有保留規則，使用者刪了就沒有。</p>
 <p><strong>路徑：</strong> 有 Plus／Enterprise／加購 Vault 才進 https://vault.google.com</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/vault/answer/2799699" target="_blank" rel="noopener">Google Vault 簡介</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/vault/getting-started/vault-overview?hl=zh-tw" target="_blank" rel="noopener">Google Vault 簡介</a></p>
 <p><strong>升級：</strong> Starter／Standard 要 eDiscovery → 商務升級。</p>
 <h4 id="faq-q95">Q95. Vault 保不保 Gemini 對話裡上傳的檔？</h4>
 <p><strong>結論：</strong> 拆 Drive 落地 vs 對話內即時上傳。不能一句「都有」。</p>
 <p><strong>路徑：</strong> 見 <a href="#vault">保管箱</a> 與 <a href="#notebook-export">筆記本匯出</a>。落地 Drive 的檔走 Drive Vault；對話內即時上傳的媒體，Vault 不當作獨立媒體匯出。</p>
-<p><strong>官方：</strong>保管箱服務範圍見 <a href="https://support.google.com/vault/answer/6127699" target="_blank" rel="noopener">支援服務與資料類型</a>。</p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/vault/getting-started/supported-services-and-data-types?hl=zh-tw" target="_blank" rel="noopener">Vault 支援的服務和資料類型</a></p>
 <p><strong>升級：</strong> 無。</p>
 <h4 id="faq-q96">Q96. 筆電丟了，要遠端抹除嗎？</h4>
 <p><strong>結論：</strong> 先撤銷帳戶與 2SV。進階裝置管理才能工作資料 Wipe；個人機勿整機抹除非政策允許。</p>
 <p><strong>路徑：</strong> Admin → 裝置；無 MDM 就改密＋撤工作階段。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/173937" target="_blank" rel="noopener">裝置管理</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/devices/wipe-corporate-data-from-a-device?hl=zh-tw" target="_blank" rel="noopener">從裝置清除公司資料</a></p>
 <p><strong>升級：</strong> 無進階管理 → 版本限制。</p>
 <h4 id="faq-q97">Q97. 要查誰改過檔案權限、誰登入過</h4>
 <p><strong>結論：</strong> Admin 稽核日誌，不是 Vault 主場。</p>
 <p><strong>路徑：</strong> 報表 → 稽核：管理員、登入、Drive。</p>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/4579579" target="_blank" rel="noopener">稽核與調查工具</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/security/view-the-security-dashboard-investigation-tool-and-security-health-page?hl=zh-tw" target="_blank" rel="noopener">查看安全性資訊主頁、調查工具與健康狀態頁面</a></p>
 <p><strong>升級：</strong> 無。</p>
 <h4 id="faq-q98">Q98. 多客戶同時掛、或全公司無預警</h4>
 <p><strong>結論：</strong> 先看狀態頁，不要先改 MX。</p>
 <p><strong>路徑：</strong> <a href="https://www.google.com/appsstatus/dashboard/" target="_blank" rel="noopener">狀態儀表板</a> → 蒐證時間與錯誤 → 開原廠。</p>
-<p><strong>官方：</strong> 狀態儀表板 · <a href="https://support.google.com/a/answer/1047213" target="_blank" rel="noopener">聯絡支援</a></p>
+<p><strong>官方：</strong> 狀態儀表板 · <a href="https://knowledge.workspace.google.com/admin/support/contact-google-workspace-support?hl=zh-tw" target="_blank" rel="noopener">與 Google Workspace 支援團隊聯絡</a></p>
 <p><strong>升級：</strong> 確認中斷 → P1。</p>
 <h4 id="faq-q99">Q99. 技術解不了，要怎麼開 Google 支援？</h4>
 <p><strong>結論：</strong> 超管在 Admin 開案；樂雲代擬內容。</p>
 <p><strong>路徑：</strong></p>
 <ol class='tight'><li>超管登入 Admin → 支援。</li><li>貼 <a href="#support">09-支援升級</a> 模板（網域、時間、影響範圍、已查 MX／授權、訊息 ID）。</li></ol>
-<p><strong>官方：</strong> <a href="https://support.google.com/a/answer/1047213" target="_blank" rel="noopener">與支援團隊聯絡</a> · <a href="https://knowledge.workspace.google.com/admin/support/google-workspace-support-offerings?hl=zh-tw" target="_blank" rel="noopener">支援方案</a></p>
+<p><strong>官方：</strong> <a href="https://knowledge.workspace.google.com/admin/support/contact-google-workspace-support?hl=zh-tw" target="_blank" rel="noopener">與 Google Workspace 支援團隊聯絡</a> · <a href="https://knowledge.workspace.google.com/admin/support/google-workspace-support-offerings?hl=zh-tw" target="_blank" rel="noopener">Google Workspace 支援服務</a></p>
 <p><strong>升級：</strong> 開 Google 支援。</p>
 <h4 id="faq-q100">Q100. 這張單到底是技術還是要開上游？</h4>
 <p><strong>結論：</strong> 登入／收信／帳號／Drive／搬家設定＝樂雲。下單／開通租戶／訂閱轉移／加授權／帳單＝上游。</p>
 <p><strong>路徑：</strong> 見 <a href="#use">分工與接單</a>。技術單沒有管理控制台權限時，先請客戶委派，不要直接開給上游。</p>
-<p><strong>官方：</strong> 無單一頁；支援分層見 <a href="https://knowledge.workspace.google.com/admin/support/google-workspace-support-offerings?hl=zh-tw" target="_blank" rel="noopener">支援方案</a></p>
+<p><strong>官方：</strong> 無單一頁；支援分層見 <a href="https://knowledge.workspace.google.com/admin/support/google-workspace-support-offerings?hl=zh-tw" target="_blank" rel="noopener">Google Workspace 支援服務</a></p>
 <p><strong>升級：</strong> 需操作銷售控制台時，把資料包開給上游。</p>
 <hr>
 <h3>關鍵字速查</h3>
