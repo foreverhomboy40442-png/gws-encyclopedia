@@ -23,7 +23,7 @@ code,kbd{font-family:ui-monospace,Consolas,monospace;font-size:.9em;background:#
 .nav-open{display:none;position:fixed;top:12px;left:12px;z-index:60;background:#1558d6;color:#fff;border:0;border-radius:8px;padding:8px 14px;font-weight:700;cursor:pointer;box-shadow:0 2px 8px rgba(16,32,51,.15)}
 body.nav-closed .nav-open{display:block}
 body.nav-closed nav.sidebar{transform:translateX(-110%);transition:transform .2s ease}
-body.nav-closed .content{margin-left:0}
+body.nav-closed .content{margin-left:0;padding-top:56px}
 body.nav-closed .dim{display:none}
 .nav-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:12px}
 .nav-head .brandwrap{min-width:0}
@@ -106,7 +106,6 @@ hr{border:0;border-top:1px solid var(--line);margin:20px 0}
 @media (max-width:720px){
   body:not(.nav-closed) .dim{display:block}
   main,header.top,footer{padding-left:16px;padding-right:16px}
-  body.nav-closed header.top{padding-top:56px}
 }
 
 </style>
