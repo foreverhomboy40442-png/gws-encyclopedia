@@ -20,11 +20,17 @@ a{color:var(--blue);text-decoration:none}
 a:hover{text-decoration:underline}
 code,kbd{font-family:ui-monospace,Consolas,monospace;font-size:.9em;background:#eef3f9;padding:.12em .38em;border-radius:4px;border:1px solid var(--line);color:#16324d}
 
-.nav-open{display:none;position:fixed;top:12px;left:12px;z-index:60;background:#1558d6;color:#fff;border:0;border-radius:8px;padding:8px 14px;font-weight:700;cursor:pointer;box-shadow:0 2px 8px rgba(16,32,51,.15);max-width:calc(100vw - 24px)}
+.nav-open{display:none;position:fixed;top:10px;left:12px;z-index:60;background:#1558d6;color:#fff;border:0;border-radius:8px;padding:8px 14px;font-weight:700;cursor:pointer;box-shadow:0 2px 8px rgba(16,32,51,.15)}
 body.nav-closed .nav-open{display:block}
 body.nav-closed nav.sidebar{transform:translateX(-110%);transition:transform .2s ease}
-/* 側欄關閉：左側留出按鈕寬度，避免 fixed 按鈕壓住捲動中的內文 */
-body.nav-closed .content{margin-left:0;padding-left:118px;padding-top:12px;box-sizing:border-box}
+/* 側欄關閉：上方固定列當「海平面」，內文永遠從列下方開始／捲過 */
+body.nav-closed::before{
+  content:"";
+  position:fixed;top:0;left:0;right:0;height:52px;z-index:55;
+  background:#fff;border-bottom:1px solid var(--line);
+  box-shadow:0 1px 0 rgba(16,32,51,.04);
+}
+body.nav-closed .content{margin-left:0;padding-top:52px;padding-left:0;box-sizing:border-box}
 body.nav-closed .dim{display:none}
 .nav-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:12px}
 .nav-head .brandwrap{min-width:0}
@@ -107,7 +113,7 @@ hr{border:0;border-top:1px solid var(--line);margin:20px 0}
 @media (max-width:720px){
   body:not(.nav-closed) .dim{display:block}
   main,header.top,footer{padding-left:16px;padding-right:16px}
-  body.nav-closed .content{padding-left:16px;padding-top:56px}
+  body.nav-closed .content{padding-top:52px;padding-left:0}
 }
 
 </style>
